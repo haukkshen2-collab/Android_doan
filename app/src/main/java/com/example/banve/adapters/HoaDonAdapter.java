@@ -1,0 +1,105 @@
+package com.example.banve.adapters;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.banve.R;
+import com.example.banve.models.HoaDon;
+import com.example.banve.utils.DinhDangTien;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonViewHolder> {
+    public interface OnHoaDonClickListener {
+        void onXemChiTiet(HoaDon hoaDon);
+    }
+
+    private final List<HoaDon> danhSachHoaDon = new ArrayList<>();
+    private final OnHoaDonClickListener listener;
+
+    public HoaDonAdapter(OnHoaDonClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void capNhatDuLieu(List<HoaDon> duLieuMoi) {
+        danhSachHoaDon.clear();
+        if (duLieuMoi != null) {
+            danhSachHoaDon.addAll(duLieuMoi);
+        }
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public HoaDonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item_hoa_don, parent, false);
+        return new HoaDonViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull HoaDonViewHolder holder, int position) {
+        HoaDon hoaDon = danhSachHoaDon.get(position);
+        holder.lblMaHoaDon.setText("Mã hóa đơn: " + hoaDon.getMaHoaDon());
+        holder.lblNgayLap.setText("Ngày lập: " + dinhDangNgayGio(hoaDon.getNgayLap()));
+        holder.lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
+        holder.lblTrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
+        holder.btnXemChiTiet.setOnClickListener(v -> listener.onXemChiTiet(hoaDon));
+    }
+
+    @Override
+    public int getItemCount() {
+        return danhSachHoaDon.size();
+    }
+
+    private String dinhDangNgayGio(String ngayGio) {
+        if (ngayGio == null || ngayGio.trim().isEmpty()) {
+            return "";
+        }
+
+        String[] dinhDangNguon = {
+                "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",
+                "yyyy-MM-dd'T'HH:mm:ss.SSS",
+                "yyyy-MM-dd'T'HH:mm:ss",
+                "yyyy-MM-dd HH:mm:ss"
+        };
+
+        for (String dinhDang : dinhDangNguon) {
+            try {
+                Date ngay = new SimpleDateFormat(dinhDang, Locale.getDefault()).parse(ngayGio);
+                return new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(ngay);
+            } catch (ParseException ignored) {
+            }
+        }
+
+        return ngayGio;
+    }
+
+    static class HoaDonViewHolder extends RecyclerView.ViewHolder {
+        private final TextView lblMaHoaDon;
+        private final TextView lblNgayLap;
+        private final TextView lblTongTien;
+        private final TextView lblTrangThai;
+        private final Button btnXemChiTiet;
+
+        public HoaDonViewHolder(@NonNull View itemView) {
+            super(itemView);
+            lblMaHoaDon = itemView.findViewById(R.id.lblMaHoaDon);
+            lblNgayLap = itemView.findViewById(R.id.lblNgayLap);
+            lblTongTien = itemView.findViewById(R.id.lblTongTien);
+            lblTrangThai = itemView.findViewById(R.id.lblTrangThai);
+            btnXemChiTiet = itemView.findViewById(R.id.btnXemChiTiet);
+        }
+    }
+}
+

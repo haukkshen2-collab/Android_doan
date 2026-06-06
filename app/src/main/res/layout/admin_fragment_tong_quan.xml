@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/lblTieuDeTongQuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tổng quan hệ thống"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lblNguoiDung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_item_ve"
+            android:padding="16dp"
+            android:text="Người dùng: 0"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblVe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_item_ve"
+            android:padding="16dp"
+            android:text="Vé: 0"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_item_ve"
+            android:padding="16dp"
+            android:text="Voucher: 0"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblHoaDon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_item_ve"
+            android:padding="16dp"
+            android:text="Hóa đơn đã thanh toán: 0"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblDoanhThu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_item_ve"
+            android:padding="16dp"
+            android:text="Doanh thu: 0 VNĐ"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>
