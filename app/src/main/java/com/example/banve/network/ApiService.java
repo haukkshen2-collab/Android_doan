@@ -151,6 +151,17 @@ public interface ApiService {
     @GET("rest/v1/CauHinhAI")
     Call<List<CauHinhAI>> layCauHinhAI(@QueryMap Map<String, String> filter);
 
+    // Thêm cấu hình AI mới.
+    @POST("rest/v1/CauHinhAI")
+    Call<List<CauHinhAI>> themCauHinhAI(@Body Map<String, Object> cauHinhAI);
+
+    // Cập nhật cấu hình AI theo mã cấu hình.
+    @PATCH("rest/v1/CauHinhAI")
+    Call<List<CauHinhAI>> capNhatCauHinhAI(
+            @Query("MaCauHinhAI") String dieuKienMaCauHinhAI,
+            @Body Map<String, Object> cauHinhAI
+    );
+
     // Tìm lịch sử chat theo bộ lọc Supabase REST API.
     @GET("rest/v1/LichSuChat")
     Call<List<LichSuChat>> timLichSuChat(@QueryMap Map<String, String> filter);

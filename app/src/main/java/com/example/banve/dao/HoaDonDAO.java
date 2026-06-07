@@ -71,10 +71,33 @@ public class HoaDonDAO {
         });
     }
 
+    public void layDanhSachHoaDonQuanLy(ApiCallback<List<HoaDon>> callback) {
+        Map<String, String> filter = new HashMap<>();
+        filter.put("select", "*,NguoiDung(HoTen)");
+        filter.put("order", "NgayLap.desc");
+
+        apiService.timHoaDon(filter).enqueue(new Callback<List<HoaDon>>() {
+            @Override
+            public void onResponse(Call<List<HoaDon>> call, Response<List<HoaDon>> response) {
+                if (!response.isSuccessful()) {
+                    callback.onError("Không thể tải danh sách hóa đơn");
+                    return;
+                }
+
+                callback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<HoaDon>> call, Throwable t) {
+                callback.onError("Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
+
     public void layChiTietHoaDon(int maHoaDon, ApiCallback<List<ChiTietHoaDon>> callback) {
         Map<String, String> filter = new HashMap<>();
         filter.put("MaHoaDon", "eq." + maHoaDon);
-        filter.put("select", "*,Ve(*)");
+        filter.put("select", "*,Ve(*,LoaiVe(*))");
 
         apiService.timChiTietHoaDon(filter).enqueue(new Callback<List<ChiTietHoaDon>>() {
             @Override
@@ -92,6 +115,45 @@ public class HoaDonDAO {
                 callback.onError("Lỗi kết nối: " + t.getMessage());
             }
         });
+    }
+
+    public void layChiTietHoaDonTheoDanhSach(List<Integer> danhSachMaHoaDon, ApiCallback<List<ChiTietHoaDon>> callback) {
+        if (danhSachMaHoaDon == null || danhSachMaHoaDon.isEmpty()) {
+            callback.onSuccess(null);
+            return;
+        }
+
+        Map<String, String> filter = new HashMap<>();
+        filter.put("MaHoaDon", "in.(" + noiDanhSachMa(danhSachMaHoaDon) + ")");
+        filter.put("select", "*,Ve(*,LoaiVe(*))");
+
+        apiService.timChiTietHoaDon(filter).enqueue(new Callback<List<ChiTietHoaDon>>() {
+            @Override
+            public void onResponse(Call<List<ChiTietHoaDon>> call, Response<List<ChiTietHoaDon>> response) {
+                if (!response.isSuccessful()) {
+                    callback.onError("Không thể tải chi tiết hóa đơn thống kê");
+                    return;
+                }
+
+                callback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ChiTietHoaDon>> call, Throwable t) {
+                callback.onError("Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
+
+    private String noiDanhSachMa(List<Integer> danhSachMa) {
+        StringBuilder ketQua = new StringBuilder();
+        for (int i = 0; i < danhSachMa.size(); i++) {
+            if (i > 0) {
+                ketQua.append(",");
+            }
+            ketQua.append(danhSachMa.get(i));
+        }
+        return ketQua.toString();
     }
 
     private Map<String, Object> taoDuLieuHoaDon(HoaDon hoaDon) {

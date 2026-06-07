@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.banve.R;
 import com.example.banve.models.HoaDon;
+import com.example.banve.models.NguoiDung;
 import com.example.banve.utils.DinhDangTien;
 
 import java.text.ParseException;
@@ -20,15 +21,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonViewHolder> {
-    public interface OnHoaDonClickListener {
+public class HoaDonQuanLyAdapter extends RecyclerView.Adapter<HoaDonQuanLyAdapter.HoaDonQuanLyViewHolder> {
+    public interface OnHoaDonQuanLyClickListener {
         void onXemChiTiet(HoaDon hoaDon);
     }
 
     private final List<HoaDon> danhSachHoaDon = new ArrayList<>();
-    private final OnHoaDonClickListener listener;
+    private final OnHoaDonQuanLyClickListener listener;
 
-    public HoaDonAdapter(OnHoaDonClickListener listener) {
+    public HoaDonQuanLyAdapter(OnHoaDonQuanLyClickListener listener) {
         this.listener = listener;
     }
 
@@ -42,24 +43,37 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
 
     @NonNull
     @Override
-    public HoaDonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item_hoa_don, parent, false);
-        return new HoaDonViewHolder(view);
+    public HoaDonQuanLyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_item_hoa_don_quan_ly, parent, false);
+        return new HoaDonQuanLyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HoaDonViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HoaDonQuanLyViewHolder holder, int position) {
         HoaDon hoaDon = danhSachHoaDon.get(position);
         holder.lblMaHoaDon.setText("Mã hóa đơn: " + hoaDon.getMaHoaDon());
+        holder.lblHoTenKhach.setText("Khách hàng: " + layHoTenKhach(hoaDon));
         holder.lblNgayLap.setText("Ngày lập: " + dinhDangNgayGio(hoaDon.getNgayLap()));
         holder.lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
-        holder.lblTrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
+        holder.lblHinhThuc.setText("Hình thức: " + giaTri(hoaDon.getThanhToan()));
         holder.btnXemChiTiet.setOnClickListener(v -> listener.onXemChiTiet(hoaDon));
     }
 
     @Override
     public int getItemCount() {
         return danhSachHoaDon.size();
+    }
+
+    private String layHoTenKhach(HoaDon hoaDon) {
+        NguoiDung nguoiDung = hoaDon.getNguoiDung();
+        if (nguoiDung == null || nguoiDung.getHoTen() == null || nguoiDung.getHoTen().trim().isEmpty()) {
+            return "Mã người dùng " + hoaDon.getMaNguoiDung();
+        }
+        return nguoiDung.getHoTen();
+    }
+
+    private String giaTri(String giaTri) {
+        return giaTri == null ? "" : giaTri;
     }
 
     private String dinhDangNgayGio(String ngayGio) {
@@ -77,7 +91,8 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
                 "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",
                 "yyyy-MM-dd'T'HH:mm:ss.SSS",
                 "yyyy-MM-dd'T'HH:mm:ss",
-                "yyyy-MM-dd HH:mm:ss"
+                "yyyy-MM-dd HH:mm:ss",
+                "yyyy-MM-dd"
         };
 
         for (String dinhDang : dinhDangNguon) {
@@ -91,19 +106,21 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         return ngayGio;
     }
 
-    static class HoaDonViewHolder extends RecyclerView.ViewHolder {
+    static class HoaDonQuanLyViewHolder extends RecyclerView.ViewHolder {
         private final TextView lblMaHoaDon;
+        private final TextView lblHoTenKhach;
         private final TextView lblNgayLap;
         private final TextView lblTongTien;
-        private final TextView lblTrangThai;
+        private final TextView lblHinhThuc;
         private final Button btnXemChiTiet;
 
-        public HoaDonViewHolder(@NonNull View itemView) {
+        public HoaDonQuanLyViewHolder(@NonNull View itemView) {
             super(itemView);
             lblMaHoaDon = itemView.findViewById(R.id.lblMaHoaDon);
+            lblHoTenKhach = itemView.findViewById(R.id.lblHoTenKhach);
             lblNgayLap = itemView.findViewById(R.id.lblNgayLap);
             lblTongTien = itemView.findViewById(R.id.lblTongTien);
-            lblTrangThai = itemView.findViewById(R.id.lblTrangThai);
+            lblHinhThuc = itemView.findViewById(R.id.lblHinhThuc);
             btnXemChiTiet = itemView.findViewById(R.id.btnXemChiTiet);
         }
     }

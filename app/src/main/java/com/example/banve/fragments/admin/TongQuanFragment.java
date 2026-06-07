@@ -1,184 +1,172 @@
 package com.example.banve.fragments.admin;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.banve.R;
-import com.example.banve.models.HoaDon;
-import com.example.banve.models.NguoiDung;
-import com.example.banve.models.Ve;
-import com.example.banve.models.Voucher;
-import com.example.banve.network.ApiService;
-import com.example.banve.network.SupabaseClient;
+import com.example.banve.adapters.ThongKeLoaiVeAdapter;
+import com.example.banve.adapters.ThongKeNgayAdapter;
+import com.example.banve.adapters.ThongKeThangAdapter;
+import com.example.banve.controllers.ThongKeController;
+import com.example.banve.models.KetQuaThongKe;
+import com.example.banve.models.ThongKeTongQuan;
+import com.example.banve.network.ApiCallback;
 import com.example.banve.utils.DinhDangTien;
-import com.example.banve.utils.TienIch;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TongQuanFragment extends Fragment {
-    private TextView lblNguoiDung;
-    private TextView lblVe;
-    private TextView lblVoucher;
-    private TextView lblHoaDon;
-    private TextView lblDoanhThu;
-    private ApiService apiService;
+    private DatePicker dtpTuNgay;
+    private DatePicker dtpDenNgay;
+    private Button btnLoc;
+    private ProgressBar pgbDangTai;
+    private TextView lblTongHoaDon;
+    private TextView lblTongDoanhThu;
+    private TextView lblTongTienGiam;
+    private TextView lblTongThanhTien;
+    private TextView lblTongVeBan;
+    private RecyclerView rcvThongKeLoaiVe;
+    private RecyclerView rcvDoanhThuNgay;
+    private RecyclerView rcvDoanhThuThang;
+    private ThongKeLoaiVeAdapter thongKeLoaiVeAdapter;
+    private ThongKeNgayAdapter thongKeNgayAdapter;
+    private ThongKeThangAdapter thongKeThangAdapter;
+    private ThongKeController thongKeController;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.admin_fragment_tong_quan, container, false);
+        View view = inflater.inflate(R.layout.admin_fragment_thong_ke, container, false);
         anhXa(view);
-        apiService = SupabaseClient.layApiService();
+        thongKeController = new ThongKeController();
+        khoiTaoNgayMacDinh();
+        khoiTaoRecyclerView();
+        batSuKien();
         taiThongKe();
         return view;
     }
 
     private void anhXa(View view) {
-        lblNguoiDung = view.findViewById(R.id.lblNguoiDung);
-        lblVe = view.findViewById(R.id.lblVe);
-        lblVoucher = view.findViewById(R.id.lblVoucher);
-        lblHoaDon = view.findViewById(R.id.lblHoaDon);
-        lblDoanhThu = view.findViewById(R.id.lblDoanhThu);
+        dtpTuNgay = view.findViewById(R.id.dtpTuNgay);
+        dtpDenNgay = view.findViewById(R.id.dtpDenNgay);
+        btnLoc = view.findViewById(R.id.btnLoc);
+        pgbDangTai = view.findViewById(R.id.pgbDangTai);
+        lblTongHoaDon = view.findViewById(R.id.lblTongHoaDon);
+        lblTongDoanhThu = view.findViewById(R.id.lblTongDoanhThu);
+        lblTongTienGiam = view.findViewById(R.id.lblTongTienGiam);
+        lblTongThanhTien = view.findViewById(R.id.lblTongThanhTien);
+        lblTongVeBan = view.findViewById(R.id.lblTongVeBan);
+        rcvThongKeLoaiVe = view.findViewById(R.id.rcvThongKeLoaiVe);
+        rcvDoanhThuNgay = view.findViewById(R.id.rcvDoanhThuNgay);
+        rcvDoanhThuThang = view.findViewById(R.id.rcvDoanhThuThang);
+    }
+
+    private void khoiTaoNgayMacDinh() {
+        Calendar tuNgay = Calendar.getInstance();
+        tuNgay.add(Calendar.DAY_OF_MONTH, -30);
+        dtpTuNgay.updateDate(tuNgay.get(Calendar.YEAR), tuNgay.get(Calendar.MONTH), tuNgay.get(Calendar.DAY_OF_MONTH));
+
+        Calendar denNgay = Calendar.getInstance();
+        dtpDenNgay.updateDate(denNgay.get(Calendar.YEAR), denNgay.get(Calendar.MONTH), denNgay.get(Calendar.DAY_OF_MONTH));
+    }
+
+    private void khoiTaoRecyclerView() {
+        thongKeLoaiVeAdapter = new ThongKeLoaiVeAdapter();
+        thongKeNgayAdapter = new ThongKeNgayAdapter();
+        thongKeThangAdapter = new ThongKeThangAdapter();
+
+        rcvThongKeLoaiVe.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvThongKeLoaiVe.setAdapter(thongKeLoaiVeAdapter);
+        rcvDoanhThuNgay.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvDoanhThuNgay.setAdapter(thongKeNgayAdapter);
+        rcvDoanhThuThang.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvDoanhThuThang.setAdapter(thongKeThangAdapter);
+    }
+
+    private void batSuKien() {
+        btnLoc.setOnClickListener(v -> taiThongKe());
     }
 
     private void taiThongKe() {
-        taiSoNguoiDung();
-        taiSoVe();
-        taiSoVoucher();
-        taiHoaDonVaDoanhThu();
-    }
+        Date tuNgay = layNgayTuDatePicker(dtpTuNgay);
+        Date denNgay = layNgayTuDatePicker(dtpDenNgay);
 
-    private void taiSoNguoiDung() {
-        Map<String, String> filter = new HashMap<>();
-        filter.put("select", "MaNguoiDung");
-
-        apiService.timNguoiDung(filter).enqueue(new Callback<List<NguoiDung>>() {
-            @Override
-            public void onResponse(Call<List<NguoiDung>> call, Response<List<NguoiDung>> response) {
-                if (!kiemTraResponse(response, "người dùng")) {
-                    return;
-                }
-
-                List<NguoiDung> data = response.body();
-                lblNguoiDung.setText("Người dùng: " + dem(data));
-            }
-
-            @Override
-            public void onFailure(Call<List<NguoiDung>> call, Throwable t) {
-                baoLoi("Không thể tải số người dùng: " + t.getMessage());
-            }
-        });
-    }
-
-    private void taiSoVe() {
-        Map<String, String> filter = new HashMap<>();
-        filter.put("select", "MaVe,SoLuong");
-
-        apiService.layDanhSachVe(filter).enqueue(new Callback<List<Ve>>() {
-            @Override
-            public void onResponse(Call<List<Ve>> call, Response<List<Ve>> response) {
-                if (!kiemTraResponse(response, "vé")) {
-                    return;
-                }
-
-                List<Ve> data = response.body();
-                int tongTonKho = 0;
-                if (data != null) {
-                    for (Ve ve : data) {
-                        tongTonKho += ve.getSoLuong();
-                    }
-                }
-                lblVe.setText("Vé: " + dem(data) + " loại | Tồn kho: " + tongTonKho);
-            }
-
-            @Override
-            public void onFailure(Call<List<Ve>> call, Throwable t) {
-                baoLoi("Không thể tải số vé: " + t.getMessage());
-            }
-        });
-    }
-
-    private void taiSoVoucher() {
-        Map<String, String> filter = new HashMap<>();
-        filter.put("select", "MaVoucher");
-
-        apiService.timVoucher(filter).enqueue(new Callback<List<Voucher>>() {
-            @Override
-            public void onResponse(Call<List<Voucher>> call, Response<List<Voucher>> response) {
-                if (!kiemTraResponse(response, "voucher")) {
-                    return;
-                }
-
-                lblVoucher.setText("Voucher: " + dem(response.body()));
-            }
-
-            @Override
-            public void onFailure(Call<List<Voucher>> call, Throwable t) {
-                baoLoi("Không thể tải số voucher: " + t.getMessage());
-            }
-        });
-    }
-
-    private void taiHoaDonVaDoanhThu() {
-        Map<String, String> filter = new HashMap<>();
-        filter.put("TrangThai", "eq.DaThanhToan");
-        filter.put("select", "MaHoaDon,TongTien,TienGiam");
-
-        apiService.timHoaDon(filter).enqueue(new Callback<List<HoaDon>>() {
-            @Override
-            public void onResponse(Call<List<HoaDon>> call, Response<List<HoaDon>> response) {
-                if (!kiemTraResponse(response, "hóa đơn")) {
-                    return;
-                }
-
-                List<HoaDon> data = response.body();
-                double doanhThu = 0;
-                if (data != null) {
-                    for (HoaDon hoaDon : data) {
-                        doanhThu += Math.max(0, hoaDon.getTongTien() - hoaDon.getTienGiam());
-                    }
-                }
-
-                lblHoaDon.setText("Hóa đơn đã thanh toán: " + dem(data));
-                lblDoanhThu.setText("Doanh thu: " + DinhDangTien.dinhDang(doanhThu));
-            }
-
-            @Override
-            public void onFailure(Call<List<HoaDon>> call, Throwable t) {
-                baoLoi("Không thể tải hóa đơn: " + t.getMessage());
-            }
-        });
-    }
-
-    private int dem(List<?> data) {
-        return data == null ? 0 : data.size();
-    }
-
-    private boolean kiemTraResponse(Response<?> response, String tenDuLieu) {
-        if (!response.isSuccessful()) {
-            baoLoi("Không thể tải dữ liệu " + tenDuLieu);
-            return false;
+        if (tuNgay.after(denNgay)) {
+            baoLoi("Lỗi thống kê", "Từ ngày không được lớn hơn đến ngày");
+            return;
         }
-        return true;
+
+        hienDangTai(true);
+        thongKeController.layThongKeTongQuan(tuNgay, denNgay, new ApiCallback<KetQuaThongKe>() {
+            @Override
+            public void onSuccess(KetQuaThongKe data) {
+                hienDangTai(false);
+                hienThongKe(data);
+            }
+
+            @Override
+            public void onError(String thongBao) {
+                hienDangTai(false);
+                baoLoi("Lỗi thống kê", thongBao);
+            }
+        });
     }
 
-    private void baoLoi(String thongBao) {
-        if (getContext() != null) {
-            TienIch.hienToast(getContext(), thongBao);
+    private Date layNgayTuDatePicker(DatePicker datePicker) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
+    private void hienThongKe(KetQuaThongKe ketQua) {
+        if (ketQua == null || ketQua.getThongKeTongQuan() == null) {
+            return;
         }
+
+        ThongKeTongQuan tongQuan = ketQua.getThongKeTongQuan();
+        lblTongHoaDon.setText("Tổng hóa đơn: " + tongQuan.getTongHoaDon());
+        lblTongDoanhThu.setText("Tổng doanh thu: " + DinhDangTien.dinhDang(tongQuan.getTongDoanhThu()));
+        lblTongTienGiam.setText("Tổng tiền giảm: " + DinhDangTien.dinhDang(tongQuan.getTongTienGiam()));
+        lblTongThanhTien.setText("Tổng thành tiền: " + DinhDangTien.dinhDang(tongQuan.getTongThanhTien()));
+        lblTongVeBan.setText("Tổng vé bán: " + tongQuan.getTongVeBan());
+
+        thongKeLoaiVeAdapter.capNhatDuLieu(ketQua.getDanhSachTheoLoaiVe());
+        thongKeNgayAdapter.capNhatDuLieu(ketQua.getDanhSachTheoNgay());
+        thongKeThangAdapter.capNhatDuLieu(ketQua.getDanhSachTheoThang());
+    }
+
+    private void hienDangTai(boolean dangTai) {
+        pgbDangTai.setVisibility(dangTai ? View.VISIBLE : View.GONE);
+        btnLoc.setEnabled(!dangTai);
+    }
+
+    private void baoLoi(String tieuDe, String noiDung) {
+        if (getContext() == null) {
+            return;
+        }
+
+        new AlertDialog.Builder(requireContext())
+                .setTitle(tieuDe)
+                .setMessage(noiDung)
+                .setPositiveButton("Đồng ý", null)
+                .show();
     }
 }
-

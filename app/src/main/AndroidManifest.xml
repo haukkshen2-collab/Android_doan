@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quan_Ly_Ban_Ve">
         <activity
+            android:name=".activities.admin.QuanLyAIActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.admin.DashboardQuanLyActivity"
             android:exported="false" />
         <activity

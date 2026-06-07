@@ -27,6 +27,7 @@ public class DashboardNguoiDungActivity extends AppCompatActivity {
     private RecyclerView rcvDanhSachVe;
     private TextView lblXinChao;
     private Button btnHoSo;
+    private Button btnDangXuat;
     private LoaiVeAdapter loaiVeAdapter;
     private VeAdapter veAdapter;
     private LoaiVeController loaiVeController;
@@ -52,6 +53,7 @@ public class DashboardNguoiDungActivity extends AppCompatActivity {
         rcvDanhSachVe = findViewById(R.id.rcvDanhSachVe);
         lblXinChao = findViewById(R.id.lblXinChao);
         btnHoSo = findViewById(R.id.btnHoSo);
+        btnDangXuat = findViewById(R.id.btnDangXuat);
 
         if (Session.nguoiDungHienTai != null) {
             lblXinChao.setText("Xin chào, " + Session.nguoiDungHienTai.getHoTen());
@@ -74,6 +76,7 @@ public class DashboardNguoiDungActivity extends AppCompatActivity {
 
     private void batSuKien() {
         btnHoSo.setOnClickListener(v -> startActivity(new Intent(this, ThongTinNguoiDungActivity.class)));
+        btnDangXuat.setOnClickListener(v -> TienIch.dangXuat(this));
         findViewById(R.id.btnGioHang).setOnClickListener(v -> startActivity(new Intent(this, GioHangActivity.class)));
         findViewById(R.id.btnLichSu).setOnClickListener(v -> startActivity(new Intent(this, LichSuDonHangActivity.class)));
         findViewById(R.id.btnChatAI).setOnClickListener(v -> startActivity(new Intent(this, ChatAIActivity.class)));
@@ -107,4 +110,3 @@ public class DashboardNguoiDungActivity extends AppCompatActivity {
         });
     }
 }
-

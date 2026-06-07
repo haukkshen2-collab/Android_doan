@@ -100,6 +100,12 @@ public class GioHangActivity extends AppCompatActivity {
                 return;
             }
 
+            String loiNgaySuDung = kiemTraNgaySuDungHopLe();
+            if (loiNgaySuDung != null) {
+                TienIch.hienAlert(this, "Lỗi thanh toán", loiNgaySuDung);
+                return;
+            }
+
             Intent intent = new Intent(this, ThanhToanActivity.class);
             intent.putExtra("tongTien", tongTien);
             startActivity(intent);
@@ -329,6 +335,31 @@ public class GioHangActivity extends AppCompatActivity {
         return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
     }
 
+    private String kiemTraNgaySuDungHopLe() {
+        Calendar homNay = Calendar.getInstance();
+        homNay.set(Calendar.HOUR_OF_DAY, 0);
+        homNay.set(Calendar.MINUTE, 0);
+        homNay.set(Calendar.SECOND, 0);
+        homNay.set(Calendar.MILLISECOND, 0);
+
+        for (MucGioHang muc : danhSachMuc) {
+            Date ngaySuDung = parseNgaySuDung(muc.getChiTietGioHang().getNgaySuDung());
+            if (ngaySuDung != null && ngaySuDung.before(homNay.getTime())) {
+                String tenVe = muc.getVe() == null ? "vé" : muc.getVe().getTenVe();
+                return "Vé \"" + tenVe + "\" có ngày sử dụng trong quá khứ. Vui lòng sửa ngày trước khi thanh toán.";
+            }
+        }
+        return null;
+    }
+
+    private Date parseNgaySuDung(String ngaySuDung) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ngaySuDung);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     private void moDangNhap() {
         Intent intent = new Intent(this, DangNhapActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -343,4 +374,3 @@ public class GioHangActivity extends AppCompatActivity {
         moDangNhap();
     }
 }
-

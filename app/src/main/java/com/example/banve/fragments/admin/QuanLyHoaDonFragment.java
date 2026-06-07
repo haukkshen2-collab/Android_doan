@@ -1,0 +1,248 @@
+package com.example.banve.fragments.admin;
+
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.banve.R;
+import com.example.banve.adapters.ChiTietHoaDonAdapter;
+import com.example.banve.adapters.HoaDonQuanLyAdapter;
+import com.example.banve.controllers.HoaDonController;
+import com.example.banve.models.ChiTietHoaDon;
+import com.example.banve.models.HoaDon;
+import com.example.banve.models.NguoiDung;
+import com.example.banve.network.ApiCallback;
+import com.example.banve.utils.DinhDangTien;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+public class QuanLyHoaDonFragment extends Fragment {
+    private DatePicker dtpTuNgay;
+    private DatePicker dtpDenNgay;
+    private Button btnLoc;
+    private RecyclerView rcvDanhSachHoaDon;
+    private HoaDonQuanLyAdapter adapter;
+    private HoaDonController hoaDonController;
+    private final List<HoaDon> danhSachGoc = new ArrayList<>();
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.admin_fragment_quan_ly_hoa_don, container, false);
+        anhXa(view);
+        hoaDonController = new HoaDonController();
+        khoiTaoNgayLoc();
+        khoiTaoRecyclerView();
+        batSuKien();
+        taiDanhSachHoaDon();
+        return view;
+    }
+
+    private void anhXa(View view) {
+        dtpTuNgay = view.findViewById(R.id.dtpTuNgay);
+        dtpDenNgay = view.findViewById(R.id.dtpDenNgay);
+        btnLoc = view.findViewById(R.id.btnLoc);
+        rcvDanhSachHoaDon = view.findViewById(R.id.rcvDanhSachHoaDon);
+    }
+
+    private void khoiTaoNgayLoc() {
+        Calendar tuNgay = Calendar.getInstance();
+        tuNgay.add(Calendar.MONTH, -1);
+        dtpTuNgay.updateDate(tuNgay.get(Calendar.YEAR), tuNgay.get(Calendar.MONTH), tuNgay.get(Calendar.DAY_OF_MONTH));
+
+        Calendar denNgay = Calendar.getInstance();
+        dtpDenNgay.updateDate(denNgay.get(Calendar.YEAR), denNgay.get(Calendar.MONTH), denNgay.get(Calendar.DAY_OF_MONTH));
+    }
+
+    private void khoiTaoRecyclerView() {
+        adapter = new HoaDonQuanLyAdapter(this::moDialogChiTietHoaDon);
+        rcvDanhSachHoaDon.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvDanhSachHoaDon.setNestedScrollingEnabled(false);
+        rcvDanhSachHoaDon.setAdapter(adapter);
+    }
+
+    private void batSuKien() {
+        btnLoc.setOnClickListener(v -> locTheoKhoangNgay());
+    }
+
+    private void taiDanhSachHoaDon() {
+        hoaDonController.layDanhSachHoaDonQuanLy(new ApiCallback<List<HoaDon>>() {
+            @Override
+            public void onSuccess(List<HoaDon> data) {
+                danhSachGoc.clear();
+                if (data != null) {
+                    danhSachGoc.addAll(data);
+                }
+                locTheoKhoangNgay();
+            }
+
+            @Override
+            public void onError(String thongBao) {
+                baoLoi("Lỗi hóa đơn", thongBao);
+            }
+        });
+    }
+
+    private void locTheoKhoangNgay() {
+        Calendar tuNgay = layCalendarTuDatePicker(dtpTuNgay, false);
+        Calendar denNgay = layCalendarTuDatePicker(dtpDenNgay, true);
+
+        if (tuNgay.after(denNgay)) {
+            baoLoi("Lỗi lọc hóa đơn", "Từ ngày không được lớn hơn đến ngày");
+            return;
+        }
+
+        List<HoaDon> danhSachLoc = new ArrayList<>();
+        for (HoaDon hoaDon : danhSachGoc) {
+            Date ngayLap = parseNgayGio(hoaDon.getNgayLap());
+            if (ngayLap == null) {
+                continue;
+            }
+
+            if (!ngayLap.before(tuNgay.getTime()) && !ngayLap.after(denNgay.getTime())) {
+                danhSachLoc.add(hoaDon);
+            }
+        }
+        adapter.capNhatDuLieu(danhSachLoc);
+    }
+
+    private Calendar layCalendarTuDatePicker(DatePicker datePicker, boolean cuoiNgay) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+        if (cuoiNgay) {
+            calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59);
+            calendar.set(Calendar.SECOND, 59);
+            calendar.set(Calendar.MILLISECOND, 999);
+        } else {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+        }
+        return calendar;
+    }
+
+    private void moDialogChiTietHoaDon(HoaDon hoaDon) {
+        View view = getLayoutInflater().inflate(R.layout.admin_dialog_chi_tiet_hoa_don_quan_ly, null);
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setTitle("Chi tiết hóa đơn")
+                .setView(view)
+                .create();
+
+        TextView lblMaHoaDon = view.findViewById(R.id.lblMaHoaDon);
+        TextView lblHoTenKhach = view.findViewById(R.id.lblHoTenKhach);
+        TextView lblNgayLap = view.findViewById(R.id.lblNgayLap);
+        TextView lblTongTien = view.findViewById(R.id.lblTongTien);
+        TextView lblTienGiam = view.findViewById(R.id.lblTienGiam);
+        TextView lblPhaiTra = view.findViewById(R.id.lblPhaiTra);
+        TextView lblHinhThuc = view.findViewById(R.id.lblHinhThuc);
+        TextView lblTrangThai = view.findViewById(R.id.lblTrangThai);
+        RecyclerView rcvChiTietHoaDon = view.findViewById(R.id.rcvChiTietHoaDon);
+        Button btnDong = view.findViewById(R.id.btnDong);
+
+        ChiTietHoaDonAdapter chiTietAdapter = new ChiTietHoaDonAdapter();
+        rcvChiTietHoaDon.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvChiTietHoaDon.setAdapter(chiTietAdapter);
+
+        lblMaHoaDon.setText("Mã hóa đơn: " + hoaDon.getMaHoaDon());
+        lblHoTenKhach.setText("Khách hàng: " + layHoTenKhach(hoaDon));
+        lblNgayLap.setText("Ngày lập: " + dinhDangNgayGio(hoaDon.getNgayLap()));
+        lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
+        lblTienGiam.setText("Tiền giảm: " + DinhDangTien.dinhDang(hoaDon.getTienGiam()));
+        lblPhaiTra.setText("Phải trả: " + DinhDangTien.dinhDang(Math.max(0, hoaDon.getTongTien() - hoaDon.getTienGiam())));
+        lblHinhThuc.setText("Hình thức thanh toán: " + giaTri(hoaDon.getThanhToan()));
+        lblTrangThai.setText("Trạng thái: " + giaTri(hoaDon.getTrangThai()));
+
+        btnDong.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+        taiChiTietHoaDon(hoaDon.getMaHoaDon(), chiTietAdapter);
+    }
+
+    private void taiChiTietHoaDon(int maHoaDon, ChiTietHoaDonAdapter chiTietAdapter) {
+        hoaDonController.layChiTietHoaDon(maHoaDon, new ApiCallback<List<ChiTietHoaDon>>() {
+            @Override
+            public void onSuccess(List<ChiTietHoaDon> data) {
+                chiTietAdapter.capNhatDuLieu(data);
+            }
+
+            @Override
+            public void onError(String thongBao) {
+                baoLoi("Lỗi chi tiết hóa đơn", thongBao);
+            }
+        });
+    }
+
+    private String layHoTenKhach(HoaDon hoaDon) {
+        NguoiDung nguoiDung = hoaDon.getNguoiDung();
+        if (nguoiDung == null || nguoiDung.getHoTen() == null || nguoiDung.getHoTen().trim().isEmpty()) {
+            return "Mã người dùng " + hoaDon.getMaNguoiDung();
+        }
+        return nguoiDung.getHoTen();
+    }
+
+    private String giaTri(String giaTri) {
+        return giaTri == null ? "" : giaTri;
+    }
+
+    private String dinhDangNgayGio(String ngayGio) {
+        Date ngay = parseNgayGio(ngayGio);
+        if (ngay == null) {
+            return ngayGio == null ? "" : ngayGio;
+        }
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(ngay);
+    }
+
+    private Date parseNgayGio(String ngayGio) {
+        if (ngayGio == null || ngayGio.trim().isEmpty()) {
+            return null;
+        }
+
+        String[] dinhDangNguon = {
+                "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX",
+                "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+                "yyyy-MM-dd'T'HH:mm:ssXXX",
+                "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX",
+                "yyyy-MM-dd'T'HH:mm:ss.SSSX",
+                "yyyy-MM-dd'T'HH:mm:ssX",
+                "yyyy-MM-dd'T'HH:mm:ss.SSSSSS",
+                "yyyy-MM-dd'T'HH:mm:ss.SSS",
+                "yyyy-MM-dd'T'HH:mm:ss",
+                "yyyy-MM-dd HH:mm:ss",
+                "yyyy-MM-dd"
+        };
+
+        for (String dinhDang : dinhDangNguon) {
+            try {
+                return new SimpleDateFormat(dinhDang, Locale.getDefault()).parse(ngayGio);
+            } catch (ParseException ignored) {
+            }
+        }
+        return null;
+    }
+
+    private void baoLoi(String tieuDe, String noiDung) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle(tieuDe)
+                .setMessage(noiDung)
+                .setPositiveButton("Đồng ý", null)
+                .show();
+    }
+}

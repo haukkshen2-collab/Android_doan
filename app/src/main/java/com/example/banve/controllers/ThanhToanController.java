@@ -13,7 +13,12 @@ import com.example.banve.models.Ve;
 import com.example.banve.models.Voucher;
 import com.example.banve.network.ApiCallback;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ThanhToanController {
     private final VeDAO veDAO;
@@ -65,44 +70,16 @@ public class ThanhToanController {
             return;
         }
 
+        String loiNgaySuDung = kiemTraNgaySuDungHopLe(danhSachMuc);
+        if (loiNgaySuDung != null) {
+            callback.onError(loiNgaySuDung);
+            return;
+        }
+
         kiemTraTonVe(maNguoiDung, danhSachMuc, voucher, hinhThucThanhToan, callback, 0);
     }
 
     private void kiemTraTonVe(
-            int maNguoiDung,
-            List<MucGioHang> danhSachMuc,
-            Voucher voucher,
-            String hinhThucThanhToan,
-            ApiCallback<HoaDon> callback,
-            int viTri
-    ) {
-        if (viTri >= danhSachMuc.size()) {
-            truSoLuongVe(maNguoiDung, danhSachMuc, voucher, hinhThucThanhToan, callback, 0);
-            return;
-        }
-
-        MucGioHang muc = danhSachMuc.get(viTri);
-        veDAO.layTheoMa(muc.getChiTietGioHang().getMaVe(), new ApiCallback<Ve>() {
-            @Override
-            public void onSuccess(Ve ve) {
-                int tongSoLuong = tinhTongSoLuong(muc.getChiTietGioHang());
-                if (ve.getSoLuong() < tongSoLuong) {
-                    callback.onError("Vé '" + ve.getTenVe() + "' không đủ số lượng");
-                    return;
-                }
-
-                muc.setVe(ve);
-                kiemTraTonVe(maNguoiDung, danhSachMuc, voucher, hinhThucThanhToan, callback, viTri + 1);
-            }
-
-            @Override
-            public void onError(String thongBao) {
-                callback.onError(thongBao);
-            }
-        });
-    }
-
-    private void truSoLuongVe(
             int maNguoiDung,
             List<MucGioHang> danhSachMuc,
             Voucher voucher,
@@ -116,11 +93,45 @@ public class ThanhToanController {
         }
 
         MucGioHang muc = danhSachMuc.get(viTri);
-        int soLuongMoi = muc.getVe().getSoLuong() - tinhTongSoLuong(muc.getChiTietGioHang());
-        veDAO.capNhatSoLuong(muc.getVe().getMaVe(), soLuongMoi, new ApiCallback<Ve>() {
+        veDAO.layTheoMa(muc.getChiTietGioHang().getMaVe(), new ApiCallback<Ve>() {
             @Override
-            public void onSuccess(Ve data) {
-                truSoLuongVe(maNguoiDung, danhSachMuc, voucher, hinhThucThanhToan, callback, viTri + 1);
+            public void onSuccess(Ve ve) {
+                muc.setVe(ve);
+                kiemTraSoLuongDaBanTheoNgay(maNguoiDung, danhSachMuc, voucher, hinhThucThanhToan, callback, viTri, muc, ve);
+            }
+
+            @Override
+            public void onError(String thongBao) {
+                callback.onError(thongBao);
+            }
+        });
+    }
+
+    private void kiemTraSoLuongDaBanTheoNgay(
+            int maNguoiDung,
+            List<MucGioHang> danhSachMuc,
+            Voucher voucher,
+            String hinhThucThanhToan,
+            ApiCallback<HoaDon> callback,
+            int viTri,
+            MucGioHang muc,
+            Ve ve
+    ) {
+        ChiTietGioHang chiTiet = muc.getChiTietGioHang();
+        chiTietHoaDonDAO.layTheoVeVaNgay(chiTiet.getMaVe(), chiTiet.getNgaySuDung(), new ApiCallback<List<ChiTietHoaDon>>() {
+            @Override
+            public void onSuccess(List<ChiTietHoaDon> data) {
+                int soLuongDaBan = tinhTongSoLuongDaBan(data);
+                int soLuongDangMua = tinhSoLuongDangMuaCungNgay(danhSachMuc, chiTiet.getMaVe(), chiTiet.getNgaySuDung());
+                int soLuongConLai = ve.getSoLuong() - soLuongDaBan;
+
+                if (soLuongDangMua > soLuongConLai) {
+                    callback.onError("Vé '" + ve.getTenVe() + "' ngày " + dinhDangNgayHienThi(chiTiet.getNgaySuDung())
+                            + " chỉ còn " + Math.max(0, soLuongConLai) + " vé");
+                    return;
+                }
+
+                kiemTraTonVe(maNguoiDung, danhSachMuc, voucher, hinhThucThanhToan, callback, viTri + 1);
             }
 
             @Override
@@ -273,5 +284,67 @@ public class ThanhToanController {
         return chiTietGioHang.getSoLuongNguoiLon()
                 + chiTietGioHang.getSoLuongTreEm()
                 + chiTietGioHang.getSoLuongNguoiCaoTuoi();
+    }
+
+    private int tinhTongSoLuong(ChiTietHoaDon chiTietHoaDon) {
+        return chiTietHoaDon.getSoLuongNguoiLon()
+                + chiTietHoaDon.getSoLuongTreEm()
+                + chiTietHoaDon.getSoLuongNguoiCaoTuoi();
+    }
+
+    private int tinhTongSoLuongDaBan(List<ChiTietHoaDon> danhSachChiTiet) {
+        int tongSoLuong = 0;
+        if (danhSachChiTiet == null) {
+            return tongSoLuong;
+        }
+
+        for (ChiTietHoaDon chiTiet : danhSachChiTiet) {
+            tongSoLuong += tinhTongSoLuong(chiTiet);
+        }
+        return tongSoLuong;
+    }
+
+    private int tinhSoLuongDangMuaCungNgay(List<MucGioHang> danhSachMuc, int maVe, String ngaySuDung) {
+        int tongSoLuong = 0;
+        for (MucGioHang muc : danhSachMuc) {
+            ChiTietGioHang chiTiet = muc.getChiTietGioHang();
+            if (chiTiet.getMaVe() == maVe && ngaySuDung.equals(chiTiet.getNgaySuDung())) {
+                tongSoLuong += tinhTongSoLuong(chiTiet);
+            }
+        }
+        return tongSoLuong;
+    }
+
+    private String dinhDangNgayHienThi(String ngaySuDung) {
+        Date ngay = parseNgaySuDung(ngaySuDung);
+        if (ngay == null) {
+            return ngaySuDung;
+        }
+        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(ngay);
+    }
+
+    private String kiemTraNgaySuDungHopLe(List<MucGioHang> danhSachMuc) {
+        Calendar homNay = Calendar.getInstance();
+        homNay.set(Calendar.HOUR_OF_DAY, 0);
+        homNay.set(Calendar.MINUTE, 0);
+        homNay.set(Calendar.SECOND, 0);
+        homNay.set(Calendar.MILLISECOND, 0);
+
+        for (MucGioHang muc : danhSachMuc) {
+            Date ngaySuDung = parseNgaySuDung(muc.getChiTietGioHang().getNgaySuDung());
+            if (ngaySuDung != null && ngaySuDung.before(homNay.getTime())) {
+                String tenVe = muc.getVe() == null ? "vé" : muc.getVe().getTenVe();
+                return "Vé \"" + tenVe + "\" có ngày sử dụng trong quá khứ. Vui lòng sửa ngày trước khi thanh toán.";
+            }
+        }
+        return null;
+    }
+
+    private Date parseNgaySuDung(String ngaySuDung) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ngaySuDung);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }

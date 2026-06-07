@@ -64,7 +64,7 @@ public class ThongTinNguoiDungActivity extends AppCompatActivity {
     private void batSuKien() {
         btnCapNhat.setOnClickListener(v -> moDialogCapNhatThongTin());
         btnDoiMatKhau.setOnClickListener(v -> moDialogDoiMatKhau());
-        btnDangXuat.setOnClickListener(v -> xacNhanDangXuat());
+        btnDangXuat.setOnClickListener(v -> TienIch.dangXuat(this));
     }
 
     private void hienThongTin() {
@@ -158,19 +158,6 @@ public class ThongTinNguoiDungActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void xacNhanDangXuat() {
-        new AlertDialog.Builder(this)
-                .setTitle("Đăng xuất")
-                .setMessage("Bạn có chắc muốn đăng xuất?")
-                .setPositiveButton("Đồng ý", (dialog, which) -> {
-                    Session.dangXuat();
-                    Session.luuLocal(this);
-                    quayVeDangNhap();
-                })
-                .setNegativeButton("Hủy", null)
-                .show();
-    }
-
     private void quayVeDangNhap() {
         Intent intent = new Intent(this, DangNhapActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -186,4 +173,3 @@ public class ThongTinNguoiDungActivity extends AppCompatActivity {
         return giaTri == null ? "" : giaTri;
     }
 }
-

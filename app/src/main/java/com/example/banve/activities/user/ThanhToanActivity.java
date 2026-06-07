@@ -29,7 +29,12 @@ import com.example.banve.utils.Session;
 import com.example.banve.utils.TienIch;
 
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ThanhToanActivity extends AppCompatActivity {
     private RecyclerView rcvDanhSachVeThanhToan;
@@ -135,6 +140,11 @@ public class ThanhToanActivity extends AppCompatActivity {
         if (viTri >= danhSachChiTiet.size()) {
             veThanhToanAdapter.capNhatDuLieu(danhSachMuc);
             tinhLaiTongTien();
+            String loiNgaySuDung = kiemTraNgaySuDungHopLe();
+            if (loiNgaySuDung != null) {
+                btnXacNhanThanhToan.setEnabled(false);
+                TienIch.hienAlert(ThanhToanActivity.this, "Lỗi thanh toán", loiNgaySuDung);
+            }
             return;
         }
 
@@ -180,6 +190,12 @@ public class ThanhToanActivity extends AppCompatActivity {
     private void xacNhanThanhToan() {
         if (danhSachMuc.isEmpty()) {
             TienIch.hienAlert(this, "Thông báo", "Giỏ hàng đang trống");
+            return;
+        }
+
+        String loiNgaySuDung = kiemTraNgaySuDungHopLe();
+        if (loiNgaySuDung != null) {
+            TienIch.hienAlert(this, "Lỗi thanh toán", loiNgaySuDung);
             return;
         }
 
@@ -230,6 +246,31 @@ public class ThanhToanActivity extends AppCompatActivity {
         return "TienMat";
     }
 
+    private String kiemTraNgaySuDungHopLe() {
+        Calendar homNay = Calendar.getInstance();
+        homNay.set(Calendar.HOUR_OF_DAY, 0);
+        homNay.set(Calendar.MINUTE, 0);
+        homNay.set(Calendar.SECOND, 0);
+        homNay.set(Calendar.MILLISECOND, 0);
+
+        for (MucGioHang muc : danhSachMuc) {
+            Date ngaySuDung = parseNgaySuDung(muc.getChiTietGioHang().getNgaySuDung());
+            if (ngaySuDung != null && ngaySuDung.before(homNay.getTime())) {
+                String tenVe = muc.getVe() == null ? "vé" : muc.getVe().getTenVe();
+                return "Vé \"" + tenVe + "\" có ngày sử dụng trong quá khứ. Vui lòng quay lại giỏ hàng để sửa ngày.";
+            }
+        }
+        return null;
+    }
+
+    private Date parseNgaySuDung(String ngaySuDung) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ngaySuDung);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     private void veDashboard() {
         Intent intent = new Intent(this, DashboardNguoiDungActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -237,4 +278,3 @@ public class ThanhToanActivity extends AppCompatActivity {
         finish();
     }
 }
-

@@ -45,6 +45,30 @@ public class ChiTietHoaDonDAO {
         });
     }
 
+    public void layTheoVeVaNgay(int maVe, String ngaySuDung, ApiCallback<List<ChiTietHoaDon>> callback) {
+        Map<String, String> filter = new HashMap<>();
+        filter.put("MaVe", "eq." + maVe);
+        filter.put("NgaySuDung", "eq." + ngaySuDung);
+        filter.put("select", "*");
+
+        apiService.timChiTietHoaDon(filter).enqueue(new Callback<List<ChiTietHoaDon>>() {
+            @Override
+            public void onResponse(Call<List<ChiTietHoaDon>> call, Response<List<ChiTietHoaDon>> response) {
+                if (!response.isSuccessful()) {
+                    callback.onError("Không thể kiểm tra số lượng vé đã bán");
+                    return;
+                }
+
+                callback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ChiTietHoaDon>> call, Throwable t) {
+                callback.onError("Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
+
     private Map<String, Object> taoDuLieuChiTiet(ChiTietHoaDon chiTietHoaDon) {
         Map<String, Object> duLieu = new HashMap<>();
         duLieu.put("MaHoaDon", chiTietHoaDon.getMaHoaDon());

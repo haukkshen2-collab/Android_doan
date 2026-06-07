@@ -23,6 +23,10 @@ public class HoaDonController {
         hoaDonDAO.layDanhSachDaThanhToan(maNguoiDung, callback);
     }
 
+    public void layDanhSachHoaDonQuanLy(ApiCallback<List<HoaDon>> callback) {
+        hoaDonDAO.layDanhSachHoaDonQuanLy(callback);
+    }
+
     public void layChiTietHoaDon(int maHoaDon, ApiCallback<List<ChiTietHoaDon>> callback) {
         if (maHoaDon <= 0) {
             callback.onError("Hóa đơn không hợp lệ");
