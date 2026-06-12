@@ -106,8 +106,8 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
         if ("VNPay".equals(thanhToan)) {
             return "VNPay";
         }
-        if ("TienMat".equals(thanhToan)) {
-            return "Tiền mặt";
+        if ("TheQuocTe".equals(thanhToan) || "TienMat".equals(thanhToan)) {
+            return "Thẻ tín dụng/ghi nợ quốc tế";
         }
         return thanhToan == null ? "" : thanhToan;
     }
@@ -135,4 +135,3 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
         return ngayGio;
     }
 }
-

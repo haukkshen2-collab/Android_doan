@@ -55,7 +55,7 @@ public class HoaDonQuanLyAdapter extends RecyclerView.Adapter<HoaDonQuanLyAdapte
         holder.lblHoTenKhach.setText("Khách hàng: " + layHoTenKhach(hoaDon));
         holder.lblNgayLap.setText("Ngày lập: " + dinhDangNgayGio(hoaDon.getNgayLap()));
         holder.lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
-        holder.lblHinhThuc.setText("Hình thức: " + giaTri(hoaDon.getThanhToan()));
+        holder.lblHinhThuc.setText("Hình thức: " + hienThiHinhThucThanhToan(hoaDon.getThanhToan()));
         holder.btnXemChiTiet.setOnClickListener(v -> listener.onXemChiTiet(hoaDon));
     }
 
@@ -74,6 +74,19 @@ public class HoaDonQuanLyAdapter extends RecyclerView.Adapter<HoaDonQuanLyAdapte
 
     private String giaTri(String giaTri) {
         return giaTri == null ? "" : giaTri;
+    }
+
+    private String hienThiHinhThucThanhToan(String thanhToan) {
+        if ("ChuyenKhoan".equals(thanhToan)) {
+            return "Chuyển khoản";
+        }
+        if ("VNPay".equals(thanhToan)) {
+            return "VNPay";
+        }
+        if ("TheQuocTe".equals(thanhToan) || "TienMat".equals(thanhToan)) {
+            return "Thẻ tín dụng/ghi nợ quốc tế";
+        }
+        return giaTri(thanhToan);
     }
 
     private String dinhDangNgayGio(String ngayGio) {

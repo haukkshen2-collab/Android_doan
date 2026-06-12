@@ -81,7 +81,7 @@ public class CauHinhAIController {
         cauHinhAI.setNhaCungCap(cauHinhAI.getNhaCungCap().trim());
         cauHinhAI.setKhoaApi(cauHinhAI.getKhoaApi().trim());
         if (rong(cauHinhAI.getMoHinh())) {
-            cauHinhAI.setMoHinh("gemini-1.5-flash");
+            cauHinhAI.setMoHinh("gemini-3.1-flash-lite");
         } else {
             cauHinhAI.setMoHinh(cauHinhAI.getMoHinh().trim());
         }
@@ -119,23 +119,29 @@ public class CauHinhAIController {
         String nhaCungCap = cauHinhAI.getNhaCungCap().trim();
         String moHinh = chuanHoaMoHinhGemini(cauHinhAI.getMoHinh());
 
-        if (nhaCungCap.contains("{model}")) {
-            return nhaCungCap.replace("{model}", moHinh);
-        }
-        if (nhaCungCap.contains(":generateContent")) {
-            return nhaCungCap;
+        if (nhaCungCap.startsWith("http://") || nhaCungCap.startsWith("https://")) {
+            if (nhaCungCap.contains("{model}")) {
+                return nhaCungCap.replace("{model}", moHinh);
+            }
+            if (nhaCungCap.contains(":generateContent")) {
+                return nhaCungCap;
+            }
+
+            String url = nhaCungCap.endsWith("/")
+                    ? nhaCungCap.substring(0, nhaCungCap.length() - 1)
+                    : nhaCungCap;
+            if (url.endsWith("/models")) {
+                return url + "/" + moHinh + ":generateContent";
+            }
+            if (url.endsWith("/v1beta")) {
+                return url + "/models/" + moHinh + ":generateContent";
+            }
+            return url + "/v1beta/models/" + moHinh + ":generateContent";
         }
 
-        String url = nhaCungCap.endsWith("/")
-                ? nhaCungCap.substring(0, nhaCungCap.length() - 1)
-                : nhaCungCap;
-        if (url.endsWith("/models")) {
-            return url + "/" + moHinh + ":generateContent";
-        }
-        if (url.endsWith("/v1beta")) {
-            return url + "/models/" + moHinh + ":generateContent";
-        }
-        return url + "/v1beta/models/" + moHinh + ":generateContent";
+        return "https://generativelanguage.googleapis.com/v1beta/models/"
+                + moHinh
+                + ":generateContent";
     }
 
     private String chuanHoaMoHinhGemini(String moHinh) {

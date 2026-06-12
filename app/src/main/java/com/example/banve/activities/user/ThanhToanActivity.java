@@ -3,6 +3,7 @@ package com.example.banve.activities.user;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -38,20 +39,21 @@ import java.util.Locale;
 
 public class ThanhToanActivity extends AppCompatActivity {
     private RecyclerView rcvDanhSachVeThanhToan;
-    private RecyclerView rcvDanhSachVoucher;
+    private TextView lblVoucherDangChon;
     private TextView lblTongTien;
     private TextView lblTienGiam;
     private TextView lblPhaiTra;
     private RadioGroup rgThanhToan;
+    private Button btnChonVoucher;
     private Button btnXacNhanThanhToan;
     private Button btnHuy;
     private VeThanhToanAdapter veThanhToanAdapter;
-    private VoucherAdapter voucherAdapter;
     private GioHangController gioHangController;
     private VeController veController;
     private VoucherDAO voucherDAO;
     private ThanhToanController thanhToanController;
     private final List<MucGioHang> danhSachMuc = new ArrayList<>();
+    private final List<Voucher> danhSachVoucher = new ArrayList<>();
     private Voucher voucherDangChon;
     private double tongTien;
     private double tienGiam;
@@ -76,11 +78,12 @@ public class ThanhToanActivity extends AppCompatActivity {
 
     private void anhXa() {
         rcvDanhSachVeThanhToan = findViewById(R.id.rcvDanhSachVeThanhToan);
-        rcvDanhSachVoucher = findViewById(R.id.rcvDanhSachVoucher);
+        lblVoucherDangChon = findViewById(R.id.lblVoucherDangChon);
         lblTongTien = findViewById(R.id.lblTongTien);
         lblTienGiam = findViewById(R.id.lblTienGiam);
         lblPhaiTra = findViewById(R.id.lblPhaiTra);
         rgThanhToan = findViewById(R.id.rgThanhToan);
+        btnChonVoucher = findViewById(R.id.btnChonVoucher);
         btnXacNhanThanhToan = findViewById(R.id.btnXacNhanThanhToan);
         btnHuy = findViewById(R.id.btnHuy);
     }
@@ -89,22 +92,11 @@ public class ThanhToanActivity extends AppCompatActivity {
         veThanhToanAdapter = new VeThanhToanAdapter();
         rcvDanhSachVeThanhToan.setLayoutManager(new LinearLayoutManager(this));
         rcvDanhSachVeThanhToan.setAdapter(veThanhToanAdapter);
-
-        voucherAdapter = new VoucherAdapter(voucher -> {
-            if (voucherDangChon != null && voucherDangChon.getMaVoucher() == voucher.getMaVoucher()) {
-                voucherDangChon = null;
-            } else {
-                voucherDangChon = voucher;
-            }
-            voucherAdapter.chonVoucher(voucherDangChon);
-            tinhLaiTongTien();
-        });
-        rcvDanhSachVoucher.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rcvDanhSachVoucher.setAdapter(voucherAdapter);
     }
 
     private void batSuKien() {
         btnHuy.setOnClickListener(v -> finish());
+        btnChonVoucher.setOnClickListener(v -> moDialogChonVoucher());
         btnXacNhanThanhToan.setOnClickListener(v -> xacNhanThanhToan());
     }
 
@@ -167,7 +159,11 @@ public class ThanhToanActivity extends AppCompatActivity {
         voucherDAO.layDanhSachVoucherKhaDung(new ApiCallback<List<Voucher>>() {
             @Override
             public void onSuccess(List<Voucher> data) {
-                voucherAdapter.capNhatDuLieu(data);
+                danhSachVoucher.clear();
+                if (data != null) {
+                    danhSachVoucher.addAll(data);
+                }
+                capNhatHienThiVoucher();
             }
 
             @Override
@@ -185,6 +181,53 @@ public class ThanhToanActivity extends AppCompatActivity {
         lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(tongTien));
         lblTienGiam.setText("Tiền giảm: " + DinhDangTien.dinhDang(tienGiam));
         lblPhaiTra.setText("Phải trả: " + DinhDangTien.dinhDang(phaiTra));
+        capNhatHienThiVoucher();
+    }
+
+    private void moDialogChonVoucher() {
+        View view = getLayoutInflater().inflate(R.layout.user_dialog_chon_voucher, null);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(view)
+                .create();
+
+        RecyclerView rcvDanhSachVoucher = view.findViewById(R.id.rcvDanhSachVoucher);
+        Button btnBoChonVoucher = view.findViewById(R.id.btnBoChonVoucher);
+        Button btnDong = view.findViewById(R.id.btnDong);
+
+        VoucherAdapter dialogVoucherAdapter = new VoucherAdapter(voucher -> {
+            if (voucherDangChon != null && voucherDangChon.getMaVoucher() == voucher.getMaVoucher()) {
+                voucherDangChon = null;
+            } else {
+                voucherDangChon = voucher;
+            }
+            tinhLaiTongTien();
+            dialog.dismiss();
+        });
+        dialogVoucherAdapter.capNhatDuLieu(danhSachVoucher);
+        dialogVoucherAdapter.chonVoucher(voucherDangChon);
+        rcvDanhSachVoucher.setLayoutManager(new LinearLayoutManager(this));
+        rcvDanhSachVoucher.setAdapter(dialogVoucherAdapter);
+
+        btnBoChonVoucher.setOnClickListener(v -> {
+            voucherDangChon = null;
+            tinhLaiTongTien();
+            dialog.dismiss();
+        });
+        btnDong.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void capNhatHienThiVoucher() {
+        if (lblVoucherDangChon == null) {
+            return;
+        }
+
+        if (voucherDangChon == null) {
+            lblVoucherDangChon.setText("Chưa chọn voucher");
+            return;
+        }
+
+        lblVoucherDangChon.setText(voucherDangChon.getTenVoucher() + " - giảm " + DinhDangTien.dinhDang(tienGiam));
     }
 
     private void xacNhanThanhToan() {
@@ -243,7 +286,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         if (id == R.id.radVNPay) {
             return "VNPay";
         }
-        return "TienMat";
+        return "TheQuocTe";
     }
 
     private String kiemTraNgaySuDungHopLe() {

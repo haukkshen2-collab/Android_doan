@@ -38,11 +38,21 @@
             android:text="Voucher khả dụng"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvDanhSachVoucher"
+        <TextView
+            android:id="@+id/lblVoucherDangChon"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_item_ve"
+            android:padding="12dp"
+            android:text="Chưa chọn voucher" />
+
+        <Button
+            android:id="@+id/btnChonVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Chọn voucher" />
 
         <TextView
             android:id="@+id/lblTongTien"
@@ -79,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Tiền mặt" />
+                android:text="Thẻ tín dụng/ghi nợ quốc tế" />
 
             <RadioButton
                 android:id="@+id/radChuyenKhoan"

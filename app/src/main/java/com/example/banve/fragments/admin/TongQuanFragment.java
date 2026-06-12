@@ -1,12 +1,12 @@
 package com.example.banve.fragments.admin;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,10 +28,12 @@ import com.example.banve.utils.DinhDangTien;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class TongQuanFragment extends Fragment {
-    private DatePicker dtpTuNgay;
-    private DatePicker dtpDenNgay;
+    private Button btnTuNgay;
+    private Button btnDenNgay;
     private Button btnLoc;
     private ProgressBar pgbDangTai;
     private TextView lblTongHoaDon;
@@ -46,6 +48,9 @@ public class TongQuanFragment extends Fragment {
     private ThongKeNgayAdapter thongKeNgayAdapter;
     private ThongKeThangAdapter thongKeThangAdapter;
     private ThongKeController thongKeController;
+    private final Calendar tuNgayCalendar = Calendar.getInstance();
+    private final Calendar denNgayCalendar = Calendar.getInstance();
+    private final SimpleDateFormat dinhDangNgay = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     @Nullable
     @Override
@@ -61,8 +66,8 @@ public class TongQuanFragment extends Fragment {
     }
 
     private void anhXa(View view) {
-        dtpTuNgay = view.findViewById(R.id.dtpTuNgay);
-        dtpDenNgay = view.findViewById(R.id.dtpDenNgay);
+        btnTuNgay = view.findViewById(R.id.btnTuNgay);
+        btnDenNgay = view.findViewById(R.id.btnDenNgay);
         btnLoc = view.findViewById(R.id.btnLoc);
         pgbDangTai = view.findViewById(R.id.pgbDangTai);
         lblTongHoaDon = view.findViewById(R.id.lblTongHoaDon);
@@ -76,12 +81,13 @@ public class TongQuanFragment extends Fragment {
     }
 
     private void khoiTaoNgayMacDinh() {
-        Calendar tuNgay = Calendar.getInstance();
-        tuNgay.add(Calendar.DAY_OF_MONTH, -30);
-        dtpTuNgay.updateDate(tuNgay.get(Calendar.YEAR), tuNgay.get(Calendar.MONTH), tuNgay.get(Calendar.DAY_OF_MONTH));
+        tuNgayCalendar.setTime(new Date());
+        tuNgayCalendar.add(Calendar.DAY_OF_MONTH, -30);
+        duaVeDauNgay(tuNgayCalendar);
 
-        Calendar denNgay = Calendar.getInstance();
-        dtpDenNgay.updateDate(denNgay.get(Calendar.YEAR), denNgay.get(Calendar.MONTH), denNgay.get(Calendar.DAY_OF_MONTH));
+        denNgayCalendar.setTime(new Date());
+        duaVeDauNgay(denNgayCalendar);
+        capNhatNutNgay();
     }
 
     private void khoiTaoRecyclerView() {
@@ -98,12 +104,14 @@ public class TongQuanFragment extends Fragment {
     }
 
     private void batSuKien() {
+        btnTuNgay.setOnClickListener(v -> moDialogChonNgay(tuNgayCalendar, this::capNhatNutNgay));
+        btnDenNgay.setOnClickListener(v -> moDialogChonNgay(denNgayCalendar, this::capNhatNutNgay));
         btnLoc.setOnClickListener(v -> taiThongKe());
     }
 
     private void taiThongKe() {
-        Date tuNgay = layNgayTuDatePicker(dtpTuNgay);
-        Date denNgay = layNgayTuDatePicker(dtpDenNgay);
+        Date tuNgay = tuNgayCalendar.getTime();
+        Date denNgay = denNgayCalendar.getTime();
 
         if (tuNgay.after(denNgay)) {
             baoLoi("Lỗi thống kê", "Từ ngày không được lớn hơn đến ngày");
@@ -126,14 +134,30 @@ public class TongQuanFragment extends Fragment {
         });
     }
 
-    private Date layNgayTuDatePicker(DatePicker datePicker) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+    private void moDialogChonNgay(Calendar ngayDangChon, Runnable sauKhiChon) {
+        new DatePickerDialog(
+                requireContext(),
+                (view, nam, thang, ngay) -> {
+                    ngayDangChon.set(nam, thang, ngay);
+                    duaVeDauNgay(ngayDangChon);
+                    sauKhiChon.run();
+                },
+                ngayDangChon.get(Calendar.YEAR),
+                ngayDangChon.get(Calendar.MONTH),
+                ngayDangChon.get(Calendar.DAY_OF_MONTH)
+        ).show();
+    }
+
+    private void capNhatNutNgay() {
+        btnTuNgay.setText("Từ: " + dinhDangNgay.format(tuNgayCalendar.getTime()));
+        btnDenNgay.setText("Đến: " + dinhDangNgay.format(denNgayCalendar.getTime()));
+    }
+
+    private void duaVeDauNgay(Calendar calendar) {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        return calendar.getTime();
     }
 
     private void hienThongKe(KetQuaThongKe ketQua) {

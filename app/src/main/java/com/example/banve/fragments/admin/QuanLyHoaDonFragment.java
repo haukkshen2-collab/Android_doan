@@ -1,12 +1,12 @@
 package com.example.banve.fragments.admin;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,13 +34,16 @@ import java.util.List;
 import java.util.Locale;
 
 public class QuanLyHoaDonFragment extends Fragment {
-    private DatePicker dtpTuNgay;
-    private DatePicker dtpDenNgay;
+    private Button btnTuNgay;
+    private Button btnDenNgay;
     private Button btnLoc;
     private RecyclerView rcvDanhSachHoaDon;
     private HoaDonQuanLyAdapter adapter;
     private HoaDonController hoaDonController;
     private final List<HoaDon> danhSachGoc = new ArrayList<>();
+    private final Calendar tuNgayCalendar = Calendar.getInstance();
+    private final Calendar denNgayCalendar = Calendar.getInstance();
+    private final SimpleDateFormat dinhDangNgay = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     @Nullable
     @Override
@@ -56,19 +59,20 @@ public class QuanLyHoaDonFragment extends Fragment {
     }
 
     private void anhXa(View view) {
-        dtpTuNgay = view.findViewById(R.id.dtpTuNgay);
-        dtpDenNgay = view.findViewById(R.id.dtpDenNgay);
+        btnTuNgay = view.findViewById(R.id.btnTuNgay);
+        btnDenNgay = view.findViewById(R.id.btnDenNgay);
         btnLoc = view.findViewById(R.id.btnLoc);
         rcvDanhSachHoaDon = view.findViewById(R.id.rcvDanhSachHoaDon);
     }
 
     private void khoiTaoNgayLoc() {
-        Calendar tuNgay = Calendar.getInstance();
-        tuNgay.add(Calendar.MONTH, -1);
-        dtpTuNgay.updateDate(tuNgay.get(Calendar.YEAR), tuNgay.get(Calendar.MONTH), tuNgay.get(Calendar.DAY_OF_MONTH));
+        tuNgayCalendar.setTime(new Date());
+        tuNgayCalendar.add(Calendar.MONTH, -1);
+        duaVeDauNgay(tuNgayCalendar);
 
-        Calendar denNgay = Calendar.getInstance();
-        dtpDenNgay.updateDate(denNgay.get(Calendar.YEAR), denNgay.get(Calendar.MONTH), denNgay.get(Calendar.DAY_OF_MONTH));
+        denNgayCalendar.setTime(new Date());
+        duaVeCuoiNgay(denNgayCalendar);
+        capNhatNutNgay();
     }
 
     private void khoiTaoRecyclerView() {
@@ -79,6 +83,8 @@ public class QuanLyHoaDonFragment extends Fragment {
     }
 
     private void batSuKien() {
+        btnTuNgay.setOnClickListener(v -> moDialogChonNgay(tuNgayCalendar, false));
+        btnDenNgay.setOnClickListener(v -> moDialogChonNgay(denNgayCalendar, true));
         btnLoc.setOnClickListener(v -> locTheoKhoangNgay());
     }
 
@@ -101,8 +107,8 @@ public class QuanLyHoaDonFragment extends Fragment {
     }
 
     private void locTheoKhoangNgay() {
-        Calendar tuNgay = layCalendarTuDatePicker(dtpTuNgay, false);
-        Calendar denNgay = layCalendarTuDatePicker(dtpDenNgay, true);
+        Calendar tuNgay = (Calendar) tuNgayCalendar.clone();
+        Calendar denNgay = (Calendar) denNgayCalendar.clone();
 
         if (tuNgay.after(denNgay)) {
             baoLoi("Lỗi lọc hóa đơn", "Từ ngày không được lớn hơn đến ngày");
@@ -123,21 +129,41 @@ public class QuanLyHoaDonFragment extends Fragment {
         adapter.capNhatDuLieu(danhSachLoc);
     }
 
-    private Calendar layCalendarTuDatePicker(DatePicker datePicker, boolean cuoiNgay) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-        if (cuoiNgay) {
-            calendar.set(Calendar.HOUR_OF_DAY, 23);
-            calendar.set(Calendar.MINUTE, 59);
-            calendar.set(Calendar.SECOND, 59);
-            calendar.set(Calendar.MILLISECOND, 999);
-        } else {
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-        }
-        return calendar;
+    private void moDialogChonNgay(Calendar ngayDangChon, boolean cuoiNgay) {
+        new DatePickerDialog(
+                requireContext(),
+                (view, nam, thang, ngay) -> {
+                    ngayDangChon.set(nam, thang, ngay);
+                    if (cuoiNgay) {
+                        duaVeCuoiNgay(ngayDangChon);
+                    } else {
+                        duaVeDauNgay(ngayDangChon);
+                    }
+                    capNhatNutNgay();
+                },
+                ngayDangChon.get(Calendar.YEAR),
+                ngayDangChon.get(Calendar.MONTH),
+                ngayDangChon.get(Calendar.DAY_OF_MONTH)
+        ).show();
+    }
+
+    private void capNhatNutNgay() {
+        btnTuNgay.setText("Từ: " + dinhDangNgay.format(tuNgayCalendar.getTime()));
+        btnDenNgay.setText("Đến: " + dinhDangNgay.format(denNgayCalendar.getTime()));
+    }
+
+    private void duaVeDauNgay(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+    }
+
+    private void duaVeCuoiNgay(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
     }
 
     private void moDialogChiTietHoaDon(HoaDon hoaDon) {
@@ -168,7 +194,7 @@ public class QuanLyHoaDonFragment extends Fragment {
         lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
         lblTienGiam.setText("Tiền giảm: " + DinhDangTien.dinhDang(hoaDon.getTienGiam()));
         lblPhaiTra.setText("Phải trả: " + DinhDangTien.dinhDang(Math.max(0, hoaDon.getTongTien() - hoaDon.getTienGiam())));
-        lblHinhThuc.setText("Hình thức thanh toán: " + giaTri(hoaDon.getThanhToan()));
+        lblHinhThuc.setText("Hình thức thanh toán: " + hienThiHinhThucThanhToan(hoaDon.getThanhToan()));
         lblTrangThai.setText("Trạng thái: " + giaTri(hoaDon.getTrangThai()));
 
         btnDong.setOnClickListener(v -> dialog.dismiss());
@@ -200,6 +226,19 @@ public class QuanLyHoaDonFragment extends Fragment {
 
     private String giaTri(String giaTri) {
         return giaTri == null ? "" : giaTri;
+    }
+
+    private String hienThiHinhThucThanhToan(String thanhToan) {
+        if ("ChuyenKhoan".equals(thanhToan)) {
+            return "Chuyển khoản";
+        }
+        if ("VNPay".equals(thanhToan)) {
+            return "VNPay";
+        }
+        if ("TheQuocTe".equals(thanhToan) || "TienMat".equals(thanhToan)) {
+            return "Thẻ tín dụng/ghi nợ quốc tế";
+        }
+        return giaTri(thanhToan);
     }
 
     private String dinhDangNgayGio(String ngayGio) {
