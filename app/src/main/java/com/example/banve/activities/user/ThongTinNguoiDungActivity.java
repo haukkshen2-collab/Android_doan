@@ -131,6 +131,9 @@ public class ThongTinNguoiDungActivity extends AppCompatActivity {
         EditText edtMatKhauCu = view.findViewById(R.id.edtMatKhauCu);
         EditText edtMatKhauMoi = view.findViewById(R.id.edtMatKhauMoi);
         EditText edtNhapLaiMatKhauMoi = view.findViewById(R.id.edtNhapLaiMatKhauMoi);
+        TienIch.ganAnHienMatKhau(edtMatKhauCu);
+        TienIch.ganAnHienMatKhau(edtMatKhauMoi);
+        TienIch.ganAnHienMatKhau(edtNhapLaiMatKhauMoi);
         Button btnLuu = view.findViewById(R.id.btnLuu);
         Button btnHuy = view.findViewById(R.id.btnHuy);
 

@@ -42,6 +42,8 @@ public class DangKyActivity extends AppCompatActivity {
         edtTaiKhoan = findViewById(R.id.edtTaiKhoan);
         edtMatKhau = findViewById(R.id.edtMatKhau);
         edtNhapLaiMatKhau = findViewById(R.id.edtNhapLaiMatKhau);
+        TienIch.ganAnHienMatKhau(edtMatKhau);
+        TienIch.ganAnHienMatKhau(edtNhapLaiMatKhau);
         edtHoTen = findViewById(R.id.edtHoTen);
         edtEmail = findViewById(R.id.edtEmail);
         edtSoDienThoai = findViewById(R.id.edtSoDienThoai);
@@ -99,4 +101,3 @@ public class DangKyActivity extends AppCompatActivity {
         return editText.getText().toString();
     }
 }
-

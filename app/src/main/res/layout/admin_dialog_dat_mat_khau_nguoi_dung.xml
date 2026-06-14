@@ -18,15 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Mật khẩu mới"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/edtNhapLaiMatKhau"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Nhập lại mật khẩu"
+        android:hint="Nhập mật khẩu mới"
         android:inputType="textPassword" />
 
     <LinearLayout

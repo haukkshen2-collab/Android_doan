@@ -26,6 +26,7 @@ import com.example.banve.controllers.NguoiDungController;
 import com.example.banve.models.NguoiDung;
 import com.example.banve.network.ApiCallback;
 import com.example.banve.utils.Session;
+import com.example.banve.utils.TienIch;
 
 import java.util.Arrays;
 import java.util.List;
@@ -173,24 +174,20 @@ public class QuanLyNguoiDungFragment extends Fragment {
 
         TextView lblTaiKhoan = view.findViewById(R.id.lblTaiKhoan);
         EditText edtMatKhauMoi = view.findViewById(R.id.edtMatKhauMoi);
-        EditText edtNhapLaiMatKhau = view.findViewById(R.id.edtNhapLaiMatKhau);
         Button btnLuu = view.findViewById(R.id.btnLuu);
         Button btnHuy = view.findViewById(R.id.btnHuy);
 
         lblTaiKhoan.setText("Tài khoản: " + nguoiDung.getTaiKhoan());
-        edtMatKhauMoi.setText("123456");
-        edtNhapLaiMatKhau.setText("123456");
-
-        btnLuu.setOnClickListener(v -> datLaiMatKhau(dialog, nguoiDung, edtMatKhauMoi, edtNhapLaiMatKhau));
+        TienIch.ganAnHienMatKhau(edtMatKhauMoi);
+        btnLuu.setOnClickListener(v -> datLaiMatKhau(dialog, nguoiDung, edtMatKhauMoi));
         btnHuy.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 
-    private void datLaiMatKhau(AlertDialog dialog, NguoiDung nguoiDung, EditText edtMatKhauMoi, EditText edtNhapLaiMatKhau) {
+    private void datLaiMatKhau(AlertDialog dialog, NguoiDung nguoiDung, EditText edtMatKhauMoi) {
         nguoiDungController.datLaiMatKhau(
                 nguoiDung.getMaNguoiDung(),
                 edtMatKhauMoi.getText().toString(),
-                edtNhapLaiMatKhau.getText().toString(),
                 new ApiCallback<NguoiDung>() {
                     @Override
                     public void onSuccess(NguoiDung data) {

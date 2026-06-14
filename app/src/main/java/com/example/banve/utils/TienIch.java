@@ -4,8 +4,13 @@ import android.app.AlertDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.banve.R;
 import com.example.banve.activities.user.DangNhapActivity;
 
 import java.text.ParseException;
@@ -44,6 +49,52 @@ public final class TienIch {
                 .setMessage(noiDung)
                 .setPositiveButton("Đồng ý", null)
                 .show();
+    }
+
+    public static void ganAnHienMatKhau(EditText editText) {
+        if (editText == null) {
+            return;
+        }
+
+        final boolean[] dangHien = {false};
+        capNhatIconMatKhau(editText, dangHien[0]);
+        editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        editText.setOnTouchListener((view, event) -> {
+            if (event.getAction() != MotionEvent.ACTION_UP) {
+                return false;
+            }
+
+            Drawable drawablePhai = editText.getCompoundDrawables()[2];
+            if (drawablePhai == null) {
+                return false;
+            }
+
+            float viTriBatDauIcon = editText.getWidth()
+                    - editText.getPaddingRight()
+                    - drawablePhai.getBounds().width();
+            if (event.getX() < viTriBatDauIcon) {
+                return false;
+            }
+
+            dangHien[0] = !dangHien[0];
+            editText.setTransformationMethod(dangHien[0]
+                    ? null
+                    : PasswordTransformationMethod.getInstance());
+            capNhatIconMatKhau(editText, dangHien[0]);
+            editText.setSelection(editText.getText().length());
+            view.performClick();
+            return true;
+        });
+    }
+
+    private static void capNhatIconMatKhau(EditText editText, boolean dangHien) {
+        editText.setCompoundDrawablePadding(12);
+        editText.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                dangHien ? R.drawable.ic_mat_khau_an : R.drawable.ic_mat_khau_hien,
+                0
+        );
     }
 
     public static void dangXuat(Activity hoatDong) {

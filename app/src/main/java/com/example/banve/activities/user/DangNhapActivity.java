@@ -47,6 +47,7 @@ public class DangNhapActivity extends AppCompatActivity {
     private void anhXa() {
         edtTaiKhoan = findViewById(R.id.edtTaiKhoan);
         edtMatKhau = findViewById(R.id.edtMatKhau);
+        TienIch.ganAnHienMatKhau(edtMatKhau);
         chkGhiNhoMatKhau = findViewById(R.id.chkGhiNhoMatKhau);
         btnDangNhap = findViewById(R.id.btnDangNhap);
         btnDangKy = findViewById(R.id.btnDangKy);
@@ -113,4 +114,3 @@ public class DangNhapActivity extends AppCompatActivity {
         return editText.getText().toString();
     }
 }
-

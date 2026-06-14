@@ -15,6 +15,7 @@ import com.example.banve.controllers.CauHinhAIController;
 import com.example.banve.models.CauHinhAI;
 import com.example.banve.network.ApiCallback;
 import com.example.banve.utils.Session;
+import com.example.banve.utils.TienIch;
 
 public class QuanLyAIActivity extends AppCompatActivity {
     private EditText edtNhaCungCap;
@@ -49,6 +50,7 @@ public class QuanLyAIActivity extends AppCompatActivity {
     private void anhXa() {
         edtNhaCungCap = findViewById(R.id.edtNhaCungCap);
         edtKhoaApi = findViewById(R.id.edtKhoaApi);
+        TienIch.ganAnHienMatKhau(edtKhoaApi);
         edtMoHinh = findViewById(R.id.edtMoHinh);
         edtNhacLenh = findViewById(R.id.edtNhacLenh);
         btnLuu = findViewById(R.id.btnLuu);

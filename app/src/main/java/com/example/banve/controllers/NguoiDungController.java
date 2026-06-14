@@ -152,6 +152,27 @@ public class NguoiDungController {
         nguoiDungDAO.datLaiMatKhau(maNguoiDung, MaHoa.maHoaMD5(matKhauMoi), callback);
     }
 
+    public void datLaiMatKhau(
+            int maNguoiDung,
+            String matKhauMoi,
+            ApiCallback<NguoiDung> callback
+    ) {
+        if (maNguoiDung <= 0) {
+            callback.onError("Người dùng không hợp lệ");
+            return;
+        }
+        if (rong(matKhauMoi)) {
+            callback.onError("Mật khẩu mới không được để trống");
+            return;
+        }
+        if (matKhauMoi.length() < 6) {
+            callback.onError("Mật khẩu mới phải có ít nhất 6 ký tự");
+            return;
+        }
+
+        nguoiDungDAO.datLaiMatKhau(maNguoiDung, MaHoa.maHoaMD5(matKhauMoi), callback);
+    }
+
     public void capNhatTrangThai(int maNguoiDung, String trangThai, ApiCallback<NguoiDung> callback) {
         if (maNguoiDung <= 0) {
             callback.onError("Người dùng không hợp lệ");
