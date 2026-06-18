@@ -1,12 +1,12 @@
 package com.example.banve.fragments.admin;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Switch;
@@ -101,18 +101,20 @@ public class QuanLyVoucherFragment extends Fragment {
         RadioButton radPhanTram = view.findViewById(R.id.radPhanTram);
         RadioButton radTienMat = view.findViewById(R.id.radTienMat);
         EditText edtGiaTriGiam = view.findViewById(R.id.edtGiaTriGiam);
-        DatePicker dtpNgayBatDau = view.findViewById(R.id.dtpNgayBatDau);
-        DatePicker dtpNgayKetThuc = view.findViewById(R.id.dtpNgayKetThuc);
+        EditText edtNgayBatDau = view.findViewById(R.id.edtNgayBatDau);
+        EditText edtNgayKetThuc = view.findViewById(R.id.edtNgayKetThuc);
         EditText edtSoLuong = view.findViewById(R.id.edtSoLuong);
         Switch swtTrangThai = view.findViewById(R.id.swtTrangThai);
         Button btnLuu = view.findViewById(R.id.btnLuu);
         Button btnHuy = view.findViewById(R.id.btnHuy);
 
         if (voucherCanSua == null) {
-            cauHinhNgayMacDinh(dtpNgayBatDau, dtpNgayKetThuc);
+            cauHinhNgayMacDinh(edtNgayBatDau, edtNgayKetThuc);
         } else {
-            doDuLieuLenDialog(voucherCanSua, edtMaGiamGia, edtTenVoucher, radPhanTram, radTienMat, edtGiaTriGiam, dtpNgayBatDau, dtpNgayKetThuc, edtSoLuong, swtTrangThai);
+            doDuLieuLenDialog(voucherCanSua, edtMaGiamGia, edtTenVoucher, radPhanTram, radTienMat, edtGiaTriGiam, edtNgayBatDau, edtNgayKetThuc, edtSoLuong, swtTrangThai);
         }
+        edtNgayBatDau.setOnClickListener(v -> moChonNgay(edtNgayBatDau));
+        edtNgayKetThuc.setOnClickListener(v -> moChonNgay(edtNgayKetThuc));
 
         btnLuu.setOnClickListener(v -> luuVoucherTuDialog(
                 dialog,
@@ -121,8 +123,8 @@ public class QuanLyVoucherFragment extends Fragment {
                 edtTenVoucher,
                 radPhanTram,
                 edtGiaTriGiam,
-                dtpNgayBatDau,
-                dtpNgayKetThuc,
+                edtNgayBatDau,
+                edtNgayKetThuc,
                 edtSoLuong,
                 swtTrangThai
         ));
@@ -130,11 +132,11 @@ public class QuanLyVoucherFragment extends Fragment {
         dialog.show();
     }
 
-    private void cauHinhNgayMacDinh(DatePicker dtpNgayBatDau, DatePicker dtpNgayKetThuc) {
+    private void cauHinhNgayMacDinh(EditText edtNgayBatDau, EditText edtNgayKetThuc) {
         Calendar homNay = Calendar.getInstance();
-        dtpNgayBatDau.updateDate(homNay.get(Calendar.YEAR), homNay.get(Calendar.MONTH), homNay.get(Calendar.DAY_OF_MONTH));
+        edtNgayBatDau.setText(dinhDangNgayHienThi(homNay.getTime()));
         homNay.add(Calendar.DAY_OF_MONTH, 30);
-        dtpNgayKetThuc.updateDate(homNay.get(Calendar.YEAR), homNay.get(Calendar.MONTH), homNay.get(Calendar.DAY_OF_MONTH));
+        edtNgayKetThuc.setText(dinhDangNgayHienThi(homNay.getTime()));
     }
 
     private void doDuLieuLenDialog(
@@ -144,8 +146,8 @@ public class QuanLyVoucherFragment extends Fragment {
             RadioButton radPhanTram,
             RadioButton radTienMat,
             EditText edtGiaTriGiam,
-            DatePicker dtpNgayBatDau,
-            DatePicker dtpNgayKetThuc,
+            EditText edtNgayBatDau,
+            EditText edtNgayKetThuc,
             EditText edtSoLuong,
             Switch swtTrangThai
     ) {
@@ -156,8 +158,8 @@ public class QuanLyVoucherFragment extends Fragment {
         edtGiaTriGiam.setText(String.valueOf(voucher.getGiaTriGiam()));
         edtSoLuong.setText(String.valueOf(voucher.getSoLuong()));
         swtTrangThai.setChecked("HoatDong".equals(voucher.getTrangThai()));
-        ganNgayChoDatePicker(dtpNgayBatDau, voucher.getNgayBatDau());
-        ganNgayChoDatePicker(dtpNgayKetThuc, voucher.getNgayKetThuc());
+        edtNgayBatDau.setText(chuyenNgaySangHienThi(voucher.getNgayBatDau()));
+        edtNgayKetThuc.setText(chuyenNgaySangHienThi(voucher.getNgayKetThuc()));
     }
 
     private void luuVoucherTuDialog(
@@ -167,8 +169,8 @@ public class QuanLyVoucherFragment extends Fragment {
             EditText edtTenVoucher,
             RadioButton radPhanTram,
             EditText edtGiaTriGiam,
-            DatePicker dtpNgayBatDau,
-            DatePicker dtpNgayKetThuc,
+            EditText edtNgayBatDau,
+            EditText edtNgayKetThuc,
             EditText edtSoLuong,
             Switch swtTrangThai
     ) {
@@ -182,8 +184,8 @@ public class QuanLyVoucherFragment extends Fragment {
             voucher.setTenVoucher(edtTenVoucher.getText().toString());
             voucher.setKieuGiamGia(radPhanTram.isChecked() ? "PhanTram" : "TienMat");
             voucher.setGiaTriGiam(docDouble(edtGiaTriGiam));
-            voucher.setNgayBatDau(layNgayTuDatePicker(dtpNgayBatDau));
-            voucher.setNgayKetThuc(layNgayTuDatePicker(dtpNgayKetThuc));
+            voucher.setNgayBatDau(chuyenNgaySangLuu(edtNgayBatDau.getText().toString()));
+            voucher.setNgayKetThuc(chuyenNgaySangLuu(edtNgayKetThuc.getText().toString()));
             voucher.setSoLuong(docInt(edtSoLuong));
             voucher.setTrangThai(swtTrangThai.isChecked() ? "HoatDong" : "Khoa");
 
@@ -249,22 +251,59 @@ public class QuanLyVoucherFragment extends Fragment {
                 .show();
     }
 
-    private void ganNgayChoDatePicker(DatePicker datePicker, String ngay) {
+    private void moChonNgay(EditText editText) {
+        Calendar calendar = taoCalendarTuNgayHienThi(editText.getText().toString());
+        new DatePickerDialog(
+                requireContext(),
+                (view, nam, thang, ngay) -> {
+                    calendar.set(nam, thang, ngay);
+                    editText.setText(dinhDangNgayHienThi(calendar.getTime()));
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        ).show();
+    }
+
+    private Calendar taoCalendarTuNgayHienThi(String ngay) {
         Calendar calendar = Calendar.getInstance();
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ngay);
+            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(ngay);
             if (date != null) {
                 calendar.setTime(date);
             }
         } catch (ParseException ignored) {
         }
-        datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        return calendar;
     }
 
-    private String layNgayTuDatePicker(DatePicker datePicker) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
+    private String chuyenNgaySangLuu(String ngayHienThi) {
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(ngayHienThi);
+            if (date != null) {
+                return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date);
+            }
+        } catch (ParseException ignored) {
+        }
+        return "";
+    }
+
+    private String chuyenNgaySangHienThi(String ngayLuu) {
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ngayLuu);
+            if (date != null) {
+                return dinhDangNgayHienThi(date);
+            }
+        } catch (ParseException ignored) {
+        }
+        return "";
+    }
+
+    private String dinhDangNgayHienThi(Date ngay) {
+        if (ngay == null) {
+            return "";
+        }
+        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(ngay);
     }
 
     private double docDouble(EditText editText) {

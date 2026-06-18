@@ -55,31 +55,25 @@
             android:hint="Giá trị giảm"
             android:inputType="numberDecimal" />
 
-        <TextView
+        <EditText
+            android:id="@+id/edtNgayBatDau"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Ngày bắt đầu" />
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Ngày bắt đầu"
+            android:inputType="none" />
 
-        <DatePicker
-            android:id="@+id/dtpNgayBatDau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
-
-        <TextView
+        <EditText
+            android:id="@+id/edtNgayKetThuc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Ngày kết thúc" />
-
-        <DatePicker
-            android:id="@+id/dtpNgayKetThuc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Ngày kết thúc"
+            android:inputType="none" />
 
         <EditText
             android:id="@+id/edtSoLuong"
