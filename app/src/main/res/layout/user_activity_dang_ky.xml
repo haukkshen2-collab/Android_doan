@@ -2,93 +2,148 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/lblTieuDe"
+        <!-- ═══ Hero gradient nhỏ ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Đăng ký tài khoản"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:background="@drawable/bg_hero_user"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/space_xxxl"
+            android:paddingTop="@dimen/space_xxxl"
+            android:paddingEnd="@dimen/space_xxxl"
+            android:paddingBottom="@dimen/space_xxxl">
 
-        <EditText
-            android:id="@+id/edtTaiKhoan"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tạo tài khoản"
+                style="@style/App.Text.OnGradient.DisplaySm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:text="Đăng ký để săn vé và ưu đãi mới nhất"
+                style="@style/App.Text.OnGradient.Body" />
+        </LinearLayout>
+
+        <!-- ═══ Form card ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="Tài khoản"
-            android:inputType="text" />
+            android:layout_marginStart="@dimen/space_xl"
+            android:layout_marginTop="-24dp"
+            android:layout_marginEnd="@dimen/space_xl"
+            android:layout_marginBottom="@dimen/space_xl"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_lg"
+            android:orientation="vertical"
+            android:padding="@dimen/space_xxl">
 
-        <EditText
-            android:id="@+id/edtMatKhau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/lblTieuDe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Đăng ký tài khoản"
+                style="@style/App.Text.HeadingLg" />
 
-        <EditText
-            android:id="@+id/edtNhapLaiMatKhau"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Nhập lại mật khẩu"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/edtTaiKhoan"
+                style="@style/App.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xl"
+                android:hint="Tài khoản"
+                android:inputType="text"
+                android:imeOptions="actionNext" />
 
-        <EditText
-            android:id="@+id/edtHoTen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Họ tên"
-            android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/edtMatKhau"
+                style="@style/App.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:imeOptions="actionNext" />
 
-        <EditText
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/edtNhapLaiMatKhau"
+                style="@style/App.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:hint="Nhập lại mật khẩu"
+                android:inputType="textPassword"
+                android:imeOptions="actionNext" />
 
-        <EditText
-            android:id="@+id/edtSoDienThoai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Số điện thoại"
-            android:inputType="phone"
-            android:maxLength="10" />
+            <EditText
+                android:id="@+id/edtHoTen"
+                style="@style/App.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:hint="Họ tên"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext" />
 
-        <ProgressBar
-            android:id="@+id/pgbDangTai"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:visibility="gone" />
+            <EditText
+                android:id="@+id/edtEmail"
+                style="@style/App.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext" />
 
-        <Button
-            android:id="@+id/btnDangKy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Đăng ký" />
+            <EditText
+                android:id="@+id/edtSoDienThoai"
+                style="@style/App.Input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:hint="Số điện thoại"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:imeOptions="actionDone" />
 
-        <Button
-            android:id="@+id/btnQuayLai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Quay lại" />
+            <ProgressBar
+                android:id="@+id/pgbDangTai"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/space_lg"
+                android:indeterminateTint="@color/mauTimChinh"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnDangKy"
+                style="@style/App.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginTop="@dimen/space_lg"
+                android:text="Đăng ký" />
+
+            <Button
+                android:id="@+id/btnQuayLai"
+                style="@style/App.Button.Outline"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginTop="@dimen/space_sm"
+                android:text="Quay lại" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

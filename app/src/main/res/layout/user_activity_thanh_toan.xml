@@ -1,121 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/screen_padding">
 
         <TextView
             android:id="@+id/lblTieuDe"
+            style="@style/App.Text.OnGradient.DisplaySm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Thanh toán"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:background="@drawable/bg_hero_user"
+            android:elevation="@dimen/elevation_lg"
+            android:gravity="center_vertical"
+            android:padding="@dimen/space_xxl"
+            android:text="Thanh toán" />
 
         <TextView
+            style="@style/App.Text.SectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Danh sách vé"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="Danh sách vé" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvDanhSachVeThanhToan"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_sm"
+            android:minHeight="@dimen/hero_height_sm"
+            android:nestedScrollingEnabled="false"
+            android:padding="@dimen/space_sm" />
 
         <TextView
+            style="@style/App.Text.SectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Voucher khả dụng"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="Voucher khả dụng" />
 
         <TextView
             android:id="@+id/lblVoucherDangChon"
+            style="@style/App.Text.Body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="12dp"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
+            android:padding="@dimen/card_padding"
             android:text="Chưa chọn voucher" />
 
         <Button
             android:id="@+id/btnChonVoucher"
+            style="@style/App.Button.Outline"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_sm"
             android:text="Chọn voucher" />
 
-        <TextView
-            android:id="@+id/lblTongTien"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Tổng tiền: 0 VNĐ" />
+            android:layout_marginTop="@dimen/space_xl"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding_lg">
+
+            <TextView
+                android:id="@+id/lblTongTien"
+                style="@style/App.Text.Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền: 0 VNĐ" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/border_thin"
+                android:layout_marginTop="@dimen/space_sm"
+                android:layout_marginBottom="@dimen/space_sm"
+                android:background="@drawable/bg_divider" />
+
+            <TextView
+                android:id="@+id/lblTienGiam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tiền giảm: 0 VNĐ"
+                android:textColor="@color/mauThanhCong"
+                android:textSize="@dimen/text_body" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/border_thin"
+                android:layout_marginTop="@dimen/space_sm"
+                android:layout_marginBottom="@dimen/space_sm"
+                android:background="@drawable/bg_divider" />
+
+            <TextView
+                android:id="@+id/lblPhaiTra"
+                style="@style/App.Text.PriceLg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_price_badge"
+                android:padding="@dimen/space_md"
+                android:text="Phải trả: 0 VNĐ" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/lblTienGiam"
+            style="@style/App.Text.SectionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Tiền giảm: 0 VNĐ" />
-
-        <TextView
-            android:id="@+id/lblPhaiTra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Phải trả: 0 VNĐ"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="Phương thức thanh toán" />
 
         <RadioGroup
             android:id="@+id/rgThanhToan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding">
 
             <RadioButton
                 android:id="@+id/radTienMat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/mauTimChinh"
                 android:checked="true"
-                android:text="Thẻ tín dụng/ghi nợ quốc tế" />
+                android:minHeight="@dimen/btn_height_sm"
+                android:text="Thẻ tín dụng/ghi nợ quốc tế"
+                android:textSize="@dimen/text_body" />
 
             <RadioButton
                 android:id="@+id/radChuyenKhoan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chuyển khoản" />
+                android:buttonTint="@color/mauTimChinh"
+                android:minHeight="@dimen/btn_height_sm"
+                android:text="Chuyển khoản SePay"
+                android:textSize="@dimen/text_body" />
 
             <RadioButton
                 android:id="@+id/radVNPay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="VNPay" />
+                android:buttonTint="@color/mauTimChinh"
+                android:minHeight="@dimen/btn_height_sm"
+                android:text="VNPay"
+                android:textSize="@dimen/text_body" />
         </RadioGroup>
 
         <Button
             android:id="@+id/btnXacNhanThanhToan"
+            style="@style/App.Button.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_xl"
             android:text="Xác nhận thanh toán" />
 
         <Button
             android:id="@+id/btnHuy"
+            style="@style/App.Button.Ghost"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Hủy" />
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginBottom="@dimen/space_xxl"
+            android:text="Hủy"
+            android:textColor="@color/mauNguyHiem" />
     </LinearLayout>
 </ScrollView>

@@ -2,34 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_modern"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/space_xxl">
 
     <TextView
-        android:id="@+id/lblTieuDe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chọn voucher"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:gravity="center"
+        android:text="🎁 Chọn voucher"
+        style="@style/App.Text.HeadingLg" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvDanhSachVoucher"
+        android:id="@+id/rcvVoucher"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_marginTop="8dp" />
+        android:layout_height="300dp"
+        android:layout_marginTop="@dimen/space_lg"
+        android:clipToPadding="false" />
 
     <Button
         android:id="@+id/btnBoChonVoucher"
+        style="@style/App.Button.Outline"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_md"
         android:text="Bỏ chọn voucher" />
-
-    <Button
-        android:id="@+id/btnDong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Đóng" />
 </LinearLayout>

@@ -1,237 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/screen_padding">
 
+        <!-- ═══ Hero tên vé ═══ -->
         <TextView
             android:id="@+id/lblTenVe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_hero_user"
+            android:elevation="@dimen/elevation_lg"
+            android:padding="@dimen/space_xxl"
             android:text="Tên vé"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.OnGradient.DisplaySm" />
 
+        <!-- ═══ Chọn ngày ═══ -->
         <TextView
             android:id="@+id/lblNgaySuDung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Ngày sử dụng"
-            android:textStyle="bold" />
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="📅 Chọn ngày sử dụng"
+            style="@style/App.Text.SectionTitle" />
 
         <DatePicker
             android:id="@+id/dtpNgaySuDung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
             android:calendarViewShown="true"
+            android:elevation="@dimen/elevation_md"
+            android:padding="@dimen/space_sm"
             android:spinnersShown="false" />
 
+        <!-- ═══ Người lớn ═══ -->
         <LinearLayout
             android:id="@+id/layNguoiLon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/space_lg"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/card_padding">
 
             <TextView
                 android:id="@+id/lblLoaiNguoiLon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Người lớn" />
+                android:paddingStart="@dimen/space_sm"
+                android:text="🧑 Người lớn"
+                style="@style/App.Text.Subtitle" />
 
             <Button
                 android:id="@+id/btnGiamNL"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Counter"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/lblSoLuongNL"
-                android:layout_width="48dp"
+                style="@style/App.Text.Counter"
+                android:layout_width="@dimen/counter_text_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="18sp" />
+                android:text="0" />
 
             <Button
                 android:id="@+id/btnTangNL"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Counter"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
+                android:text="+" />
         </LinearLayout>
 
+        <!-- ═══ Trẻ em ═══ -->
         <LinearLayout
             android:id="@+id/layTreEm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/card_padding">
 
             <TextView
                 android:id="@+id/lblLoaiTreEm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Trẻ em" />
+                android:paddingStart="@dimen/space_sm"
+                android:text="👶 Trẻ em"
+                style="@style/App.Text.Subtitle" />
 
             <Button
                 android:id="@+id/btnGiamTE"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Counter"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/lblSoLuongTE"
-                android:layout_width="48dp"
+                style="@style/App.Text.Counter"
+                android:layout_width="@dimen/counter_text_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="18sp" />
+                android:text="0" />
 
             <Button
                 android:id="@+id/btnTangTE"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Counter"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
+                android:text="+" />
         </LinearLayout>
 
+        <!-- ═══ Người cao tuổi ═══ -->
         <LinearLayout
             android:id="@+id/layCaoTuoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/card_padding">
 
             <TextView
                 android:id="@+id/lblLoaiCaoTuoi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Người cao tuổi" />
+                android:paddingStart="@dimen/space_sm"
+                android:text="👴 Người cao tuổi"
+                style="@style/App.Text.Subtitle" />
 
             <Button
                 android:id="@+id/btnGiamCT"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Counter"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/lblSoLuongCT"
-                android:layout_width="48dp"
+                style="@style/App.Text.Counter"
+                android:layout_width="@dimen/counter_text_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="18sp" />
+                android:text="0" />
 
             <Button
                 android:id="@+id/btnTangCT"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="+"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                style="@style/App.Button.Counter"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
+                android:text="+" />
         </LinearLayout>
 
+        <!-- ═══ Tạm tính ═══ -->
         <TextView
             android:id="@+id/lblTongTamTinh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/space_xl"
+            android:background="@drawable/bg_price_badge"
+            android:elevation="@dimen/elevation_md"
+            android:padding="@dimen/space_lg"
             android:text="Tạm tính: 0 VNĐ"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.PriceLg" />
 
+        <!-- ═══ Nút CTA ═══ -->
         <Button
             android:id="@+id/btnThemVaoGio"
+            style="@style/App.Button.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Thêm vào giỏ" />
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_lg"
+            android:text="🛒 Thêm vào giỏ" />
     </LinearLayout>
 </ScrollView>

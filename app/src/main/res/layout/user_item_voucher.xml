@@ -2,23 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_marginStart="@dimen/space_sm"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_sm"
+    android:background="@drawable/bg_card_accent"
+    android:elevation="@dimen/elevation_sm"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/card_padding">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblTenVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Voucher"
+            android:maxLines="1"
+            android:ellipsize="end"
+            style="@style/App.Text.Title" />
+
+        <TextView
+            android:id="@+id/lblMoTaGiam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:text="Giảm 0%"
+            style="@style/App.Text.Price" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/lblTenVoucher"
-        android:layout_width="match_parent"
+        style="@style/App.Badge.Warning"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tên voucher"
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/lblMoTaGiam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Mô tả giảm" />
+        android:text="🎁" />
 </LinearLayout>

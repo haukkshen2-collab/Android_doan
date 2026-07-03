@@ -1,71 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imgAnhVe"
+        <!-- ═══ Ảnh vé full-width ═══ -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:contentDescription="Ảnh vé"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_height="@dimen/img_detail_height">
 
-        <TextView
-            android:id="@+id/lblTenVe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Tên vé"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/imgAnhVe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Ảnh vé"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/lblMoTa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Mô tả" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_overlay_bottom" />
+        </FrameLayout>
 
-        <TextView
-            android:id="@+id/lblThongTinVe"
+        <!-- ═══ Thông tin vé ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Thông tin vé" />
+            android:layout_marginStart="@dimen/space_lg"
+            android:layout_marginTop="-24dp"
+            android:layout_marginEnd="@dimen/space_lg"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_lg"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding_lg">
 
-        <TextView
-            android:id="@+id/lblGiaNguoiLon"
+            <TextView
+                android:id="@+id/lblTenVe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên vé"
+                style="@style/App.Text.DisplaySm" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/space_md"
+                android:layout_marginBottom="@dimen/space_md"
+                android:background="@drawable/bg_divider" />
+
+            <TextView
+                android:id="@+id/lblMoTa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mô tả"
+                style="@style/App.Text.BodyLg" />
+
+            <TextView
+                android:id="@+id/lblThongTinVe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:text="Thông tin vé"
+                style="@style/App.Text.BodySm" />
+        </LinearLayout>
+
+        <!-- ═══ Bảng giá ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Người lớn: 0 VNĐ" />
+            android:layout_marginStart="@dimen/space_lg"
+            android:layout_marginTop="@dimen/space_md"
+            android:layout_marginEnd="@dimen/space_lg"
+            android:background="@drawable/bg_price_badge"
+            android:elevation="@dimen/elevation_md"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding_lg">
 
-        <TextView
-            android:id="@+id/lblGiaTreEm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Trẻ em: 0 VNĐ" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💰 Bảng giá"
+                style="@style/App.Text.Title" />
 
-        <TextView
-            android:id="@+id/lblGiaCaoTuoi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Người cao tuổi: 0 VNĐ" />
+            <TextView
+                android:id="@+id/lblGiaNguoiLon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:text="Người lớn: 0 VNĐ"
+                style="@style/App.Text.Price" />
 
+            <TextView
+                android:id="@+id/lblGiaTreEm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:text="Trẻ em: 0 VNĐ"
+                android:textColor="@color/mauChuChinh"
+                android:textSize="@dimen/text_subtitle" />
+
+            <TextView
+                android:id="@+id/lblGiaCaoTuoi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:text="Người cao tuổi: 0 VNĐ"
+                android:textColor="@color/mauChuChinh"
+                android:textSize="@dimen/text_subtitle" />
+        </LinearLayout>
+
+        <!-- ═══ Nút CTA ═══ -->
         <Button
             android:id="@+id/btnChonVe"
+            style="@style/App.Button.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Chọn vé" />
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginStart="@dimen/space_lg"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginEnd="@dimen/space_lg"
+            android:layout_marginBottom="@dimen/space_xxl"
+            android:text="🎫 Chọn vé ngay" />
     </LinearLayout>
 </ScrollView>

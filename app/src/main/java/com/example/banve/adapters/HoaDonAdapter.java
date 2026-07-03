@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.banve.R;
 import com.example.banve.models.HoaDon;
 import com.example.banve.utils.DinhDangTien;
+import com.example.banve.utils.HienThi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,7 +54,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         holder.lblMaHoaDon.setText("Mã hóa đơn: " + hoaDon.getMaHoaDon());
         holder.lblNgayLap.setText("Ngày lập: " + dinhDangNgayGio(hoaDon.getNgayLap()));
         holder.lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
-        holder.lblTrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
+        holder.lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(hoaDon.getTrangThai()));
         holder.btnXemChiTiet.setOnClickListener(v -> listener.onXemChiTiet(hoaDon));
     }
 

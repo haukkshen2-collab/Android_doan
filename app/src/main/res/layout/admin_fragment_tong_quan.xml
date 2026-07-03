@@ -1,71 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/screen_padding">
 
         <TextView
             android:id="@+id/lblTieuDeTongQuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tổng quan hệ thống"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:text="📊 Tổng quan hệ thống"
+            style="@style/App.Text.HeadingLg" />
 
-        <TextView
-            android:id="@+id/lblNguoiDung"
+        <!-- ═══ Stat cards 2x2 grid ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="16dp"
-            android:text="Người dùng: 0"
-            android:textSize="18sp" />
+            android:layout_marginTop="@dimen/space_lg"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/lblVe"
+            <TextView
+                android:id="@+id/lblNguoiDung"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/stat_card_min_height"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:layout_weight="1"
+                android:background="@drawable/bg_stat_card_1"
+                android:elevation="@dimen/elevation_md"
+                android:gravity="center"
+                android:padding="@dimen/space_lg"
+                android:text="👥\nNgười dùng: 0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body_lg"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lblVe"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/stat_card_min_height"
+                android:layout_marginStart="@dimen/space_sm"
+                android:layout_weight="1"
+                android:background="@drawable/bg_stat_card_2"
+                android:elevation="@dimen/elevation_md"
+                android:gravity="center"
+                android:padding="@dimen/space_lg"
+                android:text="🎫\nVé: 0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body_lg"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="16dp"
-            android:text="Vé: 0"
-            android:textSize="18sp" />
+            android:layout_marginTop="@dimen/space_md"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/lblVoucher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="16dp"
-            android:text="Voucher: 0"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/lblVoucher"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/stat_card_min_height"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:layout_weight="1"
+                android:background="@drawable/bg_stat_card_3"
+                android:elevation="@dimen/elevation_md"
+                android:gravity="center"
+                android:padding="@dimen/space_lg"
+                android:text="🎁\nVoucher: 0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body_lg"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/lblHoaDon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="16dp"
-            android:text="Hóa đơn đã thanh toán: 0"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/lblHoaDon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/stat_card_min_height"
+                android:layout_marginStart="@dimen/space_sm"
+                android:layout_weight="1"
+                android:background="@drawable/bg_stat_card_4"
+                android:elevation="@dimen/elevation_md"
+                android:gravity="center"
+                android:padding="@dimen/space_lg"
+                android:text="🧾\nHóa đơn: 0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_body_lg"
+                android:textStyle="bold" />
+        </LinearLayout>
 
+        <!-- ═══ Doanh thu card lớn ═══ -->
         <TextView
             android:id="@+id/lblDoanhThu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="16dp"
-            android:text="Doanh thu: 0 VNĐ"
-            android:textSize="18sp"
+            android:layout_marginTop="@dimen/space_lg"
+            android:background="@drawable/bg_hero_user"
+            android:elevation="@dimen/elevation_lg"
+            android:gravity="center"
+            android:padding="@dimen/space_xxl"
+            android:text="💰 Doanh thu: 0 VNĐ"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_heading"
             android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

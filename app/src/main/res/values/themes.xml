@@ -1,9 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Quan_Ly_Ban_Ve" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/mauNenChinh</item>
+        <item name="colorPrimary">@color/mauTimChinh</item>
+        <item name="colorPrimaryVariant">@color/mauTimDam</item>
+        <item name="android:colorAccent">@color/mauCamChinh</item>
+        <item name="android:textColorPrimary">@color/mauChuChinh</item>
+        <item name="android:textColorSecondary">@color/mauChuPhu</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:buttonStyle">@style/App.Button.Primary</item>
+        <item name="android:editTextStyle">@style/App.Input</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="Theme.Quan_Ly_Ban_Ve" parent="Base.Theme.Quan_Ly_Ban_Ve" />
+
+    <!-- Dialog theme bo góc lớn -->
+    <style name="App.Dialog" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:windowBackground">@drawable/bg_card_modern</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>

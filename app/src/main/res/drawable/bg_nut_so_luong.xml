@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#6F4BB2" />
-    <corners android:radius="22dp" />
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="@color/mauTimDam" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:angle="135"
+                android:startColor="@color/mauTimChinh"
+                android:endColor="@color/mauTimTrung"
+                android:type="linear" />
+        </shape>
+    </item>
+</selector>

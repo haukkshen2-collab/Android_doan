@@ -1,0 +1,4 @@
+project_id = "zouvtylxvdbadkpbrpdb"
+
+[functions.sepay-webhook]
+verify_jwt = false

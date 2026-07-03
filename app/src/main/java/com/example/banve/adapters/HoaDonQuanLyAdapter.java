@@ -13,6 +13,7 @@ import com.example.banve.R;
 import com.example.banve.models.HoaDon;
 import com.example.banve.models.NguoiDung;
 import com.example.banve.utils.DinhDangTien;
+import com.example.banve.utils.HienThi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,7 +56,7 @@ public class HoaDonQuanLyAdapter extends RecyclerView.Adapter<HoaDonQuanLyAdapte
         holder.lblHoTenKhach.setText("Khách hàng: " + layHoTenKhach(hoaDon));
         holder.lblNgayLap.setText("Ngày lập: " + dinhDangNgayGio(hoaDon.getNgayLap()));
         holder.lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
-        holder.lblHinhThuc.setText("Hình thức: " + hienThiHinhThucThanhToan(hoaDon.getThanhToan()));
+        holder.lblHinhThuc.setText("Hình thức: " + HienThi.hinhThucThanhToan(hoaDon.getThanhToan()));
         holder.btnXemChiTiet.setOnClickListener(v -> listener.onXemChiTiet(hoaDon));
     }
 

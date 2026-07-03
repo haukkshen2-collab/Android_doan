@@ -2,51 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
+    android:layout_marginStart="@dimen/space_sm"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_md"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/card_padding">
 
     <TextView
         android:id="@+id/lblMaHoaDon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mã hóa đơn"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/App.Text.Title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/space_sm"
+        android:layout_marginBottom="@dimen/space_sm"
+        android:background="@drawable/bg_divider" />
 
     <TextView
         android:id="@+id/lblHoTenKhach"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Khách hàng" />
+        android:text="Khách hàng"
+        style="@style/App.Text.Body" />
 
     <TextView
         android:id="@+id/lblNgayLap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Ngày lập" />
+        android:layout_marginTop="@dimen/space_xs"
+        android:text="Ngày lập"
+        style="@style/App.Text.BodySm" />
 
     <TextView
         android:id="@+id/lblTongTien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Tổng tiền" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:text="Tổng tiền"
+        style="@style/App.Text.Price" />
 
     <TextView
         android:id="@+id/lblHinhThuc"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Hình thức" />
+        android:layout_marginTop="@dimen/space_xs"
+        android:background="@drawable/bg_badge_tim"
+        android:paddingStart="@dimen/space_md"
+        android:paddingTop="@dimen/space_xxs"
+        android:paddingEnd="@dimen/space_md"
+        android:paddingBottom="@dimen/space_xxs"
+        android:text="Hình thức"
+        android:textColor="@color/mauTimDam"
+        android:textSize="@dimen/text_small" />
 
     <Button
         android:id="@+id/btnXemChiTiet"
+        style="@style/App.Button.Outline"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Xem chi tiết" />
+        android:layout_height="@dimen/btn_height_sm"
+        android:layout_marginTop="@dimen/space_md"
+        android:text="Xem chi tiết →" />
 </LinearLayout>

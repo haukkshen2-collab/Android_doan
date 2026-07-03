@@ -24,6 +24,7 @@ import com.example.banve.models.HoaDon;
 import com.example.banve.models.NguoiDung;
 import com.example.banve.network.ApiCallback;
 import com.example.banve.utils.DinhDangTien;
+import com.example.banve.utils.HienThi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -167,6 +168,11 @@ public class QuanLyHoaDonFragment extends Fragment {
     }
 
     private void moDialogChiTietHoaDon(HoaDon hoaDon) {
+        if (hoaDon == null || hoaDon.getMaHoaDon() <= 0) {
+            baoLoi("Lỗi chi tiết hóa đơn", "Hóa đơn không hợp lệ");
+            return;
+        }
+
         View view = getLayoutInflater().inflate(R.layout.admin_dialog_chi_tiet_hoa_don_quan_ly, null);
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setTitle("Chi tiết hóa đơn")
@@ -194,8 +200,8 @@ public class QuanLyHoaDonFragment extends Fragment {
         lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(hoaDon.getTongTien()));
         lblTienGiam.setText("Tiền giảm: " + DinhDangTien.dinhDang(hoaDon.getTienGiam()));
         lblPhaiTra.setText("Phải trả: " + DinhDangTien.dinhDang(Math.max(0, hoaDon.getTongTien() - hoaDon.getTienGiam())));
-        lblHinhThuc.setText("Hình thức thanh toán: " + hienThiHinhThucThanhToan(hoaDon.getThanhToan()));
-        lblTrangThai.setText("Trạng thái: " + giaTri(hoaDon.getTrangThai()));
+        lblHinhThuc.setText("Hình thức thanh toán: " + HienThi.hinhThucThanhToan(hoaDon.getThanhToan()));
+        lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(hoaDon.getTrangThai()));
 
         btnDong.setOnClickListener(v -> dialog.dismiss());
         dialog.show();

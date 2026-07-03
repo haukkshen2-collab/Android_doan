@@ -1,153 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/screen_padding">
 
         <TextView
             android:id="@+id/lblTieuDeThongKe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thống kê tổng quan"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:text="📈 Thống kê tổng quan"
+            style="@style/App.Text.HeadingLg" />
 
+        <!-- ═══ Date range ═══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_md"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnTuNgay"
+                style="@style/App.Button.Outline"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/btn_height"
                 android:layout_weight="1"
-                android:text="Từ ngày" />
+                android:text="📅 Từ ngày" />
 
             <Button
                 android:id="@+id/btnDenNgay"
+                style="@style/App.Button.Outline"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginStart="@dimen/space_sm"
                 android:layout_weight="1"
-                android:text="Đến ngày" />
+                android:text="📅 Đến ngày" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnLoc"
+            style="@style/App.Button.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Lọc thống kê" />
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_sm"
+            android:text="🔍 Lọc thống kê" />
 
         <ProgressBar
             android:id="@+id/pgbDangTai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
+            android:indeterminateTint="@color/mauTimChinh"
             android:visibility="gone" />
 
+        <!-- ═══ Tổng quan stats ═══ -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/space_xl"
             android:text="Tổng quan"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.SectionTitle" />
 
         <TextView
             android:id="@+id/lblTongHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="12dp"
-            android:text="Tổng hóa đơn: 0" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_sm"
+            android:padding="@dimen/card_padding"
+            android:text="Tổng hóa đơn: 0"
+            style="@style/App.Text.Body" />
 
         <TextView
             android:id="@+id/lblTongDoanhThu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="12dp"
-            android:text="Tổng doanh thu: 0 VNĐ" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_stat_card_2"
+            android:elevation="@dimen/elevation_sm"
+            android:padding="@dimen/card_padding"
+            android:text="Tổng doanh thu: 0 VNĐ"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_body_lg"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblTongTienGiam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="12dp"
-            android:text="Tổng tiền giảm: 0 VNĐ" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_sm"
+            android:padding="@dimen/card_padding"
+            android:text="Tổng tiền giảm: 0 VNĐ"
+            style="@style/App.Text.Body" />
 
         <TextView
             android:id="@+id/lblTongThanhTien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="12dp"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_stat_card_1"
+            android:elevation="@dimen/elevation_sm"
+            android:padding="@dimen/card_padding"
             android:text="Tổng thành tiền: 0 VNĐ"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_body_lg"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblTongVeBan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_item_ve"
-            android:padding="12dp"
-            android:text="Tổng vé bán: 0" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_sm"
+            android:padding="@dimen/card_padding"
+            android:text="Tổng vé bán: 0"
+            style="@style/App.Text.Body" />
 
+        <!-- ═══ Theo loại vé ═══ -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/space_xl"
             android:text="Theo loại vé"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.SectionTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvThongKeLoaiVe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
             android:nestedScrollingEnabled="false" />
 
+        <!-- ═══ Theo ngày ═══ -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/space_xl"
             android:text="Theo ngày"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.SectionTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvDoanhThuNgay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
             android:nestedScrollingEnabled="false" />
 
+        <!-- ═══ Theo tháng ═══ -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/space_xl"
             android:text="Theo tháng"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.SectionTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvDoanhThuThang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginBottom="@dimen/space_xxl"
             android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </ScrollView>

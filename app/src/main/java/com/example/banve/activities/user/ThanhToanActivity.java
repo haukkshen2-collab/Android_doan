@@ -22,6 +22,7 @@ import com.example.banve.dao.VoucherDAO;
 import com.example.banve.models.ChiTietGioHang;
 import com.example.banve.models.HoaDon;
 import com.example.banve.models.MucGioHang;
+import com.example.banve.models.ThanhToanTam;
 import com.example.banve.models.Ve;
 import com.example.banve.models.Voucher;
 import com.example.banve.network.ApiCallback;
@@ -29,9 +30,9 @@ import com.example.banve.utils.DinhDangTien;
 import com.example.banve.utils.Session;
 import com.example.banve.utils.TienIch;
 
-import java.util.ArrayList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -91,6 +92,7 @@ public class ThanhToanActivity extends AppCompatActivity {
     private void khoiTaoRecyclerView() {
         veThanhToanAdapter = new VeThanhToanAdapter();
         rcvDanhSachVeThanhToan.setLayoutManager(new LinearLayoutManager(this));
+        rcvDanhSachVeThanhToan.setNestedScrollingEnabled(false);
         rcvDanhSachVeThanhToan.setAdapter(veThanhToanAdapter);
     }
 
@@ -218,10 +220,6 @@ public class ThanhToanActivity extends AppCompatActivity {
     }
 
     private void capNhatHienThiVoucher() {
-        if (lblVoucherDangChon == null) {
-            return;
-        }
-
         if (voucherDangChon == null) {
             lblVoucherDangChon.setText("Chưa chọn voucher");
             return;
@@ -253,6 +251,11 @@ public class ThanhToanActivity extends AppCompatActivity {
 
     private void hoanTatThanhToan(String hinhThucThanhToan) {
         btnXacNhanThanhToan.setEnabled(false);
+        if ("ChuyenKhoan".equals(hinhThucThanhToan)) {
+            taoThanhToanSePay();
+            return;
+        }
+
         thanhToanController.hoanTatThanhToan(
                 Session.nguoiDungHienTai.getMaNguoiDung(),
                 danhSachMuc,
@@ -262,11 +265,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(HoaDon data) {
                         btnXacNhanThanhToan.setEnabled(true);
-                        new AlertDialog.Builder(ThanhToanActivity.this)
-                                .setTitle("Đặt vé thành công!")
-                                .setMessage("Mã hóa đơn: " + data.getMaHoaDon())
-                                .setPositiveButton("OK", (dialog, which) -> veDashboard())
-                                .show();
+                        moThanhToanThanhCong(data);
                     }
 
                     @Override
@@ -276,6 +275,36 @@ public class ThanhToanActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void taoThanhToanSePay() {
+        thanhToanController.taoThanhToanSePay(
+                Session.nguoiDungHienTai.getMaNguoiDung(),
+                danhSachMuc,
+                voucherDangChon,
+                new ApiCallback<ThanhToanTam>() {
+                    @Override
+                    public void onSuccess(ThanhToanTam data) {
+                        btnXacNhanThanhToan.setEnabled(true);
+                        moManHinhQrSePay(data);
+                    }
+
+                    @Override
+                    public void onError(String thongBao) {
+                        btnXacNhanThanhToan.setEnabled(true);
+                        TienIch.hienAlert(ThanhToanActivity.this, "Lỗi SePay", thongBao);
+                    }
+                }
+        );
+    }
+
+    private void moManHinhQrSePay(ThanhToanTam thanhToanTam) {
+        Intent intent = new Intent(this, ThanhToanSePayActivity.class);
+        intent.putExtra("maHoaDon", thanhToanTam.getMaHoaDon());
+        intent.putExtra("tongTien", thanhToanTam.getTongTien());
+        intent.putExtra("tienGiam", thanhToanTam.getTienGiam());
+        intent.putExtra("noiDungChuyenKhoan", thanhToanTam.getNoiDungChuyenKhoan());
+        startActivity(intent);
     }
 
     private String layHinhThucThanhToan() {
@@ -314,9 +343,11 @@ public class ThanhToanActivity extends AppCompatActivity {
         }
     }
 
-    private void veDashboard() {
-        Intent intent = new Intent(this, DashboardNguoiDungActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    private void moThanhToanThanhCong(HoaDon hoaDon) {
+        Intent intent = new Intent(this, ThanhToanThanhCongActivity.class);
+        intent.putExtra("maHoaDon", hoaDon.getMaHoaDon());
+        intent.putExtra("noiDungChuyenKhoan", hoaDon.getNoiDungChuyenKhoan());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

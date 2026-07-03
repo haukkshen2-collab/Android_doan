@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/screen_padding">
+
+        <TextView
+            style="@style/App.Text.OnGradient.DisplaySm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_hero_user"
+            android:elevation="@dimen/elevation_lg"
+            android:gravity="center_vertical"
+            android:padding="@dimen/space_xxl"
+            android:text="Thanh toán SePay" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xl"
+            android:background="@drawable/bg_card_modern"
+            android:elevation="@dimen/elevation_md"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding_lg">
+
+            <TextView
+                style="@style/App.Text.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quét mã QR để thanh toán" />
+
+            <TextView
+                style="@style/App.Text.BodySm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:text="Sau khi chuyển khoản, hệ thống sẽ tự kiểm tra trạng thái thanh toán." />
+
+            <ImageView
+                android:id="@+id/imgQrSePay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/img_qr_height"
+                android:layout_marginTop="@dimen/space_lg"
+                android:adjustViewBounds="true"
+                android:background="@drawable/bg_card_glass"
+                android:contentDescription="Mã QR thanh toán SePay"
+                android:padding="@dimen/space_sm"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/lblMaHoaDon"
+                style="@style/App.Text.BodyLg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_lg"
+                android:text="Mã hóa đơn:" />
+
+            <TextView
+                android:id="@+id/lblSoTien"
+                style="@style/App.Text.Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:text="Số tiền:" />
+
+            <TextView
+                android:id="@+id/lblNoiDungChuyenKhoan"
+                style="@style/App.Text.BodyLg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_sm"
+                android:text="Nội dung chuyển khoản:" />
+
+            <TextView
+                android:id="@+id/lblTrangThaiThanhToan"
+                style="@style/App.Text.BodySm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_md"
+                android:text="Đang chờ thanh toán" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnKiemTraThanhToan"
+            style="@style/App.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_xl"
+            android:text="Kiểm tra thanh toán" />
+
+        <Button
+            android:id="@+id/btnQuayLai"
+            style="@style/App.Button.Ghost"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginBottom="@dimen/space_xxl"
+            android:text="Hủy thanh toán" />
+    </LinearLayout>
+</ScrollView>

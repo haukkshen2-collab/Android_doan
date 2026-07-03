@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.banve.R;
 import com.example.banve.models.Voucher;
 import com.example.banve.utils.DinhDangTien;
+import com.example.banve.utils.HienThi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,7 +58,7 @@ public class VoucherQuanLyAdapter extends RecyclerView.Adapter<VoucherQuanLyAdap
         holder.lblGiaTri.setText("Giá trị: " + hienThiGiaTri(voucher));
         holder.lblThoiHan.setText("Thời hạn: " + dinhDangNgay(voucher.getNgayBatDau()) + " - " + dinhDangNgay(voucher.getNgayKetThuc()));
         holder.lblSoLuong.setText("Số lượng: " + voucher.getSoLuong());
-        holder.lblTrangThai.setText("Trạng thái: " + voucher.getTrangThai());
+        holder.lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(voucher.getTrangThai()));
         holder.btnSua.setOnClickListener(v -> listener.onSua(voucher));
         holder.btnXoa.setOnClickListener(v -> listener.onXoa(voucher));
     }

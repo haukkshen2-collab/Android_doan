@@ -2,69 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_marginStart="@dimen/space_sm"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_sm"
+    android:orientation="horizontal"
+    android:padding="@dimen/card_padding">
 
     <ImageView
         android:id="@+id/imgAnhVe"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:contentDescription="Ảnh vé"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/lblTenVe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Tên vé"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/lblNgaySuDung"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Ngày sử dụng:" />
-
-    <TextView
-        android:id="@+id/lblSoLuong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="NL: 0 | TE: 0 | CT: 0" />
-
-    <TextView
-        android:id="@+id/lblThanhTien"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Thành tiền: 0 VNĐ"
-        android:textStyle="bold" />
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="@dimen/space_md"
+        android:background="@drawable/bg_o_nhap"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblTenVe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên vé"
+            android:maxLines="2"
+            android:ellipsize="end"
+            style="@style/App.Text.Title" />
+
+        <TextView
+            android:id="@+id/lblNgaySuDung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:text="Ngày: 01/01/2025"
+            style="@style/App.Text.BodySm" />
+
+        <TextView
+            android:id="@+id/lblSoLuong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:text="NL: 0 | TE: 0 | CT: 0"
+            style="@style/App.Text.BodySm" />
+
+        <TextView
+            android:id="@+id/lblThanhTien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:text="0 VNĐ"
+            style="@style/App.Text.Price" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <Button
             android:id="@+id/btnSua"
-            android:layout_width="0dp"
+            style="@style/App.Button.Outline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sửa" />
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="Sửa"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnXoa"
-            android:layout_width="0dp"
+            style="@style/App.Button.Outline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="Xóa" />
+            android:layout_marginTop="@dimen/space_sm"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:text="Xóa"
+            android:textColor="@color/mauNguyHiem"
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>

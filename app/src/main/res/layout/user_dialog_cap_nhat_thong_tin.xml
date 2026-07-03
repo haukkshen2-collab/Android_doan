@@ -2,29 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_card_modern"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="@dimen/space_xxl">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="📝 Cập nhật thông tin"
+        style="@style/App.Text.HeadingLg" />
 
     <EditText
         android:id="@+id/edtHoTen"
+        style="@style/App.Input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xl"
         android:hint="Họ tên"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/edtEmail"
+        style="@style/App.Input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/space_md"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/edtSoDienThoai"
+        style="@style/App.Input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/space_md"
         android:hint="Số điện thoại"
         android:inputType="phone"
         android:maxLength="10" />
@@ -32,21 +44,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="end"
+        android:layout_marginTop="@dimen/space_xl"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnHuy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/App.Button.Outline"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginEnd="@dimen/space_sm"
+            android:layout_weight="1"
             android:text="Hủy" />
 
         <Button
             android:id="@+id/btnLuu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            style="@style/App.Button.Primary"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginStart="@dimen/space_sm"
+            android:layout_weight="1"
             android:text="Lưu" />
     </LinearLayout>
 </LinearLayout>

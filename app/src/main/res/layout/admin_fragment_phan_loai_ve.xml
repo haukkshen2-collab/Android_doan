@@ -2,28 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/screen_padding">
 
     <TextView
         android:id="@+id/lblTieuDe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Phân loại vé"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:text="📂 Phân loại vé"
+        style="@style/App.Text.HeadingLg" />
 
     <Button
         android:id="@+id/btnThemLoaiVe"
+        style="@style/App.Button.Primary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Thêm loại vé" />
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_md"
+        android:text="➕ Thêm loại vé" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvDanhSachLoaiVe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:layout_weight="1"
+        android:clipToPadding="false" />
 </LinearLayout>

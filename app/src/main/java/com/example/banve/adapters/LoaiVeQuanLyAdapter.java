@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.banve.R;
 import com.example.banve.models.LoaiVe;
+import com.example.banve.utils.HienThi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class LoaiVeQuanLyAdapter extends RecyclerView.Adapter<LoaiVeQuanLyAdapte
         LoaiVe loaiVe = danhSachLoaiVe.get(position);
         holder.lblTenLoaiVe.setText(loaiVe.getTenLoaiVe());
         holder.lblMoTa.setText("Mô tả: " + giaTri(loaiVe.getMoTa()));
-        holder.lblTrangThai.setText("Trạng thái: " + loaiVe.getTrangThai());
+        holder.lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(loaiVe.getTrangThai()));
         holder.btnSua.setOnClickListener(v -> listener.onSua(loaiVe));
         holder.btnXoa.setOnClickListener(v -> listener.onXoa(loaiVe));
     }

@@ -15,6 +15,7 @@ import com.example.banve.R;
 import com.example.banve.controllers.NguoiDungController;
 import com.example.banve.models.NguoiDung;
 import com.example.banve.network.ApiCallback;
+import com.example.banve.utils.HienThi;
 import com.example.banve.utils.Session;
 import com.example.banve.utils.TienIch;
 
@@ -73,9 +74,9 @@ public class ThongTinNguoiDungActivity extends AppCompatActivity {
         lblHoTen.setText("Họ tên: " + giaTri(nguoiDung.getHoTen()));
         lblEmail.setText("Email: " + giaTri(nguoiDung.getEmail()));
         lblSoDienThoai.setText("Số điện thoại: " + giaTri(nguoiDung.getSoDienThoai()));
-        lblVaiTro.setText("Vai trò: " + giaTri(nguoiDung.getVaiTro()));
+        lblVaiTro.setText("Vai trò: " + HienThi.vaiTro(nguoiDung.getVaiTro()));
         lblNgayDangKy.setText("Ngày đăng ký: " + giaTri(nguoiDung.getNgayDangKy()));
-        lblTrangThai.setText("Trạng thái: " + giaTri(nguoiDung.getTrangThai()));
+        lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(nguoiDung.getTrangThai()));
     }
 
     private void moDialogCapNhatThongTin() {

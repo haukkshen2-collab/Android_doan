@@ -25,18 +25,33 @@ public class HoaDonDAO {
         apiService.taoHoaDon(taoDuLieuHoaDon(hoaDon)).enqueue(new Callback<List<HoaDon>>() {
             @Override
             public void onResponse(Call<List<HoaDon>> call, Response<List<HoaDon>> response) {
-                if (!response.isSuccessful()) {
-                    callback.onError("Không thể tạo hóa đơn");
-                    return;
-                }
+                xuLyMotHoaDon(response, callback, "Không thể tạo hóa đơn");
+            }
 
-                List<HoaDon> danhSachHoaDon = response.body();
-                if (danhSachHoaDon == null || danhSachHoaDon.isEmpty()) {
-                    callback.onError("Không nhận được dữ liệu hóa đơn");
-                    return;
-                }
+            @Override
+            public void onFailure(Call<List<HoaDon>> call, Throwable t) {
+                callback.onError("Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
 
-                callback.onSuccess(danhSachHoaDon.get(0));
+    public void capNhatTrangThai(int maHoaDon, String trangThai, ApiCallback<HoaDon> callback) {
+        Map<String, Object> duLieuCapNhat = new HashMap<>();
+        duLieuCapNhat.put("TrangThai", trangThai);
+
+        capNhatHoaDon(maHoaDon, duLieuCapNhat, callback);
+    }
+
+    public void layTheoMa(int maHoaDon, ApiCallback<HoaDon> callback) {
+        Map<String, String> filter = new HashMap<>();
+        filter.put("MaHoaDon", "eq." + maHoaDon);
+        filter.put("select", "*");
+        filter.put("limit", "1");
+
+        apiService.timHoaDon(filter).enqueue(new Callback<List<HoaDon>>() {
+            @Override
+            public void onResponse(Call<List<HoaDon>> call, Response<List<HoaDon>> response) {
+                xuLyMotHoaDon(response, callback, "Không thể tải trạng thái thanh toán");
             }
 
             @Override
@@ -145,6 +160,35 @@ public class HoaDonDAO {
         });
     }
 
+    private void capNhatHoaDon(int maHoaDon, Map<String, Object> duLieuCapNhat, ApiCallback<HoaDon> callback) {
+        apiService.capNhatHoaDon("eq." + maHoaDon, duLieuCapNhat).enqueue(new Callback<List<HoaDon>>() {
+            @Override
+            public void onResponse(Call<List<HoaDon>> call, Response<List<HoaDon>> response) {
+                xuLyMotHoaDon(response, callback, "Không thể cập nhật hóa đơn");
+            }
+
+            @Override
+            public void onFailure(Call<List<HoaDon>> call, Throwable t) {
+                callback.onError("Lỗi kết nối: " + t.getMessage());
+            }
+        });
+    }
+
+    private void xuLyMotHoaDon(Response<List<HoaDon>> response, ApiCallback<HoaDon> callback, String thongBaoLoi) {
+        if (!response.isSuccessful()) {
+            callback.onError(thongBaoLoi);
+            return;
+        }
+
+        List<HoaDon> danhSachHoaDon = response.body();
+        if (danhSachHoaDon == null || danhSachHoaDon.isEmpty()) {
+            callback.onError("Không nhận được dữ liệu hóa đơn");
+            return;
+        }
+
+        callback.onSuccess(danhSachHoaDon.get(0));
+    }
+
     private String noiDanhSachMa(List<Integer> danhSachMa) {
         StringBuilder ketQua = new StringBuilder();
         for (int i = 0; i < danhSachMa.size(); i++) {
@@ -164,6 +208,7 @@ public class HoaDonDAO {
         duLieu.put("TienGiam", hoaDon.getTienGiam());
         duLieu.put("ThanhToan", hoaDon.getThanhToan());
         duLieu.put("TrangThai", hoaDon.getTrangThai());
+        duLieu.put("NoiDungChuyenKhoan", hoaDon.getNoiDungChuyenKhoan());
         return duLieu;
     }
 }

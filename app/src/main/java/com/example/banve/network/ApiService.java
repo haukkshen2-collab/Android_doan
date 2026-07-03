@@ -8,6 +8,8 @@ import com.example.banve.models.ChiTietGioHang;
 import com.example.banve.models.Voucher;
 import com.example.banve.models.HoaDon;
 import com.example.banve.models.ChiTietHoaDon;
+import com.example.banve.models.ThanhToanTam;
+import com.example.banve.models.ChiTietThanhToanTam;
 import com.example.banve.models.CauHinhAI;
 import com.example.banve.models.LichSuChat;
 
@@ -138,6 +140,36 @@ public interface ApiService {
     // Tìm hóa đơn theo bộ lọc Supabase REST API.
     @GET("rest/v1/HoaDon")
     Call<List<HoaDon>> timHoaDon(@QueryMap Map<String, String> filter);
+
+    // Cập nhật hóa đơn theo mã hóa đơn.
+    @PATCH("rest/v1/HoaDon")
+    Call<List<HoaDon>> capNhatHoaDon(
+            @Query("MaHoaDon") String dieuKienMaHoaDon,
+            @Body Map<String, Object> duLieuCapNhat
+    );
+
+    // Tạo thanh toán tạm SePay, chưa tạo hóa đơn thật.
+    @POST("rest/v1/ThanhToanTam")
+    Call<List<ThanhToanTam>> taoThanhToanTam(@Body Map<String, Object> thanhToanTam);
+
+    // Tìm thanh toán tạm theo bộ lọc Supabase REST API.
+    @GET("rest/v1/ThanhToanTam")
+    Call<List<ThanhToanTam>> timThanhToanTam(@QueryMap Map<String, String> filter);
+
+    // Cập nhật thanh toán tạm theo mã hóa đơn dự kiến.
+    @PATCH("rest/v1/ThanhToanTam")
+    Call<List<ThanhToanTam>> capNhatThanhToanTam(
+            @Query("MaHoaDon") String dieuKienMaHoaDon,
+            @Body Map<String, Object> duLieuCapNhat
+    );
+
+    // Xóa thanh toán tạm theo bộ lọc.
+    @DELETE("rest/v1/ThanhToanTam")
+    Call<Void> xoaThanhToanTam(@QueryMap Map<String, String> filter);
+
+    // Tạo chi tiết thanh toán tạm SePay.
+    @POST("rest/v1/ChiTietThanhToanTam")
+    Call<List<ChiTietThanhToanTam>> taoChiTietThanhToanTam(@Body Map<String, Object> chiTietThanhToanTam);
 
     // Tạo chi tiết hóa đơn.
     @POST("rest/v1/ChiTietHoaDon")

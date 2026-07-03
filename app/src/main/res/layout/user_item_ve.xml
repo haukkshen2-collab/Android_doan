@@ -2,39 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
+    android:layout_marginStart="@dimen/space_sm"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_sm"
+    android:layout_marginBottom="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_md"
+    android:foreground="@drawable/bg_ripple_bounded"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/space_md">
 
-    <ImageView
-        android:id="@+id/imgAnhVe"
+    <!-- ═══ Ảnh vé bo góc ═══ -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:contentDescription="Ảnh vé"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_height="@dimen/img_card_height">
 
+        <ImageView
+            android:id="@+id/imgAnhVe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Ảnh vé"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <!-- ═══ Badge trạng thái ═══ -->
+        <TextView
+            style="@style/App.Badge.Success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="@dimen/space_md"
+            android:text="Đang mở bán" />
+    </FrameLayout>
+
+    <!-- ═══ Tên vé ═══ -->
     <TextView
         android:id="@+id/lblTenVe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_md"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:text="Tên vé"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/App.Text.Title" />
 
-    <TextView
-        android:id="@+id/lblGiaVe"
+    <!-- ═══ Giá + nút ═══ -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="0 VNĐ" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnXem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Xem" />
+        <TextView
+            android:id="@+id/lblGiaVe"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0 VNĐ"
+            style="@style/App.Text.Price" />
+
+        <Button
+            android:id="@+id/btnXem"
+            style="@style/App.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height_sm"
+            android:text="Xem ngay →" />
+    </LinearLayout>
 </LinearLayout>

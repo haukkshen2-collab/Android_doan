@@ -2,45 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
+    android:layout_marginBottom="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_sm"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/card_padding">
 
     <TextView
         android:id="@+id/lblTenVe"
+        style="@style/App.Text.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tên vé"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:text="Tên vé" />
 
     <TextView
         android:id="@+id/lblNgaySuDung"
+        style="@style/App.Text.BodySm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/space_xs"
         android:text="Ngày sử dụng:" />
 
     <TextView
         android:id="@+id/lblSoLuong"
+        style="@style/App.Text.BodySm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="NL: 0 | TE: 0 | CT: 0" />
+        android:layout_marginTop="@dimen/space_xs"
+        android:text="Số lượng:" />
 
     <TextView
         android:id="@+id/lblDonGia"
+        style="@style/App.Text.BodySm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/space_xs"
         android:text="Đơn giá:" />
 
     <TextView
         android:id="@+id/lblThanhTien"
+        style="@style/App.Text.PriceLg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Thành tiền: 0 VNĐ"
-        android:textStyle="bold" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:background="@drawable/bg_price_badge"
+        android:padding="@dimen/space_md"
+        android:text="Thành tiền: 0 VNĐ" />
 </LinearLayout>

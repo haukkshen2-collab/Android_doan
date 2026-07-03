@@ -2,52 +2,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
+    android:layout_marginStart="@dimen/space_sm"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_md"
+    android:foreground="@drawable/bg_ripple_bounded"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/card_padding">
 
     <TextView
         android:id="@+id/lblTenLoaiVe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tên loại vé"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/App.Text.Title" />
 
     <TextView
         android:id="@+id/lblMoTa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Mô tả:" />
+        android:layout_marginTop="@dimen/space_xs"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="Mô tả:"
+        style="@style/App.Text.BodySm" />
 
     <TextView
         android:id="@+id/lblTrangThai"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Trạng thái:" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:background="@drawable/bg_badge_success"
+        android:paddingStart="@dimen/space_md"
+        android:paddingTop="@dimen/space_xxs"
+        android:paddingEnd="@dimen/space_md"
+        android:paddingBottom="@dimen/space_xxs"
+        android:text="Trạng thái:"
+        android:textColor="@color/mauThanhCong"
+        android:textSize="@dimen/text_small"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/space_md"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnSua"
+            style="@style/App.Button.Outline"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/btn_height_sm"
+            android:layout_marginEnd="@dimen/space_sm"
             android:layout_weight="1"
-            android:text="Sửa" />
+            android:text="✏️ Sửa" />
 
         <Button
             android:id="@+id/btnXoa"
+            style="@style/App.Button.Danger"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_height="@dimen/btn_height_sm"
+            android:layout_marginStart="@dimen/space_sm"
             android:layout_weight="1"
-            android:text="Xóa" />
+            android:text="🗑️ Xóa" />
     </LinearLayout>
 </LinearLayout>

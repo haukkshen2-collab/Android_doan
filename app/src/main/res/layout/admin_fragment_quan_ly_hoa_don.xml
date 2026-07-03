@@ -2,56 +2,60 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="@dimen/screen_padding">
 
         <TextView
             android:id="@+id/lblTieuDe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quản lý hóa đơn"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:text="🧾 Quản lý hóa đơn"
+            style="@style/App.Text.HeadingLg" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_md"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnTuNgay"
+                style="@style/App.Button.Outline"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/btn_height"
                 android:layout_weight="1"
-                android:text="Từ ngày" />
+                android:text="📅 Từ ngày" />
 
             <Button
                 android:id="@+id/btnDenNgay"
+                style="@style/App.Button.Outline"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginStart="@dimen/space_sm"
                 android:layout_weight="1"
-                android:text="Đến ngày" />
+                android:text="📅 Đến ngày" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnLoc"
+            style="@style/App.Button.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Lọc hóa đơn" />
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_sm"
+            android:text="🔍 Lọc hóa đơn" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvDanhSachHoaDon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </ScrollView>

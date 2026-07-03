@@ -2,94 +2,225 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_man_hinh"
     android:orientation="vertical">
 
+    <!-- Header nhỏ gọn hơn, không còn "Ưu đãi mỗi ngày" -->
     <LinearLayout
         android:id="@+id/layHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_hero_user"
+        android:elevation="@dimen/elevation_lg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:paddingStart="@dimen/space_lg"
+        android:paddingEnd="@dimen/space_lg"
+        android:paddingTop="@dimen/space_md"
+        android:paddingBottom="@dimen/space_md">
 
         <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:background="@drawable/bg_logo_tron"
             android:contentDescription="Logo"
-            android:src="@mipmap/ic_launcher" />
+            android:padding="8dp"
+            android:src="@drawable/img_vaa_e1744105217584" />
 
-        <TextView
-            android:id="@+id/lblXinChao"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="@dimen/space_md"
             android:layout_weight="1"
-            android:text="Xin chào"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lblXinChao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xin chào"
+                style="@style/App.Text.OnGradient.Heading"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnHoSo"
+            style="@style/App.Button.OnGradient"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hồ sơ" />
+            android:layout_height="36dp"
+            android:layout_marginEnd="@dimen/space_xs"
+            android:paddingStart="@dimen/space_md"
+            android:paddingEnd="@dimen/space_md"
+            android:text="Hồ sơ"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnDangXuat"
+            style="@style/App.Button.OnGradient"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Đăng xuất" />
+            android:layout_height="36dp"
+            android:paddingStart="@dimen/space_md"
+            android:paddingEnd="@dimen/space_md"
+            android:text="Thoát"
+            android:textSize="12sp" />
     </LinearLayout>
+
+    <!-- Danh mục vé -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_lg"
+        android:layout_marginTop="@dimen/space_md"
+        android:layout_marginEnd="@dimen/space_lg"
+        android:text="Danh mục vé"
+        style="@style/App.Text.SectionTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvLoaiVe"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xs"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/space_sm"
+        android:paddingEnd="@dimen/space_sm" />
+
+    <!-- Vé nổi bật -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_lg"
+        android:layout_marginTop="@dimen/space_md"
+        android:layout_marginEnd="@dimen/space_lg"
+        android:text="🎫 Vé nổi bật"
+        style="@style/App.Text.SectionTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvDanhSachVe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_xs"
         android:layout_weight="1"
-        android:padding="8dp" />
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/space_xs"
+        android:paddingEnd="@dimen/space_xs"
+        android:paddingBottom="@dimen/space_sm" />
 
+    <!-- Bottom Menu -->
     <LinearLayout
         android:id="@+id/layBottomMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_thanh_menu"
+        android:elevation="@dimen/elevation_xl"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-        <Button
+        <LinearLayout
             android:id="@+id/btnTrangChu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Trang chủ" />
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🏠"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Trang chủ"
+                android:textColor="@color/mauTimChinh"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btnGioHang"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Giỏ hàng" />
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🛒"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Giỏ hàng"
+                android:textColor="@color/mauChuPhu"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btnLichSu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Lịch sử" />
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📋"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Lịch sử"
+                android:textColor="@color/mauChuPhu"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/btnChatAI"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Chat AI" />
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💬"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Tin nhắn"
+                android:textColor="@color/mauChuPhu"
+                android:textSize="12sp" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

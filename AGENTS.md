@@ -1,5 +1,64 @@
 ﻿# AGENTS.md — Ứng dụng Quản lý Bán Vé Khu Du Lịch (Android)
 
+
+
+## Font chữ (Quan trọng)
+
+* CẤM làm hỏng encoding (lỗi font) Tiếng Việt; BẮT BUỘC 100% văn bản Tiếng Việt khi thêm/sửa phải gõ CÓ DẤU đầy đủ, chuẩn xác.
+* Không sử dụng font gây mất dấu.
+* Mọi chữ phải hiển thị đúng Unicode.
+* Không làm chữ bị quá nhỏ hoặc quá lớn.
+* Không để text bị cắt hoặc chồng lên nhau.
+
+
+---
+
+## XML và Java
+
+* XML dùng để thiết kế giao diện.
+* Java chỉ dùng để kết nối giao diện.
+* Nếu đổi id hoặc loại View trong XML thì phải cập nhật Java tương ứng.
+* Không được để ứng dụng crash sau khi chỉnh sửa.
+
+---
+
+## Resource
+
+* Dùng lại màu, drawable và style nếu đã có.
+* Không tạo file trùng chức năng.
+* Không hardcode màu nếu đã có trong colors.xml.
+
+---
+
+
+
+
+## 6. Bốn trụ cột chất lượng (yêu cầu bắt buộc)
+
+*6.1 Rõ ràng & Trực quan:* phân cấp thị giác theo type scale; *giá vé nổi bật* (App.Text.Price);
+gom nhóm bằng *Card* (item vé/hoá đơn/voucher/người dùng); lề màn hình space_lg;
+empty-state có icon + canh giữa; tương phản đạt WCAG AA; thêm vector icon cho nav.
+
+*6.2 Phản hồi & Tương tác:* vùng chạm ≥48dp; *ripple* (?attr/selectableItemBackground hoặc <ripple>);
+state pressed/disabled rõ; mỗi màn *1 nút chính* nổi bật + phụ outlined; TextInputLayout có error/helper;
+loading có ProgressBar (Mục 4.3); inputType`/imeOptions` hợp lý.
+
+*6.3 Nhất quán:*
+*một nguồn sự thật* — màu ở colors.xml, số đo ở dimens.xml, kiểu ở styles.xml;
+*không hex/số đo thô* rải rác; cùng mục đích → cùng hình thức; drawable đặt tên ngữ nghĩa
+(tách bg_card, bubble_ai, bubble_user — *đừng* mượn bg_item_ve cho bong bóng chat như hiện tại).
+
+*6.4 Thích ứng & Bố cục:* RTL-safe (start/end, không left/right); sp cho chữ, dp cho mọi thứ, **không px**;
+form/dialog dài bọc ScrollView + fillViewport="true"; chia ngang bằng weight; tránh height cứng cắt nội dung;
+nền/chữ dùng ?attr/colorSurface`/?attr/colorOnSurface` để tự đúng dark mode; tiêu đề maxLines`+ellipsize`;
+cân nhắc ConstraintLayout để *phẳng cây view* cho màn phức tạp.
+
+
+
+
+
+
+
 ## Tổng quan dự án
 - Ứng dụng Android viết bằng **Java thuần** (không dùng Kotlin).
 - Kết nối CSDL **Supabase** (PostgreSQL) qua **REST API** với Retrofit2 + OkHttp3 + Gson.
@@ -165,3 +224,5 @@ Khi gọi layout trong Java phải dùng đúng tên mới. VD: `R.layout.user_a
 - KHÔNG để mật khẩu plaintext – luôn MD5 trước khi lưu/so sánh.
 - Không đặt tên Tiếng Việt có dấu trong code.
 - Không trả lời ngôn ngữ khác ngoài tiếng Việt và phải có dấu.
+
+

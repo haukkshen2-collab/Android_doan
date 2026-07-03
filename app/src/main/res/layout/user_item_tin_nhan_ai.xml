@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="start"
-    android:padding="6dp">
+    android:layout_gravity="start"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_huge"
+    android:background="@drawable/bubble_ai"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/bubble_padding_h"
+    android:paddingTop="@dimen/bubble_padding_v"
+    android:paddingEnd="@dimen/bubble_padding_h"
+    android:paddingBottom="@dimen/bubble_padding_v">
 
     <TextView
         android:id="@+id/lblNoiDungTinNhan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/bg_item_ve"
-        android:padding="12dp"
+        android:maxWidth="@dimen/bubble_max_width"
         android:text="Tin nhắn AI"
-        android:textSize="16sp" />
+        android:textColor="@color/mauChuChinh"
+        android:textSize="@dimen/text_body" />
 </LinearLayout>

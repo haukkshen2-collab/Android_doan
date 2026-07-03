@@ -27,6 +27,9 @@ public class HoaDon {
     @SerializedName("TrangThai")
     private String trangThai;
 
+    @SerializedName("NoiDungChuyenKhoan")
+    private String noiDungChuyenKhoan;
+
     @SerializedName("NguoiDung")
     private NguoiDung nguoiDung;
 
@@ -92,6 +95,14 @@ public class HoaDon {
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public String getNoiDungChuyenKhoan() {
+        return noiDungChuyenKhoan;
+    }
+
+    public void setNoiDungChuyenKhoan(String noiDungChuyenKhoan) {
+        this.noiDungChuyenKhoan = noiDungChuyenKhoan;
     }
 
     public NguoiDung getNguoiDung() {

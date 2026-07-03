@@ -41,17 +41,16 @@ public class ChiTietHoaDonAdapter extends RecyclerView.Adapter<ChiTietHoaDonAdap
         String tenVe = ve == null ? "Vé mã " + chiTiet.getMaVe() : ve.getTenVe();
 
         holder.lblTenVe.setText(tenVe);
-        holder.lblNgaySuDung.setText("Ngày sử dụng: " + chiTiet.getNgaySuDung());
+        holder.lblNgaySuDung.setText("Ngày sử dụng: " + giaTri(chiTiet.getNgaySuDung()));
         holder.lblSoLuong.setText(
-                "NL: " + chiTiet.getSoLuongNguoiLon()
-                        + " | TE: " + chiTiet.getSoLuongTreEm()
-                        + " | CT: " + chiTiet.getSoLuongNguoiCaoTuoi()
+                "Số lượng: Người lớn " + chiTiet.getSoLuongNguoiLon()
+                        + " • Trẻ em " + chiTiet.getSoLuongTreEm()
+                        + " • Người cao tuổi " + chiTiet.getSoLuongNguoiCaoTuoi()
         );
         holder.lblDonGia.setText(
-                "Đơn giá NL/TE/CT: "
-                        + DinhDangTien.dinhDang(chiTiet.getDonGiaNguoiLon())
-                        + " / " + DinhDangTien.dinhDang(chiTiet.getDonGiaTreEm())
-                        + " / " + DinhDangTien.dinhDang(chiTiet.getDonGiaNguoiCaoTuoi())
+                "Đơn giá: Người lớn " + DinhDangTien.dinhDang(chiTiet.getDonGiaNguoiLon())
+                        + " • Trẻ em " + DinhDangTien.dinhDang(chiTiet.getDonGiaTreEm())
+                        + " • Người cao tuổi " + DinhDangTien.dinhDang(chiTiet.getDonGiaNguoiCaoTuoi())
         );
         holder.lblThanhTien.setText("Thành tiền: " + DinhDangTien.dinhDang(chiTiet.getThanhTien()));
     }
@@ -59,6 +58,10 @@ public class ChiTietHoaDonAdapter extends RecyclerView.Adapter<ChiTietHoaDonAdap
     @Override
     public int getItemCount() {
         return danhSachChiTiet.size();
+    }
+
+    private String giaTri(String giaTri) {
+        return giaTri == null ? "" : giaTri;
     }
 
     static class ChiTietHoaDonViewHolder extends RecyclerView.ViewHolder {
@@ -78,4 +81,3 @@ public class ChiTietHoaDonAdapter extends RecyclerView.Adapter<ChiTietHoaDonAdap
         }
     }
 }
-

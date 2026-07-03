@@ -2,51 +2,88 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/bg_item_ve"
+    android:layout_marginStart="@dimen/space_sm"
+    android:layout_marginTop="@dimen/space_sm"
+    android:layout_marginEnd="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_md"
+    android:foreground="@drawable/bg_ripple_bounded"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/card_padding">
 
-    <TextView
-        android:id="@+id/lblTaiKhoan"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tài khoản"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lblTaiKhoan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tài khoản"
+            style="@style/App.Text.Title" />
+
+        <TextView
+            android:id="@+id/lblVaiTro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_badge_tim"
+            android:paddingStart="@dimen/space_md"
+            android:paddingTop="@dimen/space_xxs"
+            android:paddingEnd="@dimen/space_md"
+            android:paddingBottom="@dimen/space_xxs"
+            android:text="Vai trò"
+            android:textColor="@color/mauTimDam"
+            android:textSize="@dimen/text_small"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/lblHoTen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Họ tên" />
-
-    <TextView
-        android:id="@+id/lblVaiTro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Vai trò" />
+        android:layout_marginTop="@dimen/space_xs"
+        android:text="Họ tên"
+        style="@style/App.Text.Body" />
 
     <TextView
         android:id="@+id/lblTrangThai"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Trạng thái" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:background="@drawable/bg_badge_success"
+        android:paddingStart="@dimen/space_md"
+        android:paddingTop="@dimen/space_xxs"
+        android:paddingEnd="@dimen/space_md"
+        android:paddingBottom="@dimen/space_xxs"
+        android:text="Trạng thái"
+        android:textColor="@color/mauThanhCong"
+        android:textSize="@dimen/text_small"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/space_md"
+        android:layout_marginBottom="@dimen/space_md"
+        android:background="@drawable/bg_divider" />
 
     <Switch
         android:id="@+id/swtKhoa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Khóa tài khoản" />
+        android:minHeight="@dimen/btn_height_sm"
+        android:text="Khóa tài khoản"
+        android:textColor="@color/mauChuPhu"
+        android:textSize="@dimen/text_body" />
 
     <Button
         android:id="@+id/btnResetMatKhau"
+        style="@style/App.Button.Outline"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Đặt lại mật khẩu" />
+        android:layout_height="@dimen/btn_height_sm"
+        android:layout_marginTop="@dimen/space_sm"
+        android:text="🔒 Đặt lại mật khẩu" />
 </LinearLayout>

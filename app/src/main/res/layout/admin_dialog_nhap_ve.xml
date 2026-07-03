@@ -1,90 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_modern"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/space_xxl">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="🎫 Thêm / Sửa vé"
+            style="@style/App.Text.HeadingLg" />
 
         <EditText
             android:id="@+id/edtTenVe"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xl"
             android:hint="Tên vé"
             android:inputType="text" />
 
         <Spinner
             android:id="@+id/spnLoaiVe"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_gradient"
+            android:padding="@dimen/space_sm" />
 
         <EditText
             android:id="@+id/edtGiaVe"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Giá vé"
             android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/edtGiaNguoiLon"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Giá người lớn"
             android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/edtGiaTreEm"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Giá trẻ em"
             android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/edtGiaCaoTuoi"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Giá người cao tuổi"
             android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/edtSoLuong"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Số lượng"
             android:inputType="number" />
 
         <EditText
             android:id="@+id/edtMoTa"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Mô tả"
             android:inputType="textMultiLine"
             android:minLines="2" />
 
         <EditText
             android:id="@+id/edtThongTinVe"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="Thông tin vé"
             android:inputType="textMultiLine"
             android:minLines="2" />
 
         <EditText
             android:id="@+id/edtAnhVeUrl"
+            style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_sm"
             android:hint="URL ảnh vé"
             android:inputType="textUri" />
 
@@ -92,30 +113,36 @@
             android:id="@+id/swtTrangThai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/space_md"
             android:checked="true"
-            android:text="Đang hoạt động" />
+            android:minHeight="@dimen/btn_height_sm"
+            android:text="Đang hoạt động"
+            android:textColor="@color/mauChuPhu"
+            android:textSize="@dimen/text_body" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_xl"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnLuu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Lưu" />
-
-            <Button
                 android:id="@+id/btnHuy"
+                style="@style/App.Button.Outline"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginEnd="@dimen/space_sm"
                 android:layout_weight="1"
                 android:text="Hủy" />
+
+            <Button
+                android:id="@+id/btnLuu"
+                style="@style/App.Button.Primary"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginStart="@dimen/space_sm"
+                android:layout_weight="1"
+                android:text="💾 Lưu" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

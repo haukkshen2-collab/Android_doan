@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ═══ Spacing System ═══ -->
+    <dimen name="space_xxs">2dp</dimen>
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_sm">8dp</dimen>
+    <dimen name="space_md">12dp</dimen>
+    <dimen name="space_lg">16dp</dimen>
+    <dimen name="space_xl">20dp</dimen>
+    <dimen name="space_xxl">24dp</dimen>
+    <dimen name="space_xxxl">32dp</dimen>
+    <dimen name="space_huge">48dp</dimen>
+
+    <!-- ═══ Border Radius ═══ -->
+    <dimen name="radius_xs">4dp</dimen>
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">20dp</dimen>
+    <dimen name="radius_xxl">24dp</dimen>
+    <dimen name="radius_xxxl">32dp</dimen>
+    <dimen name="radius_pill">100dp</dimen>
+    <dimen name="radius_circle">999dp</dimen>
+
+    <!-- ═══ Elevation / Shadow ═══ -->
+    <dimen name="elevation_xs">1dp</dimen>
+    <dimen name="elevation_sm">2dp</dimen>
+    <dimen name="elevation_md">4dp</dimen>
+    <dimen name="elevation_lg">8dp</dimen>
+    <dimen name="elevation_xl">12dp</dimen>
+    <dimen name="elevation_xxl">16dp</dimen>
+
+    <!-- ═══ Typography Sizes ═══ -->
+    <dimen name="text_caption">11sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_body_sm">13sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_body_lg">15sp</dimen>
+    <dimen name="text_subtitle">16sp</dimen>
+    <dimen name="text_title">18sp</dimen>
+    <dimen name="text_heading">20sp</dimen>
+    <dimen name="text_heading_lg">22sp</dimen>
+    <dimen name="text_display_sm">24sp</dimen>
+    <dimen name="text_display">28sp</dimen>
+    <dimen name="text_display_lg">32sp</dimen>
+
+    <!-- ═══ Component Heights ═══ -->
+    <dimen name="btn_height">52dp</dimen>
+    <dimen name="btn_height_sm">44dp</dimen>
+    <dimen name="btn_height_xs">36dp</dimen>
+    <dimen name="input_height">54dp</dimen>
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="hero_height">200dp</dimen>
+    <dimen name="hero_height_sm">160dp</dimen>
+    <dimen name="counter_btn_size">44dp</dimen>
+    <dimen name="counter_text_width">48dp</dimen>
+    <dimen name="tab_height">48dp</dimen>
+
+    <!-- ═══ Icon Sizes ═══ -->
+    <dimen name="icon_xs">16dp</dimen>
+    <dimen name="icon_sm">20dp</dimen>
+    <dimen name="icon_md">24dp</dimen>
+    <dimen name="icon_lg">32dp</dimen>
+    <dimen name="icon_xl">48dp</dimen>
+    <dimen name="icon_xxl">64dp</dimen>
+
+    <!-- ═══ Image Heights ═══ -->
+    <dimen name="img_card_height">180dp</dimen>
+    <dimen name="img_detail_height">260dp</dimen>
+    <dimen name="img_qr_height">320dp</dimen>
+    <dimen name="avatar_size">56dp</dimen>
+    <dimen name="avatar_size_lg">80dp</dimen>
+    <dimen name="logo_size">72dp</dimen>
+    <dimen name="logo_size_lg">96dp</dimen>
+
+    <!-- ═══ Viền ═══ -->
+    <dimen name="border_thin">1dp</dimen>
+    <dimen name="border_medium">1.5dp</dimen>
+    <dimen name="border_thick">2dp</dimen>
+
+    <!-- ═══ Padding cho màn hình ═══ -->
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="screen_padding_lg">20dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_padding_lg">20dp</dimen>
+
+    <!-- ═══ Chat bubble ═══ -->
+    <dimen name="bubble_max_width">280dp</dimen>
+    <dimen name="bubble_padding_h">14dp</dimen>
+    <dimen name="bubble_padding_v">10dp</dimen>
+    <dimen name="bubble_radius">18dp</dimen>
+    <dimen name="bubble_radius_small">4dp</dimen>
+
+    <!-- ═══ Stat card admin ═══ -->
+    <dimen name="stat_card_min_height">100dp</dimen>
+</resources>

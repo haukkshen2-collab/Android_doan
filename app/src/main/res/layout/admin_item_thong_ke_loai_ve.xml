@@ -2,29 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="@drawable/bg_item_ve"
+    android:layout_marginTop="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_sm"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="@dimen/card_padding">
 
     <TextView
         android:id="@+id/lblTenLoai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Loại vé"
-        android:textStyle="bold" />
+        style="@style/App.Text.Title" />
 
-    <TextView
-        android:id="@+id/lblSoVe"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Số vé bán: 0" />
+        android:layout_marginTop="@dimen/space_sm"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lblDoanhThu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Doanh thu: 0 VNĐ" />
+        <TextView
+            android:id="@+id/lblSoVe"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Số vé bán: 0"
+            style="@style/App.Text.Body" />
+
+        <TextView
+            android:id="@+id/lblDoanhThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doanh thu: 0 VNĐ"
+            style="@style/App.Text.Price" />
+    </LinearLayout>
 </LinearLayout>

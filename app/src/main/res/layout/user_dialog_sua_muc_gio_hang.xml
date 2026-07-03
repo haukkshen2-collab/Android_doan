@@ -1,232 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_modern"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/space_xxl">
 
         <TextView
             android:id="@+id/lblTenVe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Tên vé"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            style="@style/App.Text.HeadingLg" />
 
         <DatePicker
             android:id="@+id/dtpNgaySuDung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_lg"
             android:calendarViewShown="true"
             android:spinnersShown="false" />
 
+        <!-- Người lớn -->
         <LinearLayout
             android:id="@+id/layNguoiLon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_md"
+            android:background="@drawable/bg_card_gradient"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/space_md">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Người lớn" />
+                android:text="🧑 Người lớn"
+                style="@style/App.Text.Subtitle" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnGiamNL"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
                 android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center"
-                android:text="-"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/lblSoLuongNL"
-                android:layout_width="48dp"
+                style="@style/App.Text.Counter"
+                android:layout_width="@dimen/counter_text_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="0" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnTangNL"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
                 android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center"
-                android:text="+"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="+" />
         </LinearLayout>
 
+        <!-- Trẻ em -->
         <LinearLayout
             android:id="@+id/layTreEm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_gradient"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/space_md">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Trẻ em" />
+                android:text="👶 Trẻ em"
+                style="@style/App.Text.Subtitle" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnGiamTE"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
                 android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center"
-                android:text="-"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/lblSoLuongTE"
-                android:layout_width="48dp"
+                style="@style/App.Text.Counter"
+                android:layout_width="@dimen/counter_text_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="0" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnTangTE"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
                 android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center"
-                android:text="+"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="+" />
         </LinearLayout>
 
+        <!-- Người cao tuổi -->
         <LinearLayout
             android:id="@+id/layCaoTuoi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_card_gradient"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/space_md">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Người cao tuổi" />
+                android:text="👴 Người cao tuổi"
+                style="@style/App.Text.Subtitle" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnGiamCT"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
                 android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center"
-                android:text="-"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:text="-" />
 
             <TextView
                 android:id="@+id/lblSoLuongCT"
-                android:layout_width="48dp"
+                style="@style/App.Text.Counter"
+                android:layout_width="@dimen/counter_text_width"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="0" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnTangCT"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:padding="0dp"
-                android:includeFontPadding="false"
-                android:textAllCaps="false"
-                android:textAlignment="center"
+                android:layout_width="@dimen/counter_btn_size"
+                android:layout_height="@dimen/counter_btn_size"
                 android:background="@drawable/bg_nut_so_luong"
-                android:clickable="true"
-                android:focusable="true"
                 android:gravity="center"
-                android:text="+"
-                android:textColor="@android:color/white"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="+" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/lblTongTamTinh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_lg"
+            android:background="@drawable/bg_price_badge"
+            android:padding="@dimen/space_md"
             android:text="Tạm tính: 0 VNĐ"
-            android:textStyle="bold" />
+            style="@style/App.Text.Price" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/space_lg"
             android:gravity="end"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnHuy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/App.Button.Outline"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginEnd="@dimen/space_sm"
+                android:layout_weight="1"
                 android:text="Hủy" />
 
             <Button
                 android:id="@+id/btnLuu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                style="@style/App.Button.Primary"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_marginStart="@dimen/space_sm"
+                android:layout_weight="1"
                 android:text="Lưu" />
         </LinearLayout>
     </LinearLayout>

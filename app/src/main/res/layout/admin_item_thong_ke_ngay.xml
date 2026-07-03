@@ -2,22 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="@drawable/bg_item_ve"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:layout_marginTop="@dimen/space_sm"
+    android:background="@drawable/bg_card_modern"
+    android:elevation="@dimen/elevation_sm"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/card_padding">
 
     <TextView
         android:id="@+id/lblNgay"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Ngày"
-        android:textStyle="bold" />
+        style="@style/App.Text.Title" />
 
     <TextView
         android:id="@+id/lblDoanhThu"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Doanh thu: 0 VNĐ" />
+        android:text="Doanh thu: 0 VNĐ"
+        style="@style/App.Text.Price" />
 </LinearLayout>

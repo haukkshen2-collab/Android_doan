@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.banve.R;
 import com.example.banve.models.NguoiDung;
+import com.example.banve.utils.HienThi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +73,8 @@ public class NguoiDungAdapter extends RecyclerView.Adapter<NguoiDungAdapter.Nguo
         NguoiDung nguoiDung = danhSachHienThi.get(position);
         holder.lblTaiKhoan.setText("Tài khoản: " + giaTri(nguoiDung.getTaiKhoan()));
         holder.lblHoTen.setText("Họ tên: " + giaTri(nguoiDung.getHoTen()));
-        holder.lblVaiTro.setText("Vai trò: " + giaTri(nguoiDung.getVaiTro()));
-        holder.lblTrangThai.setText("Trạng thái: " + giaTri(nguoiDung.getTrangThai()));
+        holder.lblVaiTro.setText("Vai trò: " + HienThi.vaiTro(nguoiDung.getVaiTro()));
+        holder.lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(nguoiDung.getTrangThai()));
 
         holder.swtKhoa.setOnCheckedChangeListener(null);
         holder.swtKhoa.setChecked("Khoa".equals(nguoiDung.getTrangThai()));

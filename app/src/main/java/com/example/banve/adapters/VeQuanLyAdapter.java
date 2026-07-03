@@ -16,6 +16,7 @@ import com.example.banve.R;
 import com.example.banve.models.LoaiVe;
 import com.example.banve.models.Ve;
 import com.example.banve.utils.DinhDangTien;
+import com.example.banve.utils.HienThi;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -82,7 +83,7 @@ public class VeQuanLyAdapter extends RecyclerView.Adapter<VeQuanLyAdapter.VeQuan
         holder.lblLoaiVe.setText("Loại vé: " + layTenLoaiVe(ve));
         holder.lblGiaVe.setText("Giá vé: " + DinhDangTien.dinhDang(ve.getGiaVe()));
         holder.lblSoLuong.setText("Số lượng: " + ve.getSoLuong());
-        holder.lblTrangThai.setText("Trạng thái: " + ve.getTrangThai());
+        holder.lblTrangThai.setText("Trạng thái: " + HienThi.trangThai(ve.getTrangThai()));
         holder.imgAnhVe.setImageResource(R.mipmap.ic_launcher);
         taiAnhVe(ve.getAnhVe(), holder.imgAnhVe);
         holder.btnSua.setOnClickListener(v -> listener.onSua(ve));

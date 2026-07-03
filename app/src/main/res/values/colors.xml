@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ═══ Cơ bản ═══ -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ═══ Primary — Tím hoàng hôn ═══ -->
+    <color name="mauTimChinh">#6C3CE1</color>
+    <color name="mauTimDam">#4A1FB8</color>
+    <color name="mauTimNhat">#EDE5FF</color>
+    <color name="mauTimSieuNhat">#F8F5FF</color>
+    <color name="mauTimTrung">#8B5CF6</color>
+
+    <!-- ═══ Accent — Cam ấm (CTA nổi bật) ═══ -->
+    <color name="mauCamChinh">#FF6B35</color>
+    <color name="mauCamDam">#E85D2A</color>
+    <color name="mauCamNhat">#FFF0E8</color>
+
+    <!-- ═══ Accent 2 — Xanh ngọc (Tích cực) ═══ -->
+    <color name="mauXanhNgoc">#00C9A7</color>
+    <color name="mauXanhNgocDam">#00A88A</color>
+    <color name="mauXanhNgocNhat">#E6FBF6</color>
+
+    <!-- ═══ Accent 3 — Vàng highlight ═══ -->
+    <color name="mauVangChinh">#FFB800</color>
+    <color name="mauVangDam">#E6A600</color>
+    <color name="mauVangNhat">#FFF8E1</color>
+
+    <!-- ═══ Xanh dương — Thông tin ═══ -->
+    <color name="mauXanhDuong">#2196F3</color>
+    <color name="mauXanhDuongNhat">#E3F2FD</color>
+    <color name="mauXanhNhat">#EAF6FF</color>
+
+    <!-- ═══ Nền (Surface) ═══ -->
+    <color name="mauNenChinh">#FAFAFE</color>
+    <color name="mauNenPhu">#FFFFFF</color>
+    <color name="mauNenCard">#FFFFFF</color>
+    <color name="mauNenGlass">#F5FFFFFF</color>
+
+    <!-- ═══ Chữ (Text) ═══ -->
+    <color name="mauChuChinh">#1A1330</color>
+    <color name="mauChuPhu">#6B5F7B</color>
+    <color name="mauChuMo">#A99BBF</color>
+    <color name="mauChuTrenGradient">#FFFFFF</color>
+    <color name="mauChuTrenGradientPhu">#DACEEF</color>
+
+    <!-- ═══ Viền & Divider ═══ -->
+    <color name="mauVien">#EBE3F5</color>
+    <color name="mauVienNhat">#F5F0FB</color>
+    <color name="mauDivider">#F0EAF8</color>
+
+    <!-- ═══ Trạng thái ═══ -->
+    <color name="mauThanhCong">#00C853</color>
+    <color name="mauThanhCongNhat">#E8F5E9</color>
+    <color name="mauNguyHiem">#E53935</color>
+    <color name="mauNguyHiemNhat">#FFEBEE</color>
+    <color name="mauCanhBao">#FF9800</color>
+    <color name="mauCanhBaoNhat">#FFF3E0</color>
+
+    <!-- ═══ Nút ═══ -->
+    <color name="mauNutTat">#C4B8D4</color>
+    <color name="mauNutTatText">#9B8FB0</color>
+
+    <!-- ═══ Gradient endpoints ═══ -->
+    <color name="gradientTimBatDau">#6C3CE1</color>
+    <color name="gradientTimKetThuc">#8B5CF6</color>
+    <color name="gradientTimCamBatDau">#6C3CE1</color>
+    <color name="gradientTimCamKetThuc">#FF6B35</color>
+    <color name="gradientHeroBatDau">#2D1065</color>
+    <color name="gradientHeroGiua">#6C3CE1</color>
+    <color name="gradientHeroKetThuc">#A855F7</color>
+    <color name="gradientAdminBatDau">#1A0A3E</color>
+    <color name="gradientAdminKetThuc">#4A1FB8</color>
+    <color name="gradientCamBatDau">#FF6B35</color>
+    <color name="gradientCamKetThuc">#FFB800</color>
+    <color name="gradientXanhBatDau">#00C9A7</color>
+    <color name="gradientXanhKetThuc">#00E5C3</color>
+
+    <!-- ═══ Overlay ═══ -->
+    <color name="mauOverlayToi">#CC1A1330</color>
+    <color name="mauOverlayNhe">#331A1330</color>
+    <color name="mauOverlayTrang">#80FFFFFF</color>
+    <color name="mauOverlayTrangDam">#E6FFFFFF</color>
+
+    <!-- ═══ Stat card admin backgrounds ═══ -->
+    <color name="statCard1BatDau">#6C3CE1</color>
+    <color name="statCard1KetThuc">#A855F7</color>
+    <color name="statCard2BatDau">#FF6B35</color>
+    <color name="statCard2KetThuc">#FFB800</color>
+    <color name="statCard3BatDau">#00C9A7</color>
+    <color name="statCard3KetThuc">#34D399</color>
+    <color name="statCard4BatDau">#2196F3</color>
+    <color name="statCard4KetThuc">#64B5F6</color>
 </resources>

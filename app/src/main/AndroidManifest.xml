@@ -36,6 +36,12 @@
             android:name=".activities.user.ThanhToanActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.user.ThanhToanSePayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.user.ThanhToanThanhCongActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.user.LichSuDonHangActivity"
             android:exported="false" />
         <activity

@@ -14,6 +14,7 @@ import com.example.banve.controllers.HoaDonController;
 import com.example.banve.models.ChiTietHoaDon;
 import com.example.banve.network.ApiCallback;
 import com.example.banve.utils.DinhDangTien;
+import com.example.banve.utils.HienThi;
 import com.example.banve.utils.TienIch;
 
 import java.text.ParseException;
@@ -78,7 +79,7 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
         lblTongTien.setText("Tổng tiền: " + DinhDangTien.dinhDang(tongTien));
         lblTienGiam.setText("Tiền giảm: " + DinhDangTien.dinhDang(tienGiam));
         lblThanhTien.setText("Thành tiền: " + DinhDangTien.dinhDang(thanhTien));
-        lblHinhThuc.setText("Hình thức thanh toán: " + hienThiHinhThucThanhToan(thanhToan));
+        lblHinhThuc.setText("Hình thức thanh toán: " + HienThi.hinhThucThanhToan(thanhToan));
     }
 
     private void batSuKien() {
@@ -86,6 +87,11 @@ public class ChiTietHoaDonActivity extends AppCompatActivity {
     }
 
     private void taiChiTietHoaDon() {
+        if (maHoaDon <= 0) {
+            TienIch.hienAlert(this, "Lỗi chi tiết hóa đơn", "Mã hóa đơn không hợp lệ");
+            return;
+        }
+
         hoaDonController.layChiTietHoaDon(maHoaDon, new ApiCallback<List<ChiTietHoaDon>>() {
             @Override
             public void onSuccess(List<ChiTietHoaDon> data) {
