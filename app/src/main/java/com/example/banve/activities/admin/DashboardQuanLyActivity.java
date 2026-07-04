@@ -1,8 +1,12 @@
 package com.example.banve.activities.admin;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +25,18 @@ import com.example.banve.utils.TienIch;
 
 public class DashboardQuanLyActivity extends AppCompatActivity {
     private TextView lblXinChaoAdmin;
+    private TextView lblManHinhDangChon;
+    private FrameLayout layMenuOverlay;
+    private LinearLayout layMenuQuanLy;
+    private Button btnMoMenu;
     private Button btnDangXuat;
+    private Button btnTongQuan;
+    private Button btnQuanLyVe;
+    private Button btnLoaiVe;
+    private Button btnVoucher;
+    private Button btnNguoiDung;
+    private Button btnHoaDon;
+    private Button btnCauHinhAI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +61,18 @@ public class DashboardQuanLyActivity extends AppCompatActivity {
 
     private void anhXa() {
         lblXinChaoAdmin = findViewById(R.id.lblXinChaoAdmin);
+        lblManHinhDangChon = findViewById(R.id.lblManHinhDangChon);
+        layMenuOverlay = findViewById(R.id.layMenuOverlay);
+        layMenuQuanLy = findViewById(R.id.layMenuQuanLy);
+        btnMoMenu = findViewById(R.id.btnMoMenu);
         btnDangXuat = findViewById(R.id.btnDangXuat);
+        btnTongQuan = findViewById(R.id.btnTongQuan);
+        btnQuanLyVe = findViewById(R.id.btnQuanLyVe);
+        btnLoaiVe = findViewById(R.id.btnLoaiVe);
+        btnVoucher = findViewById(R.id.btnVoucher);
+        btnNguoiDung = findViewById(R.id.btnNguoiDung);
+        btnHoaDon = findViewById(R.id.btnHoaDon);
+        btnCauHinhAI = findViewById(R.id.btnCauHinhAI);
     }
 
     private void hienXinChao() {
@@ -57,13 +83,65 @@ public class DashboardQuanLyActivity extends AppCompatActivity {
 
     private void batSuKien() {
         btnDangXuat.setOnClickListener(v -> TienIch.dangXuat(this));
-        findViewById(R.id.btnTongQuan).setOnClickListener(v -> moFragment(new TongQuanFragment()));
-        findViewById(R.id.btnQuanLyVe).setOnClickListener(v -> moFragment(new QuanLyVeFragment()));
-        findViewById(R.id.btnLoaiVe).setOnClickListener(v -> moFragment(new PhanLoaiVeFragment()));
-        findViewById(R.id.btnVoucher).setOnClickListener(v -> moFragment(new QuanLyVoucherFragment()));
-        findViewById(R.id.btnNguoiDung).setOnClickListener(v -> moFragment(new QuanLyNguoiDungFragment()));
-        findViewById(R.id.btnHoaDon).setOnClickListener(v -> moFragment(new QuanLyHoaDonFragment()));
-        findViewById(R.id.btnCauHinhAI).setOnClickListener(v -> startActivity(new Intent(this, QuanLyAIActivity.class)));
+        layMenuOverlay.setOnClickListener(v -> dongMenu());
+        layMenuQuanLy.setOnClickListener(v -> {
+        });
+        btnMoMenu.setOnClickListener(v -> doiTrangThaiMenu());
+        btnTongQuan.setOnClickListener(v -> chonFragment("Tổng quan", new TongQuanFragment(), btnTongQuan));
+        btnQuanLyVe.setOnClickListener(v -> chonFragment("Quản lý vé", new QuanLyVeFragment(), btnQuanLyVe));
+        btnLoaiVe.setOnClickListener(v -> chonFragment("Loại vé", new PhanLoaiVeFragment(), btnLoaiVe));
+        btnVoucher.setOnClickListener(v -> chonFragment("Voucher", new QuanLyVoucherFragment(), btnVoucher));
+        btnNguoiDung.setOnClickListener(v -> chonFragment("Người dùng", new QuanLyNguoiDungFragment(), btnNguoiDung));
+        btnHoaDon.setOnClickListener(v -> chonFragment("Hóa đơn", new QuanLyHoaDonFragment(), btnHoaDon));
+        btnCauHinhAI.setOnClickListener(v -> moCauHinhAI());
+    }
+
+    private void doiTrangThaiMenu() {
+        if (layMenuOverlay.getVisibility() == View.VISIBLE) {
+            dongMenu();
+        } else {
+            layMenuOverlay.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void dongMenu() {
+        layMenuOverlay.setVisibility(View.GONE);
+    }
+
+    private void chonFragment(String tenManHinh, Fragment fragment, Button nutDangChon) {
+        lblManHinhDangChon.setText("Đang xem: " + tenManHinh);
+        capNhatMenuDangChon(nutDangChon);
+        dongMenu();
+        moFragment(fragment);
+    }
+
+    private void moCauHinhAI() {
+        lblManHinhDangChon.setText("Đang xem: Cấu hình AI");
+        capNhatMenuDangChon(btnCauHinhAI);
+        dongMenu();
+        startActivity(new Intent(this, QuanLyAIActivity.class));
+    }
+
+    private void capNhatMenuDangChon(Button nutDangChon) {
+        Button[] danhSachNut = {
+                btnTongQuan,
+                btnQuanLyVe,
+                btnLoaiVe,
+                btnVoucher,
+                btnNguoiDung,
+                btnHoaDon,
+                btnCauHinhAI
+        };
+
+        for (Button nut : danhSachNut) {
+            if (nut == nutDangChon) {
+                nut.setBackgroundResource(R.drawable.bg_bottom_nav_active);
+                nut.setTextColor(getResources().getColor(R.color.white));
+            } else {
+                nut.setBackgroundColor(Color.TRANSPARENT);
+                nut.setTextColor(getResources().getColor(R.color.mauChuTrenGradientPhu));
+            }
+        }
     }
 
     private void moFragment(Fragment fragment) {
@@ -73,8 +151,14 @@ public class DashboardQuanLyActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void thongBaoChuaBoSung(String tenChucNang) {
-        Toast.makeText(this, tenChucNang + " sẽ được bổ sung sau", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onBackPressed() {
+        if (layMenuOverlay != null && layMenuOverlay.getVisibility() == View.VISIBLE) {
+            dongMenu();
+            return;
+        }
+
+        super.onBackPressed();
     }
 
 }

@@ -3,10 +3,14 @@ package com.example.banve.fragments.admin;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +39,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class QuanLyHoaDonFragment extends Fragment {
+    private EditText edtTimKiem;
+    private LinearLayout layBoLoc;
+    private Button btnBoLoc;
     private Button btnTuNgay;
     private Button btnDenNgay;
     private Button btnLoc;
@@ -60,6 +67,9 @@ public class QuanLyHoaDonFragment extends Fragment {
     }
 
     private void anhXa(View view) {
+        edtTimKiem = view.findViewById(R.id.edtTimKiem);
+        layBoLoc = view.findViewById(R.id.layBoLoc);
+        btnBoLoc = view.findViewById(R.id.btnBoLoc);
         btnTuNgay = view.findViewById(R.id.btnTuNgay);
         btnDenNgay = view.findViewById(R.id.btnDenNgay);
         btnLoc = view.findViewById(R.id.btnLoc);
@@ -84,9 +94,34 @@ public class QuanLyHoaDonFragment extends Fragment {
     }
 
     private void batSuKien() {
+        btnBoLoc.setOnClickListener(v -> doiTrangThaiBoLoc());
         btnTuNgay.setOnClickListener(v -> moDialogChonNgay(tuNgayCalendar, false));
         btnDenNgay.setOnClickListener(v -> moDialogChonNgay(denNgayCalendar, true));
         btnLoc.setOnClickListener(v -> locTheoKhoangNgay());
+        edtTimKiem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                locTheoKhoangNgay();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
+    private void doiTrangThaiBoLoc() {
+        if (layBoLoc.getVisibility() == View.VISIBLE) {
+            layBoLoc.setVisibility(View.GONE);
+            btnBoLoc.setText("🔎 Lọc");
+        } else {
+            layBoLoc.setVisibility(View.VISIBLE);
+            btnBoLoc.setText("Ẩn lọc");
+        }
     }
 
     private void taiDanhSachHoaDon() {
@@ -116,6 +151,7 @@ public class QuanLyHoaDonFragment extends Fragment {
             return;
         }
 
+        String tuKhoa = edtTimKiem.getText().toString().trim().toLowerCase(Locale.ROOT);
         List<HoaDon> danhSachLoc = new ArrayList<>();
         for (HoaDon hoaDon : danhSachGoc) {
             Date ngayLap = parseNgayGio(hoaDon.getNgayLap());
@@ -123,11 +159,26 @@ public class QuanLyHoaDonFragment extends Fragment {
                 continue;
             }
 
-            if (!ngayLap.before(tuNgay.getTime()) && !ngayLap.after(denNgay.getTime())) {
+            boolean dungNgay = !ngayLap.before(tuNgay.getTime()) && !ngayLap.after(denNgay.getTime());
+            boolean dungTuKhoa = tuKhoa.isEmpty() || hoaDonKhopTuKhoa(hoaDon, tuKhoa);
+            if (dungNgay && dungTuKhoa) {
                 danhSachLoc.add(hoaDon);
             }
         }
         adapter.capNhatDuLieu(danhSachLoc);
+    }
+
+    private boolean hoaDonKhopTuKhoa(HoaDon hoaDon, String tuKhoa) {
+        return String.valueOf(hoaDon.getMaHoaDon()).contains(tuKhoa)
+                || chuaTuKhoa(layHoTenKhach(hoaDon), tuKhoa)
+                || chuaTuKhoa(hoaDon.getThanhToan(), tuKhoa)
+                || chuaTuKhoa(HienThi.hinhThucThanhToan(hoaDon.getThanhToan()), tuKhoa)
+                || chuaTuKhoa(hoaDon.getTrangThai(), tuKhoa)
+                || chuaTuKhoa(HienThi.trangThai(hoaDon.getTrangThai()), tuKhoa);
+    }
+
+    private boolean chuaTuKhoa(String giaTri, String tuKhoa) {
+        return giaTri != null && giaTri.toLowerCase(Locale.ROOT).contains(tuKhoa);
     }
 
     private void moDialogChonNgay(Calendar ngayDangChon, boolean cuoiNgay) {

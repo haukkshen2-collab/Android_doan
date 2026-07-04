@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,8 @@ public class QuanLyNguoiDungFragment extends Fragment {
 
     private EditText edtTimKiem;
     private Spinner spnLocVaiTro;
+    private LinearLayout layBoLoc;
+    private Button btnBoLoc;
     private RecyclerView rcvDanhSachNguoiDung;
     private NguoiDungAdapter adapter;
     private NguoiDungController nguoiDungController;
@@ -56,6 +59,8 @@ public class QuanLyNguoiDungFragment extends Fragment {
     private void anhXa(View view) {
         edtTimKiem = view.findViewById(R.id.edtTimKiem);
         spnLocVaiTro = view.findViewById(R.id.spnLocVaiTro);
+        layBoLoc = view.findViewById(R.id.layBoLoc);
+        btnBoLoc = view.findViewById(R.id.btnBoLoc);
         rcvDanhSachNguoiDung = view.findViewById(R.id.rcvDanhSachNguoiDung);
     }
 
@@ -83,6 +88,7 @@ public class QuanLyNguoiDungFragment extends Fragment {
     }
 
     private void batSuKien() {
+        btnBoLoc.setOnClickListener(v -> doiTrangThaiBoLoc());
         edtTimKiem.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -108,6 +114,16 @@ public class QuanLyNguoiDungFragment extends Fragment {
             public void onNothingSelected(android.widget.AdapterView<?> parent) {
             }
         });
+    }
+
+    private void doiTrangThaiBoLoc() {
+        if (layBoLoc.getVisibility() == View.VISIBLE) {
+            layBoLoc.setVisibility(View.GONE);
+            btnBoLoc.setText("🔎 Lọc");
+        } else {
+            layBoLoc.setVisibility(View.VISIBLE);
+            btnBoLoc.setText("Ẩn lọc");
+        }
     }
 
     private void taiDanhSachNguoiDung() {

@@ -3,6 +3,6 @@
     <gradient
         android:angle="90"
         android:startColor="@color/mauOverlayToi"
-        android:endColor="#001A1330"
+        android:endColor="#000F172A"
         android:type="linear" />
 </shape>

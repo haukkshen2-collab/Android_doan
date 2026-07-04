@@ -93,4 +93,5 @@
 
     <!-- ═══ Stat card admin ═══ -->
     <dimen name="stat_card_min_height">100dp</dimen>
+    <dimen name="drawer_width">252dp</dimen>
 </resources>

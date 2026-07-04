@@ -30,6 +30,8 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/btn_height"
                 android:layout_weight="1"
+                android:paddingStart="@dimen/space_sm"
+                android:paddingEnd="@dimen/space_sm"
                 android:text="📅 Từ ngày" />
 
             <Button
@@ -39,6 +41,8 @@
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginStart="@dimen/space_sm"
                 android:layout_weight="1"
+                android:paddingStart="@dimen/space_sm"
+                android:paddingEnd="@dimen/space_sm"
                 android:text="📅 Đến ngày" />
         </LinearLayout>
 

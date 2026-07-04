@@ -54,7 +54,8 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
         Voucher voucher = danhSachVoucher.get(position);
         holder.lblTenVoucher.setText(voucher.getTenVoucher());
         holder.lblMoTaGiam.setText(taoMoTaGiam(voucher));
-        holder.itemView.setBackgroundColor(voucher.getMaVoucher() == maVoucherDangChon ? Color.rgb(227, 242, 253) : Color.WHITE);
+        holder.itemView.setBackgroundColor(
+                voucher.getMaVoucher() == maVoucherDangChon ? Color.rgb(204, 251, 241) : Color.WHITE);
         holder.itemView.setOnClickListener(v -> listener.onClick(voucher));
     }
 
@@ -81,4 +82,3 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.VoucherV
         }
     }
 }
-

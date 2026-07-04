@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ import java.util.List;
 public class QuanLyVeFragment extends Fragment {
     private EditText edtTimKiem;
     private Spinner spnLocLoaiVe;
+    private LinearLayout layBoLoc;
+    private Button btnBoLoc;
     private Button btnThemVe;
     private RecyclerView rcvDanhSachVe;
     private VeQuanLyAdapter adapter;
@@ -61,6 +64,8 @@ public class QuanLyVeFragment extends Fragment {
     private void anhXa(View view) {
         edtTimKiem = view.findViewById(R.id.edtTimKiem);
         spnLocLoaiVe = view.findViewById(R.id.spnLocLoaiVe);
+        layBoLoc = view.findViewById(R.id.layBoLoc);
+        btnBoLoc = view.findViewById(R.id.btnBoLoc);
         btnThemVe = view.findViewById(R.id.btnThemVe);
         rcvDanhSachVe = view.findViewById(R.id.rcvDanhSachVe);
     }
@@ -88,6 +93,7 @@ public class QuanLyVeFragment extends Fragment {
     }
 
     private void batSuKien() {
+        btnBoLoc.setOnClickListener(v -> doiTrangThaiBoLoc());
         btnThemVe.setOnClickListener(v -> moDialogNhapVe(null));
         edtTimKiem.addTextChangedListener(new TextWatcher() {
             @Override
@@ -113,6 +119,16 @@ public class QuanLyVeFragment extends Fragment {
             public void onNothingSelected(android.widget.AdapterView<?> parent) {
             }
         });
+    }
+
+    private void doiTrangThaiBoLoc() {
+        if (layBoLoc.getVisibility() == View.VISIBLE) {
+            layBoLoc.setVisibility(View.GONE);
+            btnBoLoc.setText("🔎 Lọc");
+        } else {
+            layBoLoc.setVisibility(View.VISIBLE);
+            btnBoLoc.setText("Ẩn lọc");
+        }
     }
 
     private void taiLoaiVe() {

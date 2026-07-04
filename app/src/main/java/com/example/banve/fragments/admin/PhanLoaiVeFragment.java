@@ -2,11 +2,14 @@ package com.example.banve.fragments.admin;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -23,13 +26,19 @@ import com.example.banve.models.LoaiVe;
 import com.example.banve.network.ApiCallback;
 import com.example.banve.utils.TienIch;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class PhanLoaiVeFragment extends Fragment {
+    private EditText edtTimKiem;
+    private LinearLayout layBoLoc;
+    private Button btnBoLoc;
     private Button btnThemLoaiVe;
     private RecyclerView rcvDanhSachLoaiVe;
     private LoaiVeQuanLyAdapter adapter;
     private LoaiVeController loaiVeController;
+    private final List<LoaiVe> danhSachGoc = new ArrayList<>();
 
     @Nullable
     @Override
@@ -44,6 +53,9 @@ public class PhanLoaiVeFragment extends Fragment {
     }
 
     private void anhXa(View view) {
+        edtTimKiem = view.findViewById(R.id.edtTimKiem);
+        layBoLoc = view.findViewById(R.id.layBoLoc);
+        btnBoLoc = view.findViewById(R.id.btnBoLoc);
         btnThemLoaiVe = view.findViewById(R.id.btnThemLoaiVe);
         rcvDanhSachLoaiVe = view.findViewById(R.id.rcvDanhSachLoaiVe);
     }
@@ -65,14 +77,43 @@ public class PhanLoaiVeFragment extends Fragment {
     }
 
     private void batSuKien() {
+        btnBoLoc.setOnClickListener(v -> doiTrangThaiBoLoc());
         btnThemLoaiVe.setOnClickListener(v -> moDialogNhapLoaiVe(null));
+        edtTimKiem.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                apDungLoc();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
+    private void doiTrangThaiBoLoc() {
+        if (layBoLoc.getVisibility() == View.VISIBLE) {
+            layBoLoc.setVisibility(View.GONE);
+            btnBoLoc.setText("🔎 Lọc");
+        } else {
+            layBoLoc.setVisibility(View.VISIBLE);
+            btnBoLoc.setText("Ẩn lọc");
+        }
     }
 
     private void taiDanhSachLoaiVe() {
         loaiVeController.layDanhSachQuanLy(new ApiCallback<List<LoaiVe>>() {
             @Override
             public void onSuccess(List<LoaiVe> data) {
-                adapter.capNhatDuLieu(data);
+                danhSachGoc.clear();
+                if (data != null) {
+                    danhSachGoc.addAll(data);
+                }
+                apDungLoc();
             }
 
             @Override
@@ -80,6 +121,26 @@ public class PhanLoaiVeFragment extends Fragment {
                 baoLoi("Lỗi loại vé", thongBao);
             }
         });
+    }
+
+    private void apDungLoc() {
+        String tuKhoa = edtTimKiem.getText().toString().trim().toLowerCase(Locale.ROOT);
+        if (tuKhoa.isEmpty()) {
+            adapter.capNhatDuLieu(danhSachGoc);
+            return;
+        }
+
+        List<LoaiVe> danhSachLoc = new ArrayList<>();
+        for (LoaiVe loaiVe : danhSachGoc) {
+            if (chuaTuKhoa(loaiVe.getTenLoaiVe(), tuKhoa) || chuaTuKhoa(loaiVe.getMoTa(), tuKhoa)) {
+                danhSachLoc.add(loaiVe);
+            }
+        }
+        adapter.capNhatDuLieu(danhSachLoc);
+    }
+
+    private boolean chuaTuKhoa(String giaTri, String tuKhoa) {
+        return giaTri != null && giaTri.toLowerCase(Locale.ROOT).contains(tuKhoa);
     }
 
     private void moDialogNhapLoaiVe(LoaiVe loaiVeCanSua) {

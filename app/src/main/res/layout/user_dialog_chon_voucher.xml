@@ -27,4 +27,12 @@
         android:layout_height="@dimen/btn_height"
         android:layout_marginTop="@dimen/space_md"
         android:text="Bỏ chọn voucher" />
+
+    <Button
+        android:id="@+id/btnDong"
+        style="@style/App.Button.Ghost"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_sm"
+        android:text="Đóng" />
 </LinearLayout>

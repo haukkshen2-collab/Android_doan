@@ -192,7 +192,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                 .setView(view)
                 .create();
 
-        RecyclerView rcvDanhSachVoucher = view.findViewById(R.id.rcvDanhSachVoucher);
+        RecyclerView rcvDanhSachVoucher = view.findViewById(R.id.rcvVoucher);
         Button btnBoChonVoucher = view.findViewById(R.id.btnBoChonVoucher);
         Button btnDong = view.findViewById(R.id.btnDong);
 
@@ -215,7 +215,9 @@ public class ThanhToanActivity extends AppCompatActivity {
             tinhLaiTongTien();
             dialog.dismiss();
         });
-        btnDong.setOnClickListener(v -> dialog.dismiss());
+        if (btnDong != null) {
+            btnDong.setOnClickListener(v -> dialog.dismiss());
+        }
         dialog.show();
     }
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -45,15 +45,12 @@
                 android:text="🧑 Người lớn"
                 style="@style/App.Text.Subtitle" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnGiamNL"
+                style="@style/App.Button.Counter"
                 android:layout_width="@dimen/counter_btn_size"
                 android:layout_height="@dimen/counter_btn_size"
-                android:background="@drawable/bg_nut_so_luong"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:text="-" />
+                android:text="−" />
 
             <TextView
                 android:id="@+id/lblSoLuongNL"
@@ -62,14 +59,11 @@
                 android:layout_height="wrap_content"
                 android:text="0" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnTangNL"
+                style="@style/App.Button.Counter"
                 android:layout_width="@dimen/counter_btn_size"
                 android:layout_height="@dimen/counter_btn_size"
-                android:background="@drawable/bg_nut_so_luong"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
                 android:text="+" />
         </LinearLayout>
 
@@ -91,15 +85,12 @@
                 android:text="👶 Trẻ em"
                 style="@style/App.Text.Subtitle" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnGiamTE"
+                style="@style/App.Button.Counter"
                 android:layout_width="@dimen/counter_btn_size"
                 android:layout_height="@dimen/counter_btn_size"
-                android:background="@drawable/bg_nut_so_luong"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:text="-" />
+                android:text="−" />
 
             <TextView
                 android:id="@+id/lblSoLuongTE"
@@ -108,14 +99,11 @@
                 android:layout_height="wrap_content"
                 android:text="0" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnTangTE"
+                style="@style/App.Button.Counter"
                 android:layout_width="@dimen/counter_btn_size"
                 android:layout_height="@dimen/counter_btn_size"
-                android:background="@drawable/bg_nut_so_luong"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
                 android:text="+" />
         </LinearLayout>
 
@@ -137,15 +125,12 @@
                 android:text="👴 Người cao tuổi"
                 style="@style/App.Text.Subtitle" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnGiamCT"
+                style="@style/App.Button.Counter"
                 android:layout_width="@dimen/counter_btn_size"
                 android:layout_height="@dimen/counter_btn_size"
-                android:background="@drawable/bg_nut_so_luong"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:text="-" />
+                android:text="−" />
 
             <TextView
                 android:id="@+id/lblSoLuongCT"
@@ -154,14 +139,11 @@
                 android:layout_height="wrap_content"
                 android:text="0" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnTangCT"
+                style="@style/App.Button.Counter"
                 android:layout_width="@dimen/counter_btn_size"
                 android:layout_height="@dimen/counter_btn_size"
-                android:background="@drawable/bg_nut_so_luong"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
                 android:text="+" />
         </LinearLayout>
 
@@ -202,3 +184,6 @@
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
+
+
+

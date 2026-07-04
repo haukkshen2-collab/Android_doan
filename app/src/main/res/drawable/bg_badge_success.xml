@@ -4,5 +4,5 @@
     <corners android:radius="@dimen/radius_pill" />
     <stroke
         android:width="@dimen/border_thin"
-        android:color="#3300C853" />
+        android:color="#3316A34A" />
 </shape>
