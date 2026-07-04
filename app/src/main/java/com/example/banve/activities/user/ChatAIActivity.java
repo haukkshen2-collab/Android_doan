@@ -2,8 +2,8 @@ package com.example.banve.activities.user;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +25,7 @@ public class ChatAIActivity extends AppCompatActivity {
     private RecyclerView rcvLichSuChat;
     private ProgressBar pgbDangTra;
     private EditText edtCauHoi;
-    private Button btnGui;
+    private ImageButton btnGui;
     private TinNhanAdapter tinNhanAdapter;
     private LichSuChatDAO lichSuChatDAO;
     private ChatAIController chatAIController;

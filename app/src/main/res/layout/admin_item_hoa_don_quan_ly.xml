@@ -64,9 +64,12 @@
 
     <Button
         android:id="@+id/btnXemChiTiet"
+        android:drawableEnd="@drawable/ic_mui_ten_phai"
+        android:drawablePadding="@dimen/space_xs"
+        android:drawableTint="@color/mauTimChinh"
         style="@style/App.Button.Outline"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height_sm"
         android:layout_marginTop="@dimen/space_md"
-        android:text="Xem chi tiết →" />
+        android:text="Xem chi tiết" />
 </LinearLayout>

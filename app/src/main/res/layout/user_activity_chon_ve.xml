@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_xl"
-            android:text="📅 Chọn ngày sử dụng"
+            android:text="Chọn ngày sử dụng"
             style="@style/App.Text.SectionTitle" />
 
         <DatePicker
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingStart="@dimen/space_sm"
-                android:text="🧑 Người lớn"
+                android:text="Người lớn"
                 style="@style/App.Text.Subtitle" />
 
             <Button
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingStart="@dimen/space_sm"
-                android:text="👶 Trẻ em"
+                android:text="Trẻ em"
                 style="@style/App.Text.Subtitle" />
 
             <Button
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingStart="@dimen/space_sm"
-                android:text="👴 Người cao tuổi"
+                android:text="Người cao tuổi"
                 style="@style/App.Text.Subtitle" />
 
             <Button
@@ -186,11 +186,14 @@
         <!-- ═══ Nút CTA ═══ -->
         <Button
             android:id="@+id/btnThemVaoGio"
+            android:drawableStart="@drawable/ic_gio_hang"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/white"
             style="@style/App.Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
             android:layout_marginTop="@dimen/space_lg"
-            android:text="🛒 Thêm vào giỏ" />
+            android:text="Thêm vào giỏ" />
     </LinearLayout>
 </ScrollView>
 

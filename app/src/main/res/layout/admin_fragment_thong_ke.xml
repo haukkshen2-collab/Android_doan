@@ -10,14 +10,33 @@
         android:orientation="vertical"
         android:padding="@dimen/screen_padding">
 
-        <TextView
-            android:id="@+id/lblTieuDeThongKe"
+        <!-- ═══ Tiêu đề ═══ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📈 Thống kê tổng quan"
-            style="@style/App.Text.HeadingLg" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!-- ═══ Date range ═══ -->
+            <ImageView
+                android:layout_width="@dimen/icon_lg"
+                android:layout_height="@dimen/icon_lg"
+                android:background="@drawable/bg_icon_tron_nhat"
+                android:contentDescription="Thống kê"
+                android:padding="6dp"
+                android:src="@drawable/ic_thong_ke"
+                android:tint="@color/mauTimChinh" />
+
+            <TextView
+                android:id="@+id/lblTieuDeThongKe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_md"
+                android:layout_weight="1"
+                android:text="Thống kê tổng quan"
+                style="@style/App.Text.HeadingLg" />
+        </LinearLayout>
+
+        <!-- ═══ Bộ lọc thời gian ═══ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,9 +49,13 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/btn_height"
                 android:layout_weight="1"
+                android:drawableStart="@drawable/ic_lich"
+                android:drawablePadding="@dimen/space_xs"
+                android:drawableTint="@color/mauTimChinh"
                 android:paddingStart="@dimen/space_sm"
                 android:paddingEnd="@dimen/space_sm"
-                android:text="📅 Từ ngày" />
+                android:textSize="@dimen/text_body_sm"
+                android:text="Từ ngày" />
 
             <Button
                 android:id="@+id/btnDenNgay"
@@ -41,9 +64,13 @@
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginStart="@dimen/space_sm"
                 android:layout_weight="1"
+                android:drawableStart="@drawable/ic_lich"
+                android:drawablePadding="@dimen/space_xs"
+                android:drawableTint="@color/mauTimChinh"
                 android:paddingStart="@dimen/space_sm"
                 android:paddingEnd="@dimen/space_sm"
-                android:text="📅 Đến ngày" />
+                android:textSize="@dimen/text_body_sm"
+                android:text="Đến ngày" />
         </LinearLayout>
 
         <Button
@@ -52,7 +79,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
             android:layout_marginTop="@dimen/space_sm"
-            android:text="🔍 Lọc thống kê" />
+            android:drawableStart="@drawable/ic_loc"
+            android:drawablePadding="@dimen/space_sm"
+            android:drawableTint="@color/white"
+            android:text="Lọc thống kê" />
 
         <ProgressBar
             android:id="@+id/pgbDangTai"
@@ -63,7 +93,7 @@
             android:indeterminateTint="@color/mauTimChinh"
             android:visibility="gone" />
 
-        <!-- ═══ Tổng quan stats ═══ -->
+        <!-- ═══ Tổng quan ═══ -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,6 +101,43 @@
             android:text="Tổng quan"
             style="@style/App.Text.SectionTitle" />
 
+        <!-- Hero: doanh thu -->
+        <TextView
+            android:id="@+id/lblTongDoanhThu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_stat_card_2"
+            android:elevation="@dimen/elevation_md"
+            android:drawableStart="@drawable/ic_tien"
+            android:drawablePadding="@dimen/space_md"
+            android:drawableTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="@dimen/card_padding_lg"
+            android:text="Tổng doanh thu: 0 VNĐ"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_subtitle"
+            android:textStyle="bold" />
+
+        <!-- Hero: thành tiền -->
+        <TextView
+            android:id="@+id/lblTongThanhTien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_sm"
+            android:background="@drawable/bg_stat_card_1"
+            android:elevation="@dimen/elevation_md"
+            android:drawableStart="@drawable/ic_thanh_toan"
+            android:drawablePadding="@dimen/space_md"
+            android:drawableTint="@color/white"
+            android:gravity="center_vertical"
+            android:padding="@dimen/card_padding_lg"
+            android:text="Tổng thành tiền: 0 VNĐ"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_subtitle"
+            android:textStyle="bold" />
+
+        <!-- Các chỉ số phụ -->
         <TextView
             android:id="@+id/lblTongHoaDon"
             android:layout_width="match_parent"
@@ -78,22 +145,13 @@
             android:layout_marginTop="@dimen/space_sm"
             android:background="@drawable/bg_card_modern"
             android:elevation="@dimen/elevation_sm"
+            android:drawableStart="@drawable/ic_hoa_don"
+            android:drawablePadding="@dimen/space_md"
+            android:drawableTint="@color/mauTimChinh"
+            android:gravity="center_vertical"
             android:padding="@dimen/card_padding"
             android:text="Tổng hóa đơn: 0"
             style="@style/App.Text.Body" />
-
-        <TextView
-            android:id="@+id/lblTongDoanhThu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_sm"
-            android:background="@drawable/bg_stat_card_2"
-            android:elevation="@dimen/elevation_sm"
-            android:padding="@dimen/card_padding"
-            android:text="Tổng doanh thu: 0 VNĐ"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_body_lg"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblTongTienGiam"
@@ -102,22 +160,13 @@
             android:layout_marginTop="@dimen/space_sm"
             android:background="@drawable/bg_card_modern"
             android:elevation="@dimen/elevation_sm"
+            android:drawableStart="@drawable/ic_voucher"
+            android:drawablePadding="@dimen/space_md"
+            android:drawableTint="@color/mauCamChinh"
+            android:gravity="center_vertical"
             android:padding="@dimen/card_padding"
             android:text="Tổng tiền giảm: 0 VNĐ"
             style="@style/App.Text.Body" />
-
-        <TextView
-            android:id="@+id/lblTongThanhTien"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_sm"
-            android:background="@drawable/bg_stat_card_1"
-            android:elevation="@dimen/elevation_sm"
-            android:padding="@dimen/card_padding"
-            android:text="Tổng thành tiền: 0 VNĐ"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_body_lg"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lblTongVeBan"
@@ -126,6 +175,10 @@
             android:layout_marginTop="@dimen/space_sm"
             android:background="@drawable/bg_card_modern"
             android:elevation="@dimen/elevation_sm"
+            android:drawableStart="@drawable/ic_ve"
+            android:drawablePadding="@dimen/space_md"
+            android:drawableTint="@color/mauXanhNgoc"
+            android:gravity="center_vertical"
             android:padding="@dimen/card_padding"
             android:text="Tổng vé bán: 0"
             style="@style/App.Text.Body" />

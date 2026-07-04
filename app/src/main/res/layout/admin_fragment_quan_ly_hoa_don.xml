@@ -19,21 +19,28 @@
 
             <TextView
                 android:id="@+id/lblTieuDe"
+                android:drawableStart="@drawable/ic_hoa_don"
+                android:drawablePadding="@dimen/space_sm"
+                android:drawableTint="@color/mauTimChinh"
+                android:gravity="center_vertical"
                 style="@style/App.Text.HeadingLg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="🧾 Quản lý hóa đơn" />
+                android:text="Quản lý hóa đơn" />
 
             <Button
                 android:id="@+id/btnBoLoc"
+                android:drawableStart="@drawable/ic_loc"
+                android:drawablePadding="@dimen/space_xs"
+                android:drawableTint="@color/mauTimChinh"
                 style="@style/App.Button.Outline"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/btn_height_sm"
                 android:minWidth="@dimen/btn_height"
                 android:paddingStart="@dimen/space_lg"
                 android:paddingEnd="@dimen/space_lg"
-                android:text="🔎 Lọc" />
+                android:text="Lọc" />
         </LinearLayout>
 
         <LinearLayout
@@ -51,7 +58,7 @@
                 style="@style/App.Input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="🔍 Tìm mã hóa đơn, khách hàng"
+                android:hint="Tìm mã hóa đơn, khách hàng"
                 android:inputType="text"
                 android:singleLine="true" />
 
@@ -63,16 +70,22 @@
 
                 <Button
                     android:id="@+id/btnTuNgay"
+                    android:drawableStart="@drawable/ic_lich"
+                    android:drawablePadding="@dimen/space_xs"
+                    android:drawableTint="@color/mauTimChinh"
                     style="@style/App.Button.Outline"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/btn_height"
                     android:layout_weight="1"
                     android:paddingStart="@dimen/space_sm"
                     android:paddingEnd="@dimen/space_sm"
-                    android:text="📅 Từ ngày" />
+                    android:text="Từ ngày" />
 
                 <Button
                     android:id="@+id/btnDenNgay"
+                    android:drawableStart="@drawable/ic_lich"
+                    android:drawablePadding="@dimen/space_xs"
+                    android:drawableTint="@color/mauTimChinh"
                     style="@style/App.Button.Outline"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/btn_height"
@@ -80,7 +93,7 @@
                     android:layout_weight="1"
                     android:paddingStart="@dimen/space_sm"
                     android:paddingEnd="@dimen/space_sm"
-                    android:text="📅 Đến ngày" />
+                    android:text="Đến ngày" />
             </LinearLayout>
 
             <Button

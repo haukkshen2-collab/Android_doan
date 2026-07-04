@@ -36,9 +36,12 @@
             style="@style/App.Text.Price" />
     </LinearLayout>
 
-    <TextView
-        style="@style/App.Badge.Warning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🎁" />
+    <ImageView
+        android:layout_width="@dimen/icon_xl"
+        android:layout_height="@dimen/icon_xl"
+        android:background="@drawable/bg_icon_tron_cam"
+        android:contentDescription="Voucher ưu đãi"
+        android:padding="@dimen/space_md"
+        android:src="@drawable/ic_voucher"
+        android:tint="@color/mauCamDam" />
 </LinearLayout>

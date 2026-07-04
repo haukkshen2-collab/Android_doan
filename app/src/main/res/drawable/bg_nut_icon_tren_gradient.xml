@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/mauOverlayTrang">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#26FFFFFF" />
+            <stroke
+                android:width="@dimen/border_thin"
+                android:color="#40FFFFFF" />
+        </shape>
+    </item>
+</ripple>

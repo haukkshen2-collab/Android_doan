@@ -3,6 +3,7 @@ package com.example.banve.activities.user;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class DashboardNguoiDungActivity extends AppCompatActivity {
     private RecyclerView rcvDanhSachVe;
     private TextView lblXinChao;
     private Button btnHoSo;
-    private Button btnDangXuat;
+    private ImageButton btnDangXuat;
     private LoaiVeAdapter loaiVeAdapter;
     private VeAdapter veAdapter;
     private LoaiVeController loaiVeController;

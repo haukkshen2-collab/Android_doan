@@ -1,7 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Quan_Ly_Ban_Ve" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <!--
+        Giao diện hiện dùng bảng màu sáng cố định trong layout (nền trắng, chữ đậm),
+        nên bản đêm kế thừa nguyên theme sáng để tránh vỡ tương phản khi máy bật dark mode.
+    -->
+    <style name="Base.Theme.Quan_Ly_Ban_Ve" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/mauNenChinh</item>
+        <item name="colorPrimary">@color/mauTimChinh</item>
+        <item name="colorPrimaryVariant">@color/mauTimDam</item>
+        <item name="android:colorAccent">@color/mauCamChinh</item>
+        <item name="android:textColorPrimary">@color/mauChuChinh</item>
+        <item name="android:textColorSecondary">@color/mauChuPhu</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:buttonStyle">@style/App.Button.Primary</item>
+        <item name="android:editTextStyle">@style/App.Input</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 </resources>

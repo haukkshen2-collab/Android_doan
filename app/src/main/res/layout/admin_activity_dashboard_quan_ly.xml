@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- ═══ Hero Header Admin ═══ -->
+        <!-- ═══ Toolbar admin ═══ -->
         <LinearLayout
             android:id="@+id/layToolbar"
             android:layout_width="match_parent"
@@ -24,16 +24,13 @@
             android:paddingEnd="@dimen/space_lg"
             android:paddingBottom="@dimen/space_md">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnMoMenu"
-                style="@style/App.Button.OnGradient"
+                style="@style/App.IconButton.OnGradient"
                 android:layout_width="@dimen/btn_height_sm"
                 android:layout_height="@dimen/btn_height_sm"
-                android:minWidth="0dp"
-                android:paddingStart="0dp"
-                android:paddingEnd="0dp"
-                android:text="☰"
-                android:textSize="@dimen/text_heading" />
+                android:contentDescription="Mở menu quản lý"
+                android:src="@drawable/ic_menu" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -97,21 +94,55 @@
             android:paddingTop="@dimen/space_xl"
             android:paddingEnd="@dimen/space_md">
 
-            <TextView
-                style="@style/App.Text.OnGradient.Heading"
+            <!-- Header drawer -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingStart="@dimen/space_sm"
                 android:paddingEnd="@dimen/space_sm"
-                android:paddingBottom="@dimen/space_lg"
-                android:text="Menu" />
+                android:paddingBottom="@dimen/space_lg">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_logo_tron"
+                    android:contentDescription="Logo khu du lịch"
+                    android:padding="@dimen/space_sm"
+                    android:src="@drawable/img_vaa_e1744105217584" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_md"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bảng điều khiển"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_subtitle"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Khu du lịch"
+                        android:textColor="@color/mauChuTrenGradientPhu"
+                        android:textSize="@dimen/text_small" />
+                </LinearLayout>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btnTongQuan"
                 style="@style/App.Button.DrawerItemActive"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
-                android:text="📊  Tổng quan" />
+                android:drawableStart="@drawable/ic_thong_ke"
+                android:text="Tổng quan" />
 
             <Button
                 android:id="@+id/btnQuanLyVe"
@@ -119,7 +150,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_sm"
-                android:text="🎫  Quản lý vé" />
+                android:drawableStart="@drawable/ic_ve"
+                android:text="Quản lý vé" />
 
             <Button
                 android:id="@+id/btnLoaiVe"
@@ -127,7 +159,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_sm"
-                android:text="📂  Loại vé" />
+                android:drawableStart="@drawable/ic_loai_ve"
+                android:text="Loại vé" />
 
             <Button
                 android:id="@+id/btnVoucher"
@@ -135,7 +168,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_sm"
-                android:text="🎁  Voucher" />
+                android:drawableStart="@drawable/ic_voucher"
+                android:text="Voucher" />
 
             <Button
                 android:id="@+id/btnNguoiDung"
@@ -143,7 +177,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_sm"
-                android:text="👥  Người dùng" />
+                android:drawableStart="@drawable/ic_nhom"
+                android:text="Người dùng" />
 
             <Button
                 android:id="@+id/btnHoaDon"
@@ -151,7 +186,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_sm"
-                android:text="🧾  Hóa đơn" />
+                android:drawableStart="@drawable/ic_hoa_don"
+                android:text="Hóa đơn" />
 
             <Button
                 android:id="@+id/btnCauHinhAI"
@@ -159,7 +195,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_sm"
-                android:text="🤖  Cấu hình AI" />
+                android:drawableStart="@drawable/ic_ai"
+                android:text="Cấu hình AI" />
 
             <Space
                 android:layout_width="match_parent"
@@ -173,7 +210,9 @@
                 android:layout_height="@dimen/btn_height"
                 android:layout_marginTop="@dimen/space_lg"
                 android:layout_marginBottom="@dimen/space_xl"
-                android:text="🚪  Đăng xuất"
+                android:drawableStart="@drawable/ic_dang_xuat"
+                android:drawableTint="@color/mauNguyHiem"
+                android:text="Đăng xuất"
                 android:textColor="@color/mauNguyHiem" />
         </LinearLayout>
     </FrameLayout>

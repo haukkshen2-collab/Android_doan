@@ -80,20 +80,26 @@
 
         <Button
             android:id="@+id/btnSua"
+            android:drawableStart="@drawable/ic_sua"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/mauTimChinh"
             style="@style/App.Button.Outline"
             android:layout_width="0dp"
             android:layout_height="@dimen/btn_height_sm"
             android:layout_marginEnd="@dimen/space_sm"
             android:layout_weight="1"
-            android:text="✏️ Sửa" />
+            android:text="Sửa" />
 
         <Button
             android:id="@+id/btnXoa"
+            android:drawableStart="@drawable/ic_xoa"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/mauNguyHiem"
             style="@style/App.Button.Danger"
             android:layout_width="0dp"
             android:layout_height="@dimen/btn_height_sm"
             android:layout_marginStart="@dimen/space_sm"
             android:layout_weight="1"
-            android:text="🗑️ Xóa" />
+            android:text="Xóa" />
     </LinearLayout>
 </LinearLayout>

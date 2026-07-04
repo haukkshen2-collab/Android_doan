@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="🔒 Đổi mật khẩu"
+        android:text="Đổi mật khẩu"
         style="@style/App.Text.HeadingLg" />
 
     <EditText
@@ -57,6 +57,9 @@
 
         <Button
             android:id="@+id/btnLuu"
+            android:drawableStart="@drawable/ic_luu"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/white"
             style="@style/App.Button.Primary"
             android:layout_width="0dp"
             android:layout_height="@dimen/btn_height"

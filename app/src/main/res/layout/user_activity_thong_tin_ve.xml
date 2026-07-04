@@ -86,7 +86,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="💰 Bảng giá"
+                android:text="Bảng giá"
                 style="@style/App.Text.Title" />
 
             <TextView
@@ -119,6 +119,9 @@
         <!-- ═══ Nút CTA ═══ -->
         <Button
             android:id="@+id/btnChonVe"
+            android:drawableStart="@drawable/ic_ve"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/white"
             style="@style/App.Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
@@ -126,6 +129,6 @@
             android:layout_marginTop="@dimen/space_xl"
             android:layout_marginEnd="@dimen/space_lg"
             android:layout_marginBottom="@dimen/space_xxl"
-            android:text="🎫 Chọn vé ngay" />
+            android:text="Chọn vé ngay" />
     </LinearLayout>
 </ScrollView>

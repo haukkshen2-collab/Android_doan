@@ -17,10 +17,13 @@
 
     <style name="Theme.Quan_Ly_Ban_Ve" parent="Base.Theme.Quan_Ly_Ban_Ve" />
 
-    <!-- Dialog theme bo góc lớn -->
-    <style name="App.Dialog" parent="@android:style/Theme.Material.Dialog">
+    <!-- Dialog theme Material 3, bo góc lớn -->
+    <style name="App.Dialog" parent="ThemeOverlay.Material3.Dialog">
         <item name="android:windowBackground">@drawable/bg_card_modern</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/mauTimChinh</item>
+        <item name="android:textColorPrimary">@color/mauChuChinh</item>
+        <item name="android:textColorSecondary">@color/mauChuPhu</item>
     </style>
 
 </resources>

@@ -60,6 +60,9 @@
 
         <Button
             android:id="@+id/btnChonVoucher"
+            android:drawableStart="@drawable/ic_voucher"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/mauTimChinh"
             style="@style/App.Button.Outline"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
@@ -162,6 +165,9 @@
 
         <Button
             android:id="@+id/btnXacNhanThanhToan"
+            android:drawableStart="@drawable/ic_thanh_toan"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/white"
             style="@style/App.Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"

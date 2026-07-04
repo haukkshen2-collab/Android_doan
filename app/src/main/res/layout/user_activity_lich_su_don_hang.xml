@@ -17,9 +17,13 @@
 
         <TextView
             android:id="@+id/lblTieuDe"
+            android:drawableStart="@drawable/ic_lich_su"
+            android:drawablePadding="@dimen/space_sm"
+            android:drawableTint="@color/white"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📋 Lịch sử đơn hàng"
+            android:text="Lịch sử đơn hàng"
             style="@style/App.Text.OnGradient.DisplaySm" />
 
         <TextView
@@ -33,12 +37,14 @@
     <!-- ═══ Empty state ═══ -->
     <TextView
         android:id="@+id/lblTrong"
+        android:drawableTop="@drawable/ic_trong"
+        android:drawableTint="@color/mauChuMo"
         style="@style/App.EmptyState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_xxl"
         android:background="@drawable/bg_card_modern"
-        android:text="📋 Chưa có đơn hàng đã thanh toán"
+        android:text="Chưa có đơn hàng đã thanh toán"
         android:visibility="gone" />
 
     <!-- ═══ Danh sách ═══ -->

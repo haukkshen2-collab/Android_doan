@@ -14,13 +14,17 @@
         <!-- ═══ Header ═══ -->
         <TextView
             android:id="@+id/lblTieuDe"
+            android:drawableStart="@drawable/ic_hoa_don"
+            android:drawablePadding="@dimen/space_sm"
+            android:drawableTint="@color/white"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_hero_user"
             android:elevation="@dimen/elevation_lg"
             android:gravity="center_vertical"
             android:padding="@dimen/space_xxl"
-            android:text="🧾 Chi tiết hóa đơn"
+            android:text="Chi tiết hóa đơn"
             style="@style/App.Text.OnGradient.DisplaySm" />
 
         <!-- ═══ Thông tin hóa đơn ═══ -->

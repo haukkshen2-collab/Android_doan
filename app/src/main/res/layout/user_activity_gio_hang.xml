@@ -19,9 +19,13 @@
 
         <TextView
             android:id="@+id/lblTieuDe"
+            android:drawableStart="@drawable/ic_gio_hang"
+            android:drawablePadding="@dimen/space_sm"
+            android:drawableTint="@color/white"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🛒 Giỏ hàng"
+            android:text="Giỏ hàng"
             style="@style/App.Text.OnGradient.DisplaySm" />
 
         <TextView
@@ -35,6 +39,8 @@
     <!-- ═══ Empty state ═══ -->
     <TextView
         android:id="@+id/lblTrong"
+        android:drawableTop="@drawable/ic_gio_hang"
+        android:drawableTint="@color/mauChuMo"
         style="@style/App.EmptyState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +48,7 @@
         android:layout_marginTop="@dimen/space_xxl"
         android:layout_marginEnd="@dimen/space_lg"
         android:background="@drawable/bg_card_modern"
-        android:text="🛒 Giỏ hàng đang trống\nHãy thêm vé để bắt đầu!"
+        android:text="Giỏ hàng đang trống\nHãy thêm vé để bắt đầu!"
         android:visibility="gone" />
 
     <!-- ═══ Danh sách ═══ -->
@@ -75,11 +81,14 @@
 
         <Button
             android:id="@+id/btnThanhToan"
+            android:drawableStart="@drawable/ic_thanh_toan"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/white"
             style="@style/App.Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
             android:layout_marginTop="@dimen/space_md"
-            android:text="💳 Thanh toán" />
+            android:text="Thanh toán" />
 
         <Button
             android:id="@+id/btnTiepTucMua"

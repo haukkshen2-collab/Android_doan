@@ -14,21 +14,28 @@
 
         <TextView
             android:id="@+id/lblTieuDe"
+            android:drawableStart="@drawable/ic_loai_ve"
+            android:drawablePadding="@dimen/space_sm"
+            android:drawableTint="@color/mauTimChinh"
+            android:gravity="center_vertical"
             style="@style/App.Text.HeadingLg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="📂 Phân loại vé" />
+            android:text="Phân loại vé" />
 
         <Button
             android:id="@+id/btnBoLoc"
+            android:drawableStart="@drawable/ic_loc"
+            android:drawablePadding="@dimen/space_xs"
+            android:drawableTint="@color/mauTimChinh"
             style="@style/App.Button.Outline"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/btn_height_sm"
             android:minWidth="@dimen/btn_height"
             android:paddingStart="@dimen/space_lg"
             android:paddingEnd="@dimen/space_lg"
-            android:text="🔎 Lọc" />
+            android:text="Lọc" />
     </LinearLayout>
 
     <LinearLayout
@@ -46,18 +53,21 @@
             style="@style/App.Input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="🔍 Tìm theo tên hoặc mô tả"
+            android:hint="Tìm theo tên hoặc mô tả"
             android:inputType="text"
             android:singleLine="true" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnThemLoaiVe"
+        android:drawableStart="@drawable/ic_them"
+        android:drawablePadding="@dimen/space_xs"
+        android:drawableTint="@color/white"
         style="@style/App.Button.Primary"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
         android:layout_marginTop="@dimen/space_sm"
-        android:text="➕ Thêm loại vé" />
+        android:text="Thêm loại vé" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvDanhSachLoaiVe"

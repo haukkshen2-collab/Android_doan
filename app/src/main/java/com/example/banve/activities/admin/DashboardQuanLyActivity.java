@@ -1,11 +1,12 @@
 package com.example.banve.activities.admin;
 
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ public class DashboardQuanLyActivity extends AppCompatActivity {
     private TextView lblManHinhDangChon;
     private FrameLayout layMenuOverlay;
     private LinearLayout layMenuQuanLy;
-    private Button btnMoMenu;
+    private ImageButton btnMoMenu;
     private Button btnDangXuat;
     private Button btnTongQuan;
     private Button btnQuanLyVe;
@@ -133,14 +134,17 @@ public class DashboardQuanLyActivity extends AppCompatActivity {
                 btnCauHinhAI
         };
 
+        int mauChuActive = getResources().getColor(R.color.white);
+        int mauChuThuong = getResources().getColor(R.color.mauChuTrenGradientPhu);
+
         for (Button nut : danhSachNut) {
-            if (nut == nutDangChon) {
-                nut.setBackgroundResource(R.drawable.bg_bottom_nav_active);
-                nut.setTextColor(getResources().getColor(R.color.white));
-            } else {
-                nut.setBackgroundColor(Color.TRANSPARENT);
-                nut.setTextColor(getResources().getColor(R.color.mauChuTrenGradientPhu));
-            }
+            boolean dangChon = nut == nutDangChon;
+            nut.setBackgroundResource(dangChon
+                    ? R.drawable.bg_drawer_item_active
+                    : R.drawable.bg_drawer_item);
+            int mauChu = dangChon ? mauChuActive : mauChuThuong;
+            nut.setTextColor(mauChu);
+            nut.setCompoundDrawableTintList(ColorStateList.valueOf(mauChu));
         }
     }
 
